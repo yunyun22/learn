@@ -14,7 +14,6 @@ import java.util.Date;
  * @version $Id: StringToDateConverter.java, v 0.1 2015年9月24日 下午7:19:41 byshome Exp $
  */
 
-@Component
 public class StringToDateConverter implements Converter<String, Date> {
     private static final String dateFormat = "yyyy-MM-dd HH:mm:ss";
     private static final String shortDateFormat = "yyyy-MM-dd";

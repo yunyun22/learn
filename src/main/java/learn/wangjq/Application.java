@@ -7,30 +7,26 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @EnableAutoConfiguration
-@SpringBootApplication
 public class Application {
 
-    @Autowired
-    private StringToDateConverter stringToDateConverter;
-
-    @RequestMapping
+    @RequestMapping("/home")
     @ResponseBody
     public String home(DateDto dateDto) {
-        System.out.println(dateDto);
         return "Hello World!";
+    }
+
+    @RequestMapping("/root")
+    public ModelAndView index() {
+        System.out.println("start in index");
+        return new ModelAndView("index.html");
     }
 
 
     public static void main(String[] args) throws Exception {
         SpringApplication.run(Application.class, args);
-
     }
-//    @InitBinder
-//    public void init(WebDataBinder binder) {
-//        binder.registerCustomEditor(Date.class, new CustomDateEditor(new SimpleDateFormat("yyyy-MM-dd"), true));
-//
-//    }
 }
