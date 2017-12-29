@@ -8,13 +8,34 @@
     <title>Bootstrap 101 Template</title>
     <!-- Bootstrap -->
     <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="jquery/jquery-3.2.1.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="bootstrap/js/bootstrap.min.js"></script>
 </head>
 <body>
-<h1>你好，世界！</h1>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#hello").click(function () {
+            $.ajax({
+                url: "/world",
+                type: "POST",
+                data: "hello world",
+                success: function (result) {
+                    $("#world").text(result);
+                },
+                error: function () {
+                    alert("发生错误!");
+                }
 
-<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-<script src="jquery/jquery-3.2.1.min.js"></script>
-<!-- Include all compiled plugins (below), or include individual files as needed -->
-<script src="bootstrap/js/bootstrap.min.js"></script>
+            });
+        });
+    });
+</script>
+
+<h1 id="hello">你好，世界！aa</h1>
+<h1 id="world"></h1>
+
+
 </body>
 </html>
