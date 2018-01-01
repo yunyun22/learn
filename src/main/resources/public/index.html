@@ -17,10 +17,16 @@
 <script type="text/javascript">
     $(document).ready(function () {
         $("#hello").click(function () {
+
+            var o = {};
+            o.name='wangjq';
+            o.today='2017/01/02';
+            console.log(JSON.stringify(o));
             $.ajax({
-                url: "/world",
-                type: "POST",
-                data: "hello world",
+                url: "/home",
+                type: 'POST',
+                dataType : "json",
+                data: 'dateDto:'+JSON.stringify(o),
                 success: function (result) {
                     $("#world").text(result);
                 },

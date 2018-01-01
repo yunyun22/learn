@@ -16,7 +16,8 @@ public class Application {
 
     @RequestMapping("/home")
     @ResponseBody
-    public String home(DateDto dateDto) {
+    public String home(@RequestParam(name = "dateDto") DateDto dateDto) {
+        System.out.println(dateDto);
         return "Hello World!";
     }
 
