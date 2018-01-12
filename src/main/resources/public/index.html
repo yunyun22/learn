@@ -20,13 +20,13 @@
 
             var o = {};
             o.name='wangjq';
-            o.today='2017/01/02';
+            o.today='2017-01-02';
             console.log(JSON.stringify(o));
             $.ajax({
                 url: "/home",
                 type: 'POST',
-                dataType : "json",
-                data: 'dateDto:'+JSON.stringify(o),
+                contentType: "application/json",
+                data: JSON.stringify(o),
                 success: function (result) {
                     $("#world").text(result);
                 },
