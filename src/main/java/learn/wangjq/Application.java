@@ -44,7 +44,13 @@ public class Application {
 
 
     public static void main(String[] args) throws Exception {
-        SpringApplication.run(Application.class, args);
+        //SpringApplication.run(Application.class, args);
+
+        Long[] l = new Long[10];
+
+        new Thread(()->{
+           // l=new Long[20];
+        });
     }
 
     @Bean
