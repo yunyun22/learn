@@ -3,13 +3,15 @@ package learn.wangjq;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.text.SimpleDateFormat;
@@ -23,6 +25,19 @@ public class Application {
     //@Autowired
     //private MappingJackson2HttpMessageConverter mappingJackson2HttpMessageConverter;
 
+    @Autowired
+    private KafkaTemplate kafkaTemplate;
+
+    public static void main(String[] args) throws Exception {
+        SpringApplication.run(Application.class, args);
+
+//        Long[] l = new Long[10];
+//
+//        new Thread(() -> {
+//            // l=new Long[20];
+//        });
+    }
+
     @RequestMapping("/home")
     @ResponseBody
     public String home(@RequestBody DateDto dateDto) {
@@ -33,24 +48,20 @@ public class Application {
     @RequestMapping("/world")
     @ResponseBody
     public String world(String json) {
+        try {
+            kafkaTemplate.send("test", "key", json);
+        } catch (Exception e) {
+
+            throw new RuntimeException("send error");
+        }
         return "Hello World!";
     }
+
 
     @RequestMapping("/root")
     public ModelAndView index() {
         System.out.println("start in index");
         return new ModelAndView("index.html");
-    }
-
-
-    public static void main(String[] args) throws Exception {
-        //SpringApplication.run(Application.class, args);
-
-        Long[] l = new Long[10];
-
-        new Thread(()->{
-           // l=new Long[20];
-        });
     }
 
     @Bean
