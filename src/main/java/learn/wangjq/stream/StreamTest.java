@@ -3,9 +3,8 @@ package learn.wangjq.stream;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
-import java.util.stream.Collector;
+import java.util.Optional;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class StreamTest {
     public static void main(String[] args) {
@@ -40,23 +39,95 @@ public class StreamTest {
         //流中式数组对象与留中式字符串对象是一个道理
 //        String[] arrayOfWords = {"Hello", "world"};
 //        Arrays.stream(arrayOfWords).map(word -> word.split("")).forEach(s->System.out.println(s.length));
-//        Arrays.stream(arrayOfWords).map(word -> word.split("")).flatMap((String[] sss)->Arrays.stream(sss)).distinct().forEach(System.out::print);
+//        Arrays.stream(arrayOfWords).map(word -> word.split("")).flatMap((String[] sss)->Arrays.
+// (sss)).distinct().forEach(System.out::print);
 
         List<Dish> dishList = Arrays.asList(
                 new Dish("茄子", true, 100, Dish.Type.OTHER),
                 new Dish("猪肉", false, 1000, Dish.Type.MEAT),
                 new Dish("鱼", false, 2000, Dish.Type.MEAT),
-                new Dish("非常", false, 2000, Dish.Type.MEAT),
-                new Dish("", false, 2000, Dish.Type.MEAT),
-                new Dish("牛肉", false, 2000, Dish.Type.MEAT),
-                new Dish("牛肉", false, 2000, Dish.Type.MEAT),
-                new Dish("牛肉", false, 2000, Dish.Type.MEAT));
+                new Dish("西红柿", true, 2000, Dish.Type.MEAT),
+                new Dish("土豆", true, 2000, Dish.Type.MEAT),
+                new Dish("上海青", true, 2000, Dish.Type.MEAT),
+                new Dish("南瓜", true, 2000, Dish.Type.MEAT),
+                new Dish("冬瓜", true, 2000, Dish.Type.MEAT));
 
-        List<String> names = dishList.stream()
-                .filter(dish -> dish.getCalories() < 1100)
-                .sorted(Comparator.comparing(Dish::getCalories))
-                .map(Dish::getName).collect(Collectors.toList());
+//        int i = dishList.stream().map(dish -> 1).reduce(0,Integer::sum);
+//        System.out.println(i);
+
+//        对比
+//        int i = dishList.stream().map(Dish::getCalories).reduce(0, Integer::sum);
+//
+//        dishList.stream().map(Dish::getCalories).reduce(0, new BinaryOperator<Integer>() {
+//            @Override
+//            public Integer apply(Integer integer, Integer integer2) {
+//                return integer + integer2;
+//            }
+//        });
+
+//        boolean haveVegetaria = dishList.stream().anyMatch(Dish::isVegetarian);
+//        System.out.println(haveVegetaria);
+//        boolean haveVegetaria = dishList.stream().allMatch(Dish::isVegetarian);
+//        System.out.println(haveVegetaria);
+//        boolean haveVegetaria = dishList.stream().noneMatch(dish -> dish.getCalories() < 99);
+//        System.out.println(haveVegetaria);
+//        List<String> names = dishList.stream()
+//                .filter(dish -> dish.getCalories() < 1100)
+//                .sorted(Comparator.comparing(Dish::getCalories))
+//                .map(Dish::getName).collect(Collectors.toList());
 //        System.out.println(names);
+
+//        List<Integer> numbers1 = Arrays.asList(1,2,3);
+//        List<Integer> numbers2 = Arrays.asList(3,4);
+//        Stream<Stream<String>> stringStream = numbers1.stream().map(new Function<Integer, Stream<String>>() {
+//            @Override
+//            public Stream<String> apply(Integer integer) {
+//                return null;
+//            }
+//        });
+//        Stream<int[]> Stream = numbers1.stream().flatMap(new Function<Integer, java.util.stream.Stream<? extends int[]>>() {
+//            @Override
+//            public Stream<? extends int[]> apply(Integer integer) {
+//                return numbers2.stream().map(integer1 -> new int[]{integer,integer1});
+//            }
+//        });
+
+
+        Trader raoul = new Trader("Raoul", "Cambridge");
+        Trader mario = new Trader("Raoul", "Milan");
+        Trader alan = new Trader("Raoul", "Cambridge");
+        Trader brian = new Trader("Raoul", "Cambridge");
+
+        List<Transaction> transactions = Arrays.asList(
+                new Transaction(brian, 2011, 300),
+                new Transaction(raoul, 2012, 1000),
+                new Transaction(raoul, 2011, 400),
+                new Transaction(mario, 2012, 710),
+                new Transaction(mario, 2012, 700),
+                new Transaction(alan, 2012, 950)
+
+        );
+
+        transactions.stream()
+                .filter(transaction -> transaction.getYear() == 2011)
+                .sorted(Comparator.comparing(Transaction::getValue));
+
+        List<String> citys = transactions.stream()
+                .map(transaction -> transaction.getTrader().getCity())
+                .distinct()
+
+                .collect(Collectors.toList());
+
+        List<Trader> traders = transactions.stream().map(transaction -> transaction.getTrader()).sorted(Comparator.comparing(Trader::getName)).collect(Collectors.toList());
+
+        boolean haveMilan = transactions.stream().map(Transaction::getTrader).anyMatch(trader -> "".equals(trader.getCity()));
+
+        int totle = transactions.stream().filter(transaction -> "Cambridge".equals(transaction.getTrader().getCity())).map(Transaction::getValue).reduce(0, (v1, v2) -> v1 + v2);
+
+        Optional<Integer> max = transactions.stream().map(transaction -> transaction.getValue()).max(Integer::compareTo);
+
+        Optional<Integer> min = transactions.stream().map(transaction -> transaction.getValue()).min(Integer::compareTo);
+
 
     }
 
@@ -103,5 +174,65 @@ class Dish {
 
     public enum Type {
         MEAT, FISH, OTHER
+    }
+}
+
+class Trader {
+    private final String name;
+    private final String city;
+
+    public Trader(String name, String city) {
+        this.name = name;
+        this.city = city;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    @Override
+    public String toString() {
+        return "Trader{" +
+                "name='" + name + '\'' +
+                ", city='" + city + '\'' +
+                '}';
+    }
+}
+
+
+class Transaction {
+    private final Trader trader;
+    private final int year;
+    private final int value;
+
+    public Transaction(Trader trader, int year, int value) {
+        this.trader = trader;
+        this.year = year;
+        this.value = value;
+    }
+
+    public Trader getTrader() {
+        return trader;
+    }
+
+    public int getYear() {
+        return year;
+    }
+
+    public int getValue() {
+        return value;
+    }
+
+    @Override
+    public String toString() {
+        return "Transaction{" +
+                "trader=" + trader +
+                ", year=" + year +
+                ", value=" + value +
+                '}';
     }
 }
