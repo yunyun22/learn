@@ -1,10 +1,6 @@
 package learn.wangjq.stream;
 
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class StreamTest {
     public static void main(String[] args) {
@@ -42,15 +38,34 @@ public class StreamTest {
 //        Arrays.stream(arrayOfWords).map(word -> word.split("")).flatMap((String[] sss)->Arrays.
 // (sss)).distinct().forEach(System.out::print);
 
-        List<Dish> dishList = Arrays.asList(
-                new Dish("茄子", true, 100, Dish.Type.OTHER),
-                new Dish("猪肉", false, 1000, Dish.Type.MEAT),
-                new Dish("鱼", false, 2000, Dish.Type.MEAT),
-                new Dish("西红柿", true, 2000, Dish.Type.MEAT),
-                new Dish("土豆", true, 2000, Dish.Type.MEAT),
-                new Dish("上海青", true, 2000, Dish.Type.MEAT),
-                new Dish("南瓜", true, 2000, Dish.Type.MEAT),
-                new Dish("冬瓜", true, 2000, Dish.Type.MEAT));
+//        List<Dish> dishList = Arrays.asList(
+//                new Dish("茄子", true, 100, Dish.Type.OTHER),
+//                new Dish("猪肉", false, 1000, Dish.Type.MEAT),
+//                new Dish("鱼", false, 2000, Dish.Type.MEAT),
+//                new Dish("西红柿", true, 2000, Dish.Type.MEAT),
+//                new Dish("土豆", true, 2000, Dish.Type.MEAT),
+//                new Dish("上海青", true, 2000, Dish.Type.MEAT),
+//                new Dish("南瓜", true, 2000, Dish.Type.MEAT),
+//                new Dish("冬瓜", true, 2000, Dish.Type.MEAT));
+
+//        IntStream intStream = dishList.stream().mapToInt(Dish::getCalories);
+//
+//        Stream<Integer> stream =
+//                intStream.boxed();
+//
+//
+//        Stream<int[]> stream1 = IntStream.rangeClosed(1, 100).boxed()
+//                .flatMap(a ->
+//                        IntStream.rangeClosed(a, 100)
+//                                .filter(b -> Math.sqrt(a * a + b * b) % 1 == 0)
+//                                .mapToObj(b -> new int[]{a, b, (int) Math.sqrt(a * a + b * b)}));
+//
+//
+//        stream1.forEach(t -> System.out.println(t[0]+","+t[1]+","+t[2]));
+//        Stream.iterate(new int[]{0, 1}, is -> new int[]{is[1] ,is[0]+is[1]}).limit(10).forEach(t -> {
+//            System.out.print(t[0]+","+t[1]+",");
+//        });
+
 
 //        int i = dishList.stream().map(dish -> 1).reduce(0,Integer::sum);
 //        System.out.println(i);
@@ -93,40 +108,42 @@ public class StreamTest {
 //        });
 
 
-        Trader raoul = new Trader("Raoul", "Cambridge");
-        Trader mario = new Trader("Raoul", "Milan");
-        Trader alan = new Trader("Raoul", "Cambridge");
-        Trader brian = new Trader("Raoul", "Cambridge");
+//        Trader raoul = new Trader("Raoul", "Cambridge");
+//        Trader mario = new Trader("Raoul", "Milan");
+//        Trader alan = new Trader("Raoul", "Cambridge");
+//        Trader brian = new Trader("Raoul", "Cambridge");
+//
+//        List<Transaction> transactions = Arrays.asList(
+//                new Transaction(brian, 2011, 300),
+//                new Transaction(raoul, 2012, 1000),
+//                new Transaction(raoul, 2011, 400),
+//                new Transaction(mario, 2012, 710),
+//                new Transaction(mario, 2012, 700),
+//                new Transaction(alan, 2012, 950)
+//
+//        );
+//
+//        transactions.stream()
+//                .filter(transaction -> transaction.getYear() == 2011)
+//                .sorted(Comparator.comparing(Transaction::getValue));
+//
+//        List<String> citys = transactions.stream()
+//                .map(transaction -> transaction.getTrader().getCity())
+//                .distinct()
+//
+//                .collect(Collectors.toList());
+//
+//        List<Trader> traders = transactions.stream().map(transaction -> transaction.getTrader()).sorted(Comparator.comparing(Trader::getName)).collect(Collectors.toList());
+//
+//        boolean haveMilan = transactions.stream().map(Transaction::getTrader).anyMatch(trader -> "".equals(trader.getCity()));
+//
+//        int totle = transactions.stream().filter(transaction -> "Cambridge".equals(transaction.getTrader().getCity())).map(Transaction::getValue).reduce(0, (v1, v2) -> v1 + v2);
+//
+//        Optional<Integer> max = transactions.stream().map(transaction -> transaction.getValue()).max(Integer::compareTo);
+//
+//        Optional<Integer> min = transactions.stream().map(transaction -> transaction.getValue()).min(Integer::compareTo);
 
-        List<Transaction> transactions = Arrays.asList(
-                new Transaction(brian, 2011, 300),
-                new Transaction(raoul, 2012, 1000),
-                new Transaction(raoul, 2011, 400),
-                new Transaction(mario, 2012, 710),
-                new Transaction(mario, 2012, 700),
-                new Transaction(alan, 2012, 950)
-
-        );
-
-        transactions.stream()
-                .filter(transaction -> transaction.getYear() == 2011)
-                .sorted(Comparator.comparing(Transaction::getValue));
-
-        List<String> citys = transactions.stream()
-                .map(transaction -> transaction.getTrader().getCity())
-                .distinct()
-
-                .collect(Collectors.toList());
-
-        List<Trader> traders = transactions.stream().map(transaction -> transaction.getTrader()).sorted(Comparator.comparing(Trader::getName)).collect(Collectors.toList());
-
-        boolean haveMilan = transactions.stream().map(Transaction::getTrader).anyMatch(trader -> "".equals(trader.getCity()));
-
-        int totle = transactions.stream().filter(transaction -> "Cambridge".equals(transaction.getTrader().getCity())).map(Transaction::getValue).reduce(0, (v1, v2) -> v1 + v2);
-
-        Optional<Integer> max = transactions.stream().map(transaction -> transaction.getValue()).max(Integer::compareTo);
-
-        Optional<Integer> min = transactions.stream().map(transaction -> transaction.getValue()).min(Integer::compareTo);
+        Stream.generate(Math::random).limit(100).forEach(System.out::println);
 
 
     }

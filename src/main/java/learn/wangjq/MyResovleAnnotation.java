@@ -20,7 +20,7 @@ public class MyResovleAnnotation implements BeanFactoryPostProcessor, Applicatio
         map.forEach((s, application) -> System.out.println("s = " + s + ",applicaiton:" + application));
         Application application = map.get("application");
         application.setList(Arrays.asList("111","222","333"));
-        applicationContext.getBeanNamesForAnnotation();
+        //applicationContext.getBeanNamesForAnnotation();
     }
 
     @Override
