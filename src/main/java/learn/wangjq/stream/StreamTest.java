@@ -1,6 +1,9 @@
 package learn.wangjq.stream;
 
-import java.util.stream.Stream;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 public class StreamTest {
     public static void main(String[] args) {
@@ -38,16 +41,27 @@ public class StreamTest {
 //        Arrays.stream(arrayOfWords).map(word -> word.split("")).flatMap((String[] sss)->Arrays.
 // (sss)).distinct().forEach(System.out::print);
 
-//        List<Dish> dishList = Arrays.asList(
-//                new Dish("茄子", true, 100, Dish.Type.OTHER),
-//                new Dish("猪肉", false, 1000, Dish.Type.MEAT),
-//                new Dish("鱼", false, 2000, Dish.Type.MEAT),
-//                new Dish("西红柿", true, 2000, Dish.Type.MEAT),
-//                new Dish("土豆", true, 2000, Dish.Type.MEAT),
-//                new Dish("上海青", true, 2000, Dish.Type.MEAT),
-//                new Dish("南瓜", true, 2000, Dish.Type.MEAT),
-//                new Dish("冬瓜", true, 2000, Dish.Type.MEAT));
+        List<Dish> dishList = Arrays.asList(
+                new Dish("茄子", true, 100, Dish.Type.OTHER),
+                new Dish("猪肉", false, 1000, Dish.Type.MEAT),
+                new Dish("鱼", false, 2000, Dish.Type.FISH),
+                new Dish("西红柿", true, 2000, Dish.Type.OTHER),
+                new Dish("土豆", true, 2000, Dish.Type.OTHER),
+                new Dish("上海青", true, 2000, Dish.Type.OTHER),
+                new Dish("南瓜", true, 2000, Dish.Type.OTHER),
+                new Dish("冬瓜", true, 2000, Dish.Type.OTHER));
 
+        Map<Dish.Type,List<Dish>> map = dishList.stream().collect(Collectors.groupingBy(Dish::getType));
+
+        System.out.println(map);
+
+
+
+//        double avg = dishList.stream().collect(Collectors.averagingInt(Dish::getCalories));
+//        System.out.println("avg = " + avg);
+
+//        String menus = dishList.stream().map(Dish::getName).collect(Collectors.joining(",","(",")"));
+//        System.out.println("menus = " + menus);
 //        IntStream intStream = dishList.stream().mapToInt(Dish::getCalories);
 //
 //        Stream<Integer> stream =
@@ -143,7 +157,7 @@ public class StreamTest {
 //
 //        Optional<Integer> min = transactions.stream().map(transaction -> transaction.getValue()).min(Integer::compareTo);
 
-        Stream.generate(Math::random).limit(100).forEach(System.out::println);
+//         Stream.generate(Math::random).limit(100).forEach(System.out::println);
 
 
     }
@@ -181,7 +195,7 @@ class Dish {
 
     @Override
     public String toString() {
-        return "Dish{" +
+        return "{" +
                 "name='" + name + '\'' +
                 ", vegetarian=" + vegetarian +
                 ", calories=" + calories +
@@ -191,6 +205,7 @@ class Dish {
 
     public enum Type {
         MEAT, FISH, OTHER
+
     }
 }
 
