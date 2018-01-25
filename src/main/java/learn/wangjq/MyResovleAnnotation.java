@@ -10,7 +10,6 @@ import org.springframework.stereotype.Component;
 import java.util.Arrays;
 import java.util.Map;
 
-@Component
 public class MyResovleAnnotation implements BeanFactoryPostProcessor, ApplicationContextAware {
     private ApplicationContext applicationContext;
 
@@ -19,8 +18,6 @@ public class MyResovleAnnotation implements BeanFactoryPostProcessor, Applicatio
         Map<String, Application> map = beanFactory.getBeansOfType(Application.class);
         map.forEach((s, application) -> System.out.println("s = " + s + ",applicaiton:" + application));
         Application application = map.get("application");
-        application.setList(Arrays.asList("111","222","333"));
-        applicationContext.getBeanNamesForAnnotation();
     }
 
     @Override

@@ -1,10 +1,12 @@
 package learn.wangjq;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import learn.wangjq.dto.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.core.annotation.Order;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.stereotype.Controller;
@@ -19,23 +21,24 @@ import java.util.List;
 
 @Controller
 @SpringBootApplication
+@Order(1)
 public class Application {
 
     //@Autowired
     //private MappingJackson2HttpMessageConverter mappingJackson2HttpMessageConverter;
 
-    private List<String> list;
+    @Autowired
+    private List<Service> list;
 
     @Autowired
     public static void main(String[] args) throws Exception {
         SpringApplication.run(Application.class, args);
-
     }
 
     @RequestMapping("/home")
     @ResponseBody
     public String home(@RequestBody DateDto dateDto) {
-        System.out.println(dateDto);
+        System.out.println(list);
         return "Hello World!";
     }
 
@@ -65,10 +68,6 @@ public class Application {
         list.add(MediaType.APPLICATION_JSON_UTF8);
         mappingJackson2HttpMessageConverter.setSupportedMediaTypes(list);
         return mappingJackson2HttpMessageConverter;
-    }
-
-    public void setList(List<String> list) {
-        this.list = list;
     }
 
     @Override
