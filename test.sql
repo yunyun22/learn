@@ -21,7 +21,8 @@ tname VARCHAR(4) NOT NULL, tsex VARCHAR(2) NOT NULL,
 tbirthday DATETIME NOT NULL, prof VARCHAR(6), 
 depart VARCHAR(10) NOT NULL);
 
-INSERT INTO STUDENTS (SNO,SNAME,SSEX,SBIRTHDAY,CLASS) VALUES (108 ,'曾华' ,'男' ,'1977-09-01',95033);
+INSERT INTO STUDENTS (SNO,SNAME,SSEX,SBIRTHD
+AY,CLASS) VALUES (108 ,'曾华' ,'男' ,'1977-09-01',95033);
 INSERT INTO STUDENTS (SNO,SNAME,SSEX,SBIRTHDAY,CLASS) VALUES (105 ,'匡明' ,'男' ,'1975-10-02',95031);
 INSERT INTO STUDENTS (SNO,SNAME,SSEX,SBIRTHDAY,CLASS) VALUES (107 ,'王丽' ,'女' ,'1976-01-23',95033);
 INSERT INTO STUDENTS (SNO,SNAME,SSEX,SBIRTHDAY,CLASS) VALUES (101 ,'李军' ,'男' ,'1976-02-20',95033);
@@ -52,19 +53,19 @@ INSERT INTO TEACHERS(TNO,TNAME,TSEX,TBIRTHDAY,PROF,DEPART) VALUES (825,'王萍',
 INSERT INTO TEACHERS(TNO,TNAME,TSEX,TBIRTHDAY,PROF,DEPART) VALUES (831,'刘冰','女','1977-08-14','助教','电子工程系');
 
 --1、 查询Student表中的所有记录的Sname、Ssex和Class列。
-select *from students；
+select *from students;
 --2、 查询教师所有的单位即不重复的Depart列。
-select distinct depart from teachers；
+select distinct depart from teachers;
 --3、 查询Student表的所有记录。
-select *from students；
+select *from students;
 --4、 查询Score表中成绩在60到80之间的所有记录。
-select * from scores where degree between 60 and 80；
+select * from scores where degree between 60 and 80;
 --5、 查询Score表中成绩为85，86或88的记录。
-select * from scores where degree in  (85,86,88)；
+select * from scores where degree in  (85,86,88);
 --6、 查询Student表中“95031”班或性别为“女”的同学记录。
-select *from students where class=95031 and ssex='女'；
+select *from students where class=95031 and ssex='女';
 --7、 以Class降序查询Student表的所有记录。
-select * from students order by class DESC；
+select * from students order by class DESC;
 --8、 以Cno升序、Degree降序查询Score表的所有记录。
 select * from scores order by cno ASC,degree DESC;
 --9、 查询“95031”班的学生人数。
