@@ -1,5 +1,8 @@
 package learn.wangjq.math;
 
+/**
+ * 32位,前三位表示线程池的工作状态,后29表示线程的capactity
+ */
 public class ShiftTest {
 
     private static final int COUNT_BITS = Integer.SIZE - 3;
@@ -32,9 +35,9 @@ public class ShiftTest {
 
     public static void main(String[] args) {
 
-        String capacityString = Integer.toBinaryString(~CAPACITY);
-        System.out.println("~CAPACITY:" + capacityString);
-        System.out.println("~CAPACITY length:" + capacityString.length());
+//        String capacityString = Integer.toBinaryString(~CAPACITY);
+//        System.out.println("~CAPACITY:" + capacityString);
+//        System.out.println("~CAPACITY length:" + capacityString.length());
 
 
 //        //CAPACITY:11111111111111111111111111111(29)
