@@ -1,3 +1,14 @@
+CREATE database school;
+use school;
+ALTER DATABASE school CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+
+
+alter table students convert to character set utf8mb4 collate utf8mb4_bin; 
+alter table courses convert to character set utf8mb4 collate utf8mb4_bin; 
+alter table scores convert to character set utf8mb4 collate utf8mb4_bin; 
+alter table teachers convert to character set utf8mb4 collate utf8mb4_bin; 
+
+
 CREATE TABLE students
 (sno VARCHAR(3) NOT NULL, 
 sname VARCHAR(4) NOT NULL,
@@ -21,8 +32,7 @@ tname VARCHAR(4) NOT NULL, tsex VARCHAR(2) NOT NULL,
 tbirthday DATETIME NOT NULL, prof VARCHAR(6), 
 depart VARCHAR(10) NOT NULL);
 
-INSERT INTO STUDENTS (SNO,SNAME,SSEX,SBIRTHD
-AY,CLASS) VALUES (108 ,'曾华' ,'男' ,'1977-09-01',95033);
+INSERT INTO STUDENTS (SNO,SNAME,SSEX,SBIRTHDAY,CLASS) VALUES (108 ,'曾华' ,'男' ,'1977-09-01',95033);
 INSERT INTO STUDENTS (SNO,SNAME,SSEX,SBIRTHDAY,CLASS) VALUES (105 ,'匡明' ,'男' ,'1975-10-02',95031);
 INSERT INTO STUDENTS (SNO,SNAME,SSEX,SBIRTHDAY,CLASS) VALUES (107 ,'王丽' ,'女' ,'1976-01-23',95033);
 INSERT INTO STUDENTS (SNO,SNAME,SSEX,SBIRTHDAY,CLASS) VALUES (101 ,'李军' ,'男' ,'1976-02-20',95033);
@@ -83,6 +93,9 @@ select sno from scores group by sno having min(degree)>70 and max(degree)<90;
 --14、查询所有学生的Sname、Cno和Degree列。
 select * from students;
 select * from scores;
+
+select * from students natural left outer join scores
+
 select * from courses;
 select student.sname,sco.cno,sco.degree  from students student,scores sco  where student.sno= sco.sno;
 --15、查询所有学生的Sno、Cname和Degree列。

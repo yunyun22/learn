@@ -2,14 +2,15 @@ package learn.wangjq;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import learn.wangjq.dto.Service;
+import learn.wangjq.service.JdbcService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import org.springframework.core.annotation.Order;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -21,14 +22,15 @@ import java.util.List;
 
 @Controller
 @SpringBootApplication
-@Order(1)
+@EnableTransactionManagement
 public class Application {
 
-    //@Autowired
-    //private MappingJackson2HttpMessageConverter mappingJackson2HttpMessageConverter;
 
     @Autowired
     private List<Service> list;
+
+    @Autowired
+    private JdbcService jdbcService;
 
     @Autowired
     public static void main(String[] args) throws Exception {
@@ -38,8 +40,8 @@ public class Application {
     @RequestMapping("/home")
     @ResponseBody
     public String home(@RequestBody DateDto dateDto) {
-        System.out.println(list);
-        return "Hello World!";
+        jdbcService.insertStudent();
+        return "Hello World";
     }
 
     @RequestMapping("/world")
