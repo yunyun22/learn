@@ -14,7 +14,8 @@ public class MyServiceImp {
     private MyJdbc myJdbc;
 
     @Transactional(propagation = Propagation.NESTED)
-    public void insertTeacher() {
-        throw new RuntimeException();
+    public void insertTeacher() throws Exception{
+        myJdbc.insertStudent();
+        throw  new RuntimeException();
     }
 }

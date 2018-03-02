@@ -4,6 +4,6 @@ public interface JdbcService {
 
     void insertStudent();
 
-    void insertTeacher();
+    void insertTeacher() throws Exception;
 
 }
