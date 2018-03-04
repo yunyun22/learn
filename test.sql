@@ -93,9 +93,7 @@ select sno from scores group by sno having min(degree)>70 and max(degree)<90;
 --14、查询所有学生的Sname、Cno和Degree列。
 select * from students;
 select * from scores;
-
 select * from students natural left outer join scores
-
 select * from courses;
 select student.sname,sco.cno,sco.degree  from students student,scores sco  where student.sno= sco.sno;
 --15、查询所有学生的Sno、Cname和Degree列。
@@ -112,34 +110,71 @@ insert into grade values(70,79,"C");
 insert into grade values(60,69,"D");
 insert into grade values(0,59,"E");
 commit;
---现查询所有同学的Sno、Cno和rank列。
+--现查询所有同学的Sno、Cno和rank列。   内关联，两个表能确定位唯一记录
+select * from scores sco,grade gra where sco.degree>=gra.low and sco.degree<=gra.upp; 
 --19、查询选修“3-105”课程的成绩高于“109”号同学成绩的所有同学的记录。
+select * from scores where cno='3-105' and degree> (select degree from scores where cno='3-105' and sno='109');
 --20、查询score中选学一门以上课程的同学中分数为非最高分成绩的记录。
-21、查询成绩高于学号为“109”、课程号为“3-105”的成绩的所有记录。
-22、查询和学号为108的同学同年出生的所有学生的Sno、Sname和Sbirthday列。
-23、查询“张旭“教师任课的学生成绩。
-24、查询选修某课程的同学人数多于5人的教师姓名。
-25、查询95033班和95031班全体学生的记录。
-26、查询存在有85分以上成绩的课程Cno.
-27、查询出“计算机系“教师所教课程的成绩表。
-28、查询“计算机系”与“电子工程系“不同职称的教师的Tname和Prof。
-29、查询选修编号为“3-105“课程且成绩至少高于选修编号为“3-245”的同学的Cno、Sno和Degree,并按Degree从高到低次序排序。
-30、查询选修编号为“3-105”且成绩高于选修编号为“3-245”课程的同学的Cno、Sno和Degree.
-31、查询所有教师和同学的name、sex和birthday.
-32、查询所有“女”教师和“女”同学的name、sex和birthday.
-33、查询成绩比该课程平均成绩低的同学的成绩表。
-34、查询所有任课教师的Tname和Depart.
-35  查询所有未讲课的教师的Tname和Depart. 
-36、查询至少有2名男生的班号。
-37、查询Student表中不姓“王”的同学记录。
-38、查询Student表中每个学生的姓名和年龄。
-39、查询Student表中最大和最小的Sbirthday日期值。
-40、以班号和年龄从大到小的顺序查询Student表中的全部记录。
-41、查询“男”教师及其所上的课程。
-42、查询最高分同学的Sno、Cno和Degree列。
-43、查询和“李军”同性别的所有同学的Sname.
-44、查询和“李军”同性别并同班的同学Sname.
-45、查询所有选修“计算机导论”课程的“男”同学的成绩表
+select * from scores where sno in(select sno from scores group by sno having count(sno)>1) and degree<(select max(degree) from scores);
+--21、查询成绩高于学号为“109”、课程号为“3-105”的成绩的所有记录。
+select *from  scores where degree>(select degree from scores where sno=109 and cno='3-105');
+--22、查询和学号为108的同学同年出生的所有学生的Sno、Sname和Sbirthday列。
+select * from  students where  YEAR(sbirthday) =(select distinct YEAR(sbirthday)  from students where sno=108);
+--23、查询“张旭“教师任课的学生成绩。
+select *from scores s,courses c,teachers t where s.cno=c.cno and c.tno=t.tno and tname='张旭';
+--24、查询选修某课程的同学人数多于5人的教师姓名。
+select * from teachers t,scores s,courses c where t.tno=c.tno and s.cno=c.cno and c.cno = ( select cno from scores group by cno having count(cno)>5);
+--25、查询95033班和95031班全体学生的记录。
+select * from students where class=95033 or class=95031;
+--26、查询存在有85分以上成绩的课程Cno.
+select distinct cno from scores where degree>=85;
+--27、查询出“计算机系“教师所教课程的成绩表
+select * from  scores s,teachers t,courses c where s.cno=c.cno and c.tno=t.tno and depart='计算机系';
+--28、查询“计算机系”与“电子工程系“不同职称的教师的Tname和Prof。
+select tname,prof from teachers where depart='计算机系'  and prof not in(select prof from teachers where depart='电子工程系') 
+union select tname,prof from teachers where depart='电子工程系'  and prof not in(select prof from teachers where depart='计算机系')
+--29、查询选修编号为“3-105“课程且成绩至少高于选修编号为“3-245”的同学的Cno、Sno和Degree,并按Degree从高到低次序排序。
+select * from  scores where degree>(select min(degree) from scores where cno='3-245') and cno='3-105' order by degree DESC
+select * from scores where cno='3-105' and degree>any(select degree from scores where cno='3-245')
+--30、查询选修编号为“3-105”且成绩高于选修编号为“3-245”课程的同学的Cno、Sno和Degree.
+select * from scores where cno='3-105' and degree>all(select degree from scores where cno='3-245')
+select * from  scores where degree>(select max(degree) from scores where cno='3-245') and cno='3-105' order by degree DESC
+--31、查询所有教师和同学的name、sex和birthday.
+select * from teachers
+select *from students
+(select tname as name,tsex as sex,tbirthday as birthday,'老师' as shenfen from teachers) union (select sname as name ,ssex as sex,sbirthday as birthday,'学生' as shenfen from students)
+--32、查询所有“女”教师和“女”同学的name、sex和birthday.
+(select tname as name,tsex as sex,tbirthday as birthday,'老师' as shenfen from teachers where tsex='女') 
+union (select sname as name ,ssex as sex,sbirthday as birthday,'学生' as shenfen from students where ssex='女');
+--33、查询成绩比该课程平均成绩低的同学的成绩表。
+select *from scores s1,(select cno,avg(degree) as avgdegree from scores group by cno) s2 where s1.cno=s2.cno and degree<avgdegree
+select * from scores a where degree<(select avg(degree) from scores b where b.cno =a.cno )
+--34、查询所有任课教师的Tname和Depart.
+select * from teachers where tno  in(select tno from courses )
+select *,tname  from teachers
+--35  查询所有未讲课的教师的Tname和Depart. 
+select *from courses
+select * from teachers where tno not in(select tno from courses )
+--36、查询至少有2名男生的班号。
+select sno from students where ssex='男' group by sno having count(ssex)>=2
+--37、查询Student表中不姓“王”的同学记录。
+select * from students where sno not in(select sno from students where sname like '王%')
+--38、查询Student表中每个学生的姓名和年龄。
+--39、查询Student表中最大和最小的Sbirthday日期值。
+select max(sbirthday),min(sbirthday) from students
+--40、以班号和年龄从大到小的顺序查询Student表中的全部记录。
+select *from students order by sno,sbirthday
+--41、查询“男”教师及其所上的课程。
+select *from teachers
+--42、查询最高分同学的Sno、Cno和Degree列。
+select max(degree) from scores s
+select * from scores
+--43、查询和“李军”同性别的所有同学的Sname.
+select * from students where ssex = (select ssex from students where sname='李军')
+--44、查询和“李军”同性别并同班的同学Sname.
+select * from students  s,(select * from students where sname='李军') s1 where s.ssex=s1.ssex and s.class=s1.class
+--45、查询所有选修“计算机导论”课程的“男”同学的成绩表
+select * from students s1,scores s2,courses c where s1.sno=s2.sno and s2.cno=c.cno and c.cname='计算机导论' and s1.ssex='男'
 
 
 
