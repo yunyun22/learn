@@ -61,8 +61,10 @@ public class Tester {
         for (String s :
                 beanDefinitionNames) {
 
-            System.out.println("s = " + s);
-
+            System.out.println("name = " + s);
         }
+        System.out.println(defaultListableBeanFactory.isSingleton("testDisposableBean"));
+
+        defaultListableBeanFactory.destroySingletons();
     }
 }
