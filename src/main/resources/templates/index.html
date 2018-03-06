@@ -17,15 +17,9 @@
 <script type="text/javascript">
     $(document).ready(function () {
         $("#hello").click(function () {
-            var o = {};
-            o.name='wangjq';
-            o.today='2017-01-02';
-            console.log(JSON.stringify(o));
             $.ajax({
                 url: "/home",
                 type: 'POST',
-                contentType: "application/json",
-                data: JSON.stringify(o),
                 success: function (result) {
                     $("#world").text(result);
                 },
