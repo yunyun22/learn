@@ -1,4 +1,4 @@
-package learn.wangjq.BeanDefinition;
+package learn.wangjq.beanDefinition;
 
 
 import org.springframework.beans.factory.DisposableBean;

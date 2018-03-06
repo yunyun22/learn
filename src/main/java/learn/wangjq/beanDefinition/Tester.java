@@ -1,4 +1,4 @@
-package learn.wangjq.BeanDefinition;
+package learn.wangjq.beanDefinition;
 
 import org.springframework.beans.factory.annotation.AnnotatedGenericBeanDefinition;
 import org.springframework.beans.factory.config.BeanDefinition;
@@ -48,7 +48,7 @@ public class Tester {
 
         ClassPathBeanDefinitionScanner classPathBeanDefinitionScanner = new ClassPathBeanDefinitionScanner(defaultListableBeanFactory);
 
-        int count = classPathBeanDefinitionScanner.scan("learn.wangjq.BeanDefinition");
+        int count = classPathBeanDefinitionScanner.scan("learn.wangjq.beanDefinition");
 
         System.out.println("count = " + count);
 
