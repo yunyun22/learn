@@ -37,10 +37,24 @@ public class Application {
         SpringApplication.run(Application.class, args);
     }
 
+    @RequestMapping("/")
+    public String index() {
+        return "index";
+    }
+
+    @RequestMapping("/logout")
+    public String logout() {
+        return "logout";
+    }
+
+    @RequestMapping("/login")
+    public String login() {
+        return "login";
+    }
+
     @RequestMapping("/home")
     @ResponseBody
-    public String home(@RequestBody DateDto dateDto) {
-        jdbcService.insertStudent();
+    public String home() {
         return "Hello World";
     }
 
@@ -50,12 +64,12 @@ public class Application {
         return "Hello World!";
     }
 
-
-    @RequestMapping("/root")
-    public ModelAndView index() {
-        System.out.println("start in index");
-        return new ModelAndView("index.html");
-    }
+//
+//    @RequestMapping("/root")
+//    public ModelAndView index() {
+//        System.out.println("start in index");
+//        return new ModelAndView("index.html");
+//    }
 
     @Bean
     public MappingJackson2HttpMessageConverter getMappingJackson2HttpMessageConverter() {

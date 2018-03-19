@@ -7,3 +7,5 @@ drop database sakila
 --添加mysql 内置的
 
 select * from employee
+
+desc employee
