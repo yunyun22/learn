@@ -1,8 +1,16 @@
 package learn.wangjq.beanDefinition;
 
+import org.springframework.beans.factory.annotation.AnnotatedGenericBeanDefinition;
+import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
+import org.springframework.beans.factory.support.GenericBeanDefinition;
+import org.springframework.beans.factory.support.RootBeanDefinition;
+import org.springframework.beans.factory.support.SimpleBeanDefinitionRegistry;
+import org.springframework.context.annotation.AnnotatedBeanDefinitionReader;
 import org.springframework.context.annotation.ClassPathBeanDefinitionScanner;
 import org.springframework.stereotype.Component;
+
+import java.util.Arrays;
 
 @Component("t")
 public class Tester {
@@ -40,35 +48,37 @@ public class Tester {
 
         ClassPathBeanDefinitionScanner classPathBeanDefinitionScanner = new ClassPathBeanDefinitionScanner(defaultListableBeanFactory);
 
-        int count = classPathBeanDefinitionScanner.scan("learn.wangjq.beanDefinition");
+        int count = classPathBeanDefinitionScanner.scan("learn.wangjq.BeanDefinition");
 
-        System.out.println("count = " + count);
+        //System.out.println("count = " + count);
 
         Tester t = (Tester) defaultListableBeanFactory.getBean("t");
 
-        System.out.println("t = " + t);
+        // System.out.println("t = " + t);
 
-        String[] beanDefinitionNames = defaultListableBeanFactory.getBeanDefinitionNames();
+        Object myFactoryBeanStr = defaultListableBeanFactory.getBean("myFactoryBean");
 
-        for (String s :
-                beanDefinitionNames) {
+        System.out.println("myFactoryBeanStr = " + myFactoryBeanStr);
 
-            System.out.println("name = " + s);
-        }
-        TestDisposableBean testDisposableBean = (TestDisposableBean) defaultListableBeanFactory.getBean("testDisposableBean");
-
-        Object object = (Object) defaultListableBeanFactory.getBean("myFactoryBean");
-
-        MyFactoryBean myFactoryBean = (MyFactoryBean) defaultListableBeanFactory.getBean("&myFactoryBean");
+//        Object myFactoryBean = defaultListableBeanFactory.getBean("&myFactoryBean");
+//
+//        System.out.println("myFactoryBean = " + myFactoryBean);
 
 
-        myFactoryBean.getObjectType();
 
-        if (object instanceof String) {
-            System.out.println("this class is " + myFactoryBean.getObjectType());
-            System.out.println("object = " + object);
-        }
+//        if (o instanceof MyFactoryBean) {
+//            System.out.println("o = " + o);
+//        } else {
+//            System.out.println("o = " + o);
+//        }
 
-        defaultListableBeanFactory.destroySingletons();
+
+//        String[] beanDefinitionNames = defaultListableBeanFactory.getBeanDefinitionNames();
+//
+//        for (String s :
+//                beanDefinitionNames) {
+//            System.out.println("s = " + s);
+//
+//        }
     }
 }
