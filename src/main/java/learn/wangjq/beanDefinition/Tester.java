@@ -1,4 +1,4 @@
-package learn.wangjq.BeanDefinition;
+package learn.wangjq.beanDefinition;
 
 import org.springframework.beans.factory.annotation.AnnotatedGenericBeanDefinition;
 import org.springframework.beans.factory.config.BeanDefinition;
@@ -60,7 +60,6 @@ public class Tester {
 
         for (String s :
                 beanDefinitionNames) {
-
             System.out.println("s = " + s);
 
         }
