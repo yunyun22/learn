@@ -13,11 +13,6 @@ public class MyFactoryBean implements FactoryBean {
         return "wangjq";
     }
 
-    @Override
-    public String toString() {
-        return "MyFactoryBean{}";
-    }
-
     @Nullable
     @Override
     public Class<?> getObjectType() {
@@ -29,6 +24,8 @@ public class MyFactoryBean implements FactoryBean {
         return true;
     }
 
-
-
+    @Override
+    public String toString() {
+        return "MyFactoryBean{}";
+    }
 }

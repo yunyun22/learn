@@ -1,16 +1,8 @@
 package learn.wangjq.beanDefinition;
 
-import org.springframework.beans.factory.annotation.AnnotatedGenericBeanDefinition;
-import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
-import org.springframework.beans.factory.support.GenericBeanDefinition;
-import org.springframework.beans.factory.support.RootBeanDefinition;
-import org.springframework.beans.factory.support.SimpleBeanDefinitionRegistry;
-import org.springframework.context.annotation.AnnotatedBeanDefinitionReader;
 import org.springframework.context.annotation.ClassPathBeanDefinitionScanner;
 import org.springframework.stereotype.Component;
-
-import java.util.Arrays;
 
 @Component("t")
 public class Tester {
@@ -52,18 +44,25 @@ public class Tester {
 
         //System.out.println("count = " + count);
 
+        defaultListableBeanFactory.registerCustomEditor(String.class, MyCustomEditor.class);
+
         Tester t = (Tester) defaultListableBeanFactory.getBean("t");
 
         // System.out.println("t = " + t);
 
-        Object myFactoryBeanStr = defaultListableBeanFactory.getBean("myFactoryBean");
+        TestDisposableBean testDisposableBean = (TestDisposableBean) defaultListableBeanFactory.getBean("testDisposableBean");
 
-        System.out.println("myFactoryBeanStr = " + myFactoryBeanStr);
+
+        System.out.println(testDisposableBean);
+        //testDisposableBean.
+
+        defaultListableBeanFactory.destroySingletons();
+
+        // System.out.println("myFactoryBeanStr = " + myFactoryBeanStr);
 
 //        Object myFactoryBean = defaultListableBeanFactory.getBean("&myFactoryBean");
 //
 //        System.out.println("myFactoryBean = " + myFactoryBean);
-
 
 
 //        if (o instanceof MyFactoryBean) {

@@ -6,13 +6,12 @@ import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.BeanFactoryAware;
 import org.springframework.beans.factory.BeanNameAware;
 import org.springframework.beans.factory.DisposableBean;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 @Component("testDisposableBean")
 public class TestDisposableBean implements DisposableBean, BeanNameAware, BeanFactoryAware {
 
-    @Value("#{'Hello' + world}")
+
     private String name;
     private String beanName;
     private BeanFactory beanFactory;
@@ -33,5 +32,14 @@ public class TestDisposableBean implements DisposableBean, BeanNameAware, BeanFa
     @Override
     public void setBeanFactory(BeanFactory beanFactory) throws BeansException {
         this.beanFactory = beanFactory;
+    }
+
+    @Override
+    public String toString() {
+        return "TestDisposableBean{" +
+                "name='" + name + '\'' +
+                ", beanName='" + beanName + '\'' +
+                ", beanFactory=" + beanFactory +
+                '}';
     }
 }
