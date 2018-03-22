@@ -15,6 +15,8 @@ public class TestDisposableBean implements DisposableBean, BeanNameAware, BeanFa
     private String name;
     private String beanName;
     private BeanFactory beanFactory;
+    private float myFloat;
+
 
     @Override
     public void destroy() throws Exception {
@@ -38,6 +40,14 @@ public class TestDisposableBean implements DisposableBean, BeanNameAware, BeanFa
 
     public BeanFactory getBeanFactory() {
         return beanFactory;
+    }
+
+    public float getMyFloat() {
+        return myFloat;
+    }
+
+    public void setMyFloat(float myFloat) {
+        this.myFloat = myFloat;
     }
 
     @Override

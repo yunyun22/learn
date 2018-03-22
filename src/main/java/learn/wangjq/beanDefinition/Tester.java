@@ -5,10 +5,16 @@ import org.springframework.beans.factory.config.CustomEditorConfigurer;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.springframework.beans.factory.support.RootBeanDefinition;
 import org.springframework.context.annotation.ClassPathBeanDefinitionScanner;
+import org.springframework.core.convert.converter.Converter;
+import org.springframework.core.convert.support.DefaultConversionService;
+import org.springframework.core.convert.support.GenericConversionService;
 import org.springframework.stereotype.Component;
 
 import java.beans.PropertyEditor;
+import java.text.NumberFormat;
+import java.text.ParseException;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 @Component("t")
@@ -46,23 +52,50 @@ public class Tester {
         DefaultListableBeanFactory defaultListableBeanFactory = new DefaultListableBeanFactory();
         ClassPathBeanDefinitionScanner classPathBeanDefinitionScanner = new ClassPathBeanDefinitionScanner(defaultListableBeanFactory);
         int count = classPathBeanDefinitionScanner.scan("learn.wangjq.beanDefinition");
+
+        /**
+         * test,learn conversion
+         */
+        GenericConversionService conversionService = new DefaultConversionService();
+        conversionService.addConverter(new Converter<String, Float>() {
+            @Override
+            public Float convert(String source) {
+                try {
+                    NumberFormat nf = NumberFormat.getInstance(Locale.GERMAN);
+                    return nf.parse(source).floatValue();
+                } catch (ParseException ex) {
+                    throw new IllegalArgumentException(ex);
+                }
+            }
+        });
+        defaultListableBeanFactory.setConversionService(conversionService);
+        MutablePropertyValues pvs = new MutablePropertyValues();
+        pvs.add("myFloat", "1,1");
+        RootBeanDefinition rootBeanDefinition = new RootBeanDefinition(TestDisposableBean.class);
+        rootBeanDefinition.setPropertyValues(pvs);
+        defaultListableBeanFactory.registerBeanDefinition("testDisposableBean", rootBeanDefinition);
+        TestDisposableBean testDisposableBean = (TestDisposableBean) defaultListableBeanFactory.getBean("testDisposableBean");
+
+        System.out.println("testDisposableBean.myFloat = " + testDisposableBean.getMyFloat());
+
+
         /**
          * test，learn PropertyEditor
          */
-        CustomEditorConfigurer cec = new CustomEditorConfigurer();
-
-        Map<Class<?>, Class<? extends PropertyEditor>> editors = new HashMap<>();
-        editors.put(String.class, MyCustomEditor.class);
-        cec.setCustomEditors(editors);
-        cec.postProcessBeanFactory(defaultListableBeanFactory);
-
-        MutablePropertyValues pvs = new MutablePropertyValues();
-        pvs.add("name", "www");
-        RootBeanDefinition bd = new RootBeanDefinition(TestDisposableBean.class);
-        bd.setPropertyValues(pvs);
-        defaultListableBeanFactory.registerBeanDefinition("tb", bd);
-        TestDisposableBean testDisposableBean = defaultListableBeanFactory.getBean(TestDisposableBean.class);
-        defaultListableBeanFactory.destroySingletons();
+//        CustomEditorConfigurer cec = new CustomEditorConfigurer();
+//
+//        Map<Class<?>, Class<? extends PropertyEditor>> editors = new HashMap<>();
+//        editors.put(String.class, MyCustomEditor.class);
+//        cec.setCustomEditors(editors);
+//        cec.postProcessBeanFactory(defaultListableBeanFactory);
+//
+//        MutablePropertyValues pvs = new MutablePropertyValues();
+//        pvs.add("name", "www");
+//        RootBeanDefinition bd = new RootBeanDefinition(TestDisposableBean.class);
+//        bd.setPropertyValues(pvs);
+//        defaultListableBeanFactory.registerBeanDefinition("tb", bd);
+//        TestDisposableBean testDisposableBean = defaultListableBeanFactory.getBean(TestDisposableBean.class);
+//        defaultListableBeanFactory.destroySingletons();
 
         //System.out.println("count = " + count);
 
