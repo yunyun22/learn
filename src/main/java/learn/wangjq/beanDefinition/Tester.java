@@ -1,8 +1,15 @@
 package learn.wangjq.beanDefinition;
 
+import org.springframework.beans.MutablePropertyValues;
+import org.springframework.beans.factory.config.CustomEditorConfigurer;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
+import org.springframework.beans.factory.support.RootBeanDefinition;
 import org.springframework.context.annotation.ClassPathBeanDefinitionScanner;
 import org.springframework.stereotype.Component;
+
+import java.beans.PropertyEditor;
+import java.util.HashMap;
+import java.util.Map;
 
 @Component("t")
 public class Tester {
@@ -37,26 +44,43 @@ public class Tester {
 
 
         DefaultListableBeanFactory defaultListableBeanFactory = new DefaultListableBeanFactory();
-
         ClassPathBeanDefinitionScanner classPathBeanDefinitionScanner = new ClassPathBeanDefinitionScanner(defaultListableBeanFactory);
+        int count = classPathBeanDefinitionScanner.scan("learn.wangjq.beanDefinition");
+        /**
+         * test，learn PropertyEditor
+         */
+        CustomEditorConfigurer cec = new CustomEditorConfigurer();
 
-        int count = classPathBeanDefinitionScanner.scan("learn.wangjq.BeanDefinition");
+        Map<Class<?>, Class<? extends PropertyEditor>> editors = new HashMap<>();
+        editors.put(String.class, MyCustomEditor.class);
+        cec.setCustomEditors(editors);
+        cec.postProcessBeanFactory(defaultListableBeanFactory);
+
+        MutablePropertyValues pvs = new MutablePropertyValues();
+        pvs.add("name", "www");
+        RootBeanDefinition bd = new RootBeanDefinition(TestDisposableBean.class);
+        bd.setPropertyValues(pvs);
+        defaultListableBeanFactory.registerBeanDefinition("tb", bd);
+        TestDisposableBean testDisposableBean = defaultListableBeanFactory.getBean(TestDisposableBean.class);
+        defaultListableBeanFactory.destroySingletons();
 
         //System.out.println("count = " + count);
 
-        defaultListableBeanFactory.registerCustomEditor(String.class, MyCustomEditor.class);
+        // defaultListableBeanFactory.registerSingleton("myString",new String("wangjq222"));
 
-        Tester t = (Tester) defaultListableBeanFactory.getBean("t");
+        //defaultListableBeanFactory.registerCustomEditor(String.class, MyCustomEditor.class);
+
+        //Tester t = (Tester) defaultListableBeanFactory.getBean("t");
 
         // System.out.println("t = " + t);
 
-        TestDisposableBean testDisposableBean = (TestDisposableBean) defaultListableBeanFactory.getBean("testDisposableBean");
+        //String s = (String) defaultListableBeanFactory.getBean("myString");
 
 
-        System.out.println(testDisposableBean);
+        // System.out.println(s);
         //testDisposableBean.
 
-        defaultListableBeanFactory.destroySingletons();
+        // defaultListableBeanFactory.destroySingletons();
 
         // System.out.println("myFactoryBeanStr = " + myFactoryBeanStr);
 

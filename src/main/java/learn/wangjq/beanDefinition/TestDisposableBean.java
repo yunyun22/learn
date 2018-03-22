@@ -8,7 +8,7 @@ import org.springframework.beans.factory.BeanNameAware;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.stereotype.Component;
 
-@Component("testDisposableBean")
+//@Component("testDisposableBean")
 public class TestDisposableBean implements DisposableBean, BeanNameAware, BeanFactoryAware {
 
 
@@ -22,6 +22,22 @@ public class TestDisposableBean implements DisposableBean, BeanNameAware, BeanFa
         System.out.println("I will destory");
         System.out.println("beanName = " + beanName);
         System.out.println("beanFactory = " + beanFactory);
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getBeanName() {
+        return beanName;
+    }
+
+    public BeanFactory getBeanFactory() {
+        return beanFactory;
     }
 
     @Override

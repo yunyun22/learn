@@ -6,6 +6,6 @@ public class MyCustomEditor extends PropertyEditorSupport {
 
     public void setAsText(String text) {
         System.out.println("text = " + text);
-        setValue(text);
+        setValue("hello world");
     }
 }
