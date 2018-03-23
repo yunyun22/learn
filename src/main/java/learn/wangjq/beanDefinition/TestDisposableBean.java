@@ -6,16 +6,22 @@ import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.BeanFactoryAware;
 import org.springframework.beans.factory.BeanNameAware;
 import org.springframework.beans.factory.DisposableBean;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-//@Component("testDisposableBean")
+@Component("testDisposableBean")
 public class TestDisposableBean implements DisposableBean, BeanNameAware, BeanFactoryAware {
 
 
+    @Value("wangjq")
     private String name;
     private String beanName;
     private BeanFactory beanFactory;
     private float myFloat;
+
+    @Autowired
+    private Tester Tester;
 
 
     @Override
@@ -38,8 +44,26 @@ public class TestDisposableBean implements DisposableBean, BeanNameAware, BeanFa
         return beanName;
     }
 
+    @Override
+    public void setBeanName(String name) {
+        this.beanName = name;
+    }
+
+    public learn.wangjq.beanDefinition.Tester getTester() {
+        return Tester;
+    }
+
+    public void setTester(learn.wangjq.beanDefinition.Tester tester) {
+        Tester = tester;
+    }
+
     public BeanFactory getBeanFactory() {
         return beanFactory;
+    }
+
+    @Override
+    public void setBeanFactory(BeanFactory beanFactory) throws BeansException {
+        this.beanFactory = beanFactory;
     }
 
     public float getMyFloat() {
@@ -51,21 +75,13 @@ public class TestDisposableBean implements DisposableBean, BeanNameAware, BeanFa
     }
 
     @Override
-    public void setBeanName(String name) {
-        this.beanName = name;
-    }
-
-    @Override
-    public void setBeanFactory(BeanFactory beanFactory) throws BeansException {
-        this.beanFactory = beanFactory;
-    }
-
-    @Override
     public String toString() {
         return "TestDisposableBean{" +
                 "name='" + name + '\'' +
                 ", beanName='" + beanName + '\'' +
                 ", beanFactory=" + beanFactory +
+                ", myFloat=" + myFloat +
+                ", Tester=" + Tester +
                 '}';
     }
 }
