@@ -1,7 +1,11 @@
 package learn.wangjq.beanDefinition;
 
+import org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor;
+import org.springframework.beans.factory.config.PropertyPlaceholderConfigurer;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.springframework.context.annotation.ClassPathBeanDefinitionScanner;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Component;
 
 @Component("t")
@@ -43,6 +47,24 @@ public class Tester {
         //BeanPostProcessor beanPostProcessor = (BeanPostProcessor)defaultListableBeanFactory.getBean("myBeanPostProcessor");
         //System.out.println(beanPostProcessor);
 
+
+        /**
+         * @Value annotation
+         */
+        AutowiredAnnotationBeanPostProcessor autowiredAnnotationBeanPostProcessor = new AutowiredAnnotationBeanPostProcessor();
+        autowiredAnnotationBeanPostProcessor.setBeanFactory(defaultListableBeanFactory);
+        defaultListableBeanFactory.addBeanPostProcessor(autowiredAnnotationBeanPostProcessor);
+
+        /**
+         * add Property
+         */
+        PropertyPlaceholderConfigurer pc = new PropertyPlaceholderConfigurer();
+        Resource resource = new ClassPathResource("/config/PropertyPlaceholderConfigurerTests.properties", Tester.class);
+        pc.setLocation(resource);
+        pc.postProcessBeanFactory(defaultListableBeanFactory);
+
+        TestDisposableBean testDisposableBean = (TestDisposableBean) defaultListableBeanFactory.getBean("testDisposableBean");
+        System.out.println(testDisposableBean);
 
         /**
          * test @Autowired

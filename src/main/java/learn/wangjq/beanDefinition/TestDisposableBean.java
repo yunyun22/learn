@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
 public class TestDisposableBean implements DisposableBean, BeanNameAware, BeanFactoryAware {
 
 
-    @Value("wangjq")
+    @Value("${name}")
     private String name;
     private String beanName;
     private BeanFactory beanFactory;
