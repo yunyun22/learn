@@ -56,27 +56,27 @@ public class Tester {
         /**
          * test,learn conversion
          */
-        GenericConversionService conversionService = new DefaultConversionService();
-        conversionService.addConverter(new Converter<String, Float>() {
-            @Override
-            public Float convert(String source) {
-                try {
-                    NumberFormat nf = NumberFormat.getInstance(Locale.GERMAN);
-                    return nf.parse(source).floatValue();
-                } catch (ParseException ex) {
-                    throw new IllegalArgumentException(ex);
-                }
-            }
-        });
-        defaultListableBeanFactory.setConversionService(conversionService);
-        MutablePropertyValues pvs = new MutablePropertyValues();
-        pvs.add("myFloat", "1,1");
-        RootBeanDefinition rootBeanDefinition = new RootBeanDefinition(TestDisposableBean.class);
-        rootBeanDefinition.setPropertyValues(pvs);
-        defaultListableBeanFactory.registerBeanDefinition("testDisposableBean", rootBeanDefinition);
-        TestDisposableBean testDisposableBean = (TestDisposableBean) defaultListableBeanFactory.getBean("testDisposableBean");
-
-        System.out.println("testDisposableBean.myFloat = " + testDisposableBean.getMyFloat());
+//        GenericConversionService conversionService = new DefaultConversionService();
+//        conversionService.addConverter(new Converter<String, Float>() {
+//            @Override
+//            public Float convert(String source) {
+//                try {
+//                    NumberFormat nf = NumberFormat.getInstance(Locale.GERMAN);
+//                    return nf.parse(source).floatValue();
+//                } catch (ParseException ex) {
+//                    throw new IllegalArgumentException(ex);
+//                }
+//            }
+//        });
+//        defaultListableBeanFactory.setConversionService(conversionService);
+//        MutablePropertyValues pvs = new MutablePropertyValues();
+//        pvs.add("myFloat", "1,1");
+//        RootBeanDefinition rootBeanDefinition = new RootBeanDefinition(TestDisposableBean.class);
+//        rootBeanDefinition.setPropertyValues(pvs);
+//        defaultListableBeanFactory.registerBeanDefinition("testDisposableBean", rootBeanDefinition);
+//        TestDisposableBean testDisposableBean = (TestDisposableBean) defaultListableBeanFactory.getBean("testDisposableBean");
+//
+//        System.out.println("testDisposableBean.myFloat = " + testDisposableBean.getMyFloat());
 
 
         /**
