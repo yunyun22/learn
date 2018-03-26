@@ -1,21 +1,8 @@
 package learn.wangjq.beanDefinition;
 
-import org.springframework.beans.MutablePropertyValues;
-import org.springframework.beans.factory.config.CustomEditorConfigurer;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
-import org.springframework.beans.factory.support.RootBeanDefinition;
 import org.springframework.context.annotation.ClassPathBeanDefinitionScanner;
-import org.springframework.core.convert.converter.Converter;
-import org.springframework.core.convert.support.DefaultConversionService;
-import org.springframework.core.convert.support.GenericConversionService;
 import org.springframework.stereotype.Component;
-
-import java.beans.PropertyEditor;
-import java.text.NumberFormat;
-import java.text.ParseException;
-import java.util.HashMap;
-import java.util.Locale;
-import java.util.Map;
 
 @Component("t")
 public class Tester {
@@ -41,6 +28,7 @@ public class Tester {
 //        //方法测试
 //        System.out.println(registry.containsBeanDefinition("d1"));//true
 //        System.out.println(registry.getBeanDefinitionCount());//2
+
 //        System.out.println(Arrays.toString(registry.getBeanDefinitionNames()));//[d1, d2]
 //
 //
@@ -52,6 +40,27 @@ public class Tester {
         DefaultListableBeanFactory defaultListableBeanFactory = new DefaultListableBeanFactory();
         ClassPathBeanDefinitionScanner classPathBeanDefinitionScanner = new ClassPathBeanDefinitionScanner(defaultListableBeanFactory);
         int count = classPathBeanDefinitionScanner.scan("learn.wangjq.beanDefinition");
+        //BeanPostProcessor beanPostProcessor = (BeanPostProcessor)defaultListableBeanFactory.getBean("myBeanPostProcessor");
+        //System.out.println(beanPostProcessor);
+
+
+        /**
+         * test @Autowired
+         */
+//        AutowiredAnnotationBeanPostProcessor autowiredAnnotationBeanPostProcessor = new AutowiredAnnotationBeanPostProcessor();
+//        autowiredAnnotationBeanPostProcessor.setBeanFactory(defaultListableBeanFactory);
+//        defaultListableBeanFactory.addBeanPostProcessor(autowsiredAnnotationBeanPostProcessor);
+////        Tester t = (Tester) defaultListableBeanFactory.getBean("t");
+////        System.out.println(t);
+//        TestDisposableBean testDisposableBean = (TestDisposableBean) defaultListableBeanFactory.getBean("testDisposableBean");
+//        System.out.println(testDisposableBean);
+
+        /**
+         * test,learn BeanPostProcessor
+         */
+        //defaultListableBeanFactory.addBeanPostProcessor(new MyBeanPostProcessor());
+        //TestDisposableBean testDisposableBean = (TestDisposableBean) defaultListableBeanFactory.getBean("testDisposableBean");
+
 
         /**
          * test,learn conversion
@@ -136,5 +145,11 @@ public class Tester {
 //            System.out.println("s = " + s);
 //
 //        }
+    }
+
+
+    @Override
+    public String toString() {
+        return "Tester";
     }
 }
