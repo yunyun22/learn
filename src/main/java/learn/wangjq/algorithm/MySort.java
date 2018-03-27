@@ -1,5 +1,8 @@
 package learn.wangjq.algorithm;
 
+/**
+ * a sort util
+ */
 public class MySort {
 
 
