@@ -1,5 +1,8 @@
 package learn.wangjq.beanDefinition;
 
+import org.springframework.beans.factory.BeanFactoryAware;
+import org.springframework.beans.factory.BeanNameAware;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor;
 import org.springframework.beans.factory.config.PropertyPlaceholderConfigurer;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
@@ -8,8 +11,16 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Component;
 
+
 @Component("t")
 public class Tester {
+
+    @Autowired
+    private BeanNameAware disposableBean;
+
+
+    @Autowired
+    private BeanFactoryAware disposableBean2;
 
 
     public static void main(String[] args) throws Exception {
@@ -18,7 +29,7 @@ public class Tester {
 //        System.out.println(beanDefinition.isSingleton());
 //        System.out.println(beanDefinition.getBeanClassName());
 //        //System.out.println( beanDefinition.getFactoryMethodMetadata());
-//
+//DisposableBean
 //        //实例化SimpleBeanDefinitionRegistry
 //        SimpleBeanDefinitionRegistry registry = new SimpleBeanDefinitionRegistry();
 //
@@ -44,8 +55,10 @@ public class Tester {
         DefaultListableBeanFactory defaultListableBeanFactory = new DefaultListableBeanFactory();
         ClassPathBeanDefinitionScanner classPathBeanDefinitionScanner = new ClassPathBeanDefinitionScanner(defaultListableBeanFactory);
         int count = classPathBeanDefinitionScanner.scan("learn.wangjq.beanDefinition");
-        //BeanPostProcessor beanPostProcessor = (BeanPostProcessor)defaultListableBeanFactory.getBean("myBeanPostProcessor");
-        //System.out.println(beanPostProcessor);
+        PropertyPlaceholderConfigurer pc = new PropertyPlaceholderConfigurer();
+        Resource resource = new ClassPathResource("/config/PropertyPlaceholderConfigurerTests.properties", Tester.class);
+        pc.setLocation(resource);
+        pc.postProcessBeanFactory(defaultListableBeanFactory);
 
 
         /**
@@ -55,16 +68,19 @@ public class Tester {
         autowiredAnnotationBeanPostProcessor.setBeanFactory(defaultListableBeanFactory);
         defaultListableBeanFactory.addBeanPostProcessor(autowiredAnnotationBeanPostProcessor);
 
+        Tester t = (Tester) defaultListableBeanFactory.getBean("t");
+        System.out.println(t);
+
         /**
          * add Property
          */
-        PropertyPlaceholderConfigurer pc = new PropertyPlaceholderConfigurer();
-        Resource resource = new ClassPathResource("/config/PropertyPlaceholderConfigurerTests.properties", Tester.class);
-        pc.setLocation(resource);
-        pc.postProcessBeanFactory(defaultListableBeanFactory);
-
-        TestDisposableBean testDisposableBean = (TestDisposableBean) defaultListableBeanFactory.getBean("testDisposableBean");
-        System.out.println(testDisposableBean);
+//        PropertyPlaceholderConfigurer pc = new PropertyPlaceholderConfigurer();
+//        Resource resource = new ClassPathResource("/config/PropertyPlaceholderConfigurerTests.properties", Tester.class);
+//        pc.setLocation(resource);
+//        pc.postProcessBeanFactory(defaultListableBeanFactory);
+//
+//        TestDisposableBean testDisposableBean = (TestDisposableBean) defaultListableBeanFactory.getBean("testDisposableBean");
+//        System.out.println(testDisposableBean);
 
         /**
          * test @Autowired
@@ -172,6 +188,9 @@ public class Tester {
 
     @Override
     public String toString() {
-        return "Tester";
+        return "Tester{" +
+                "disposableBean=" + disposableBean +
+                ", disposableBean2=" + disposableBean2 +
+                '}';
     }
 }

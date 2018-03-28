@@ -6,7 +6,6 @@ import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.BeanFactoryAware;
 import org.springframework.beans.factory.BeanNameAware;
 import org.springframework.beans.factory.DisposableBean;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -19,10 +18,6 @@ public class TestDisposableBean implements DisposableBean, BeanNameAware, BeanFa
     private String beanName;
     private BeanFactory beanFactory;
     private float myFloat;
-
-    @Autowired
-    private Tester Tester;
-
 
     @Override
     public void destroy() throws Exception {
@@ -49,14 +44,6 @@ public class TestDisposableBean implements DisposableBean, BeanNameAware, BeanFa
         this.beanName = name;
     }
 
-    public learn.wangjq.beanDefinition.Tester getTester() {
-        return Tester;
-    }
-
-    public void setTester(learn.wangjq.beanDefinition.Tester tester) {
-        Tester = tester;
-    }
-
     public BeanFactory getBeanFactory() {
         return beanFactory;
     }
@@ -74,14 +61,11 @@ public class TestDisposableBean implements DisposableBean, BeanNameAware, BeanFa
         this.myFloat = myFloat;
     }
 
+
     @Override
     public String toString() {
         return "TestDisposableBean{" +
-                "name='" + name + '\'' +
-                ", beanName='" + beanName + '\'' +
-                ", beanFactory=" + beanFactory +
-                ", myFloat=" + myFloat +
-                ", Tester=" + Tester +
+                "name=222'" + name + '\'' +
                 '}';
     }
 }
