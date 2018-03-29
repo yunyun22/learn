@@ -16,12 +16,7 @@ import org.springframework.stereotype.Component;
 public class Tester {
 
     @Autowired
-    private BeanNameAware disposableBean;
-
-
-    @Autowired
-    private BeanFactoryAware disposableBean2;
-
+    private BeanFactoryAware disposableBean;
 
     public static void main(String[] args) throws Exception {
 //        AnnotatedGenericBeanDefinition beanDefinition = new AnnotatedGenericBeanDefinition(Tester.class);
@@ -190,7 +185,6 @@ public class Tester {
     public String toString() {
         return "Tester{" +
                 "disposableBean=" + disposableBean +
-                ", disposableBean2=" + disposableBean2 +
                 '}';
     }
 }
