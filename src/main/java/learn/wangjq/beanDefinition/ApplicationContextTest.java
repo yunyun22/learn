@@ -1,13 +1,19 @@
 package learn.wangjq.beanDefinition;
 
+import learn.wangjq.beanDefinition.event.EmailEvent;
+import learn.wangjq.beanDefinition.event.MyContextStartedEvent;
+import org.springframework.context.event.ContextStartedEvent;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class ApplicationContextTest {
 
     public static void main(String[] args) {
         ClassPathXmlApplicationContext classPathXmlApplicationContext = new ClassPathXmlApplicationContext("/config/ApplicationContextTest.xml");
-        Student s = (Student) classPathXmlApplicationContext.getBean("student");
-        System.out.println(s);
+        //Student s = (Student) classPathXmlApplicationContext.getBean("student");
+        //classPathXmlApplicationContext.publishEvent(new EmailEvent("hello Spring!", "cxg@126.com", "This is SpringApplicatoinContext test!"));
+        classPathXmlApplicationContext.publishEvent(new MyContextStartedEvent(classPathXmlApplicationContext));
+        //System.out.println(s);
     }
 
 }
+

@@ -8,5 +8,9 @@
         <property name="name" value="wangjq"/>
         <property name="sex" value="man"/>
     </bean>
-    
+
+    <bean class="learn.wangjq.beanDefinition.listener.EmailNotifier" />
+
+    <bean class="learn.wangjq.beanDefinition.listener.MyApplicationStartedListener"/>
+
 </beans>
