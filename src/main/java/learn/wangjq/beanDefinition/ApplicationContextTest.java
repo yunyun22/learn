@@ -9,6 +9,8 @@ public class ApplicationContextTest {
 
     public static void main(String[] args) {
         ClassPathXmlApplicationContext classPathXmlApplicationContext = new ClassPathXmlApplicationContext("/config/ApplicationContextTest.xml");
+
+        classPathXmlApplicationContext.getMessage(null,null);
         //Student s = (Student) classPathXmlApplicationContext.getBean("student");
         //classPathXmlApplicationContext.publishEvent(new EmailEvent("hello Spring!", "cxg@126.com", "This is SpringApplicatoinContext test!"));
         classPathXmlApplicationContext.publishEvent(new MyContextStartedEvent(classPathXmlApplicationContext));
