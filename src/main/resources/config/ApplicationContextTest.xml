@@ -1,16 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
-        http://www.springframework.org/schema/beans/spring-beans.xsd">
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd">
 
+    <!--
     <bean id="student" class="learn.wangjq.beanDefinition.Student">
         <property name="name" value="wangjq"/>
         <property name="sex" value="man"/>
     </bean>
+    <bean class="learn.wangjq.beanDefinition.listener.EmailNotifier"/>
+     <bean class="learn.wangjq.beanDefinition.listener.MyApplicationStartedListener"/>
+    -->
 
-    <bean class="learn.wangjq.beanDefinition.listener.EmailNotifier" />
+    <bean id="myHandler" class="learn.wangjq.aop.MyHandler"/>
 
-    <bean class="learn.wangjq.beanDefinition.listener.MyApplicationStartedListener"/>
+
+    <bean id="aopService" class="learn.wangjq.service.impl.AopServiceImpl"/>
+
+    <aop:config>
+        <aop:aspect id="handler" ref="myHandler">
+            <aop:pointcut id="addAllMethod" expression="execution(* learn.wangjq.service.*.*(..))"/>
+            <aop:before method="beforeSayHello" pointcut-ref="addAllMethod"/>
+            <aop:after method="afterSayBye" pointcut-ref="addAllMethod"/>
+        </aop:aspect>
+    </aop:config>
 
 </beans>
