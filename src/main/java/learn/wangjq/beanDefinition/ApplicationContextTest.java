@@ -15,6 +15,7 @@ public class ApplicationContextTest {
         //classPathXmlApplicationContext.publishEvent(new EmailEvent("hello Spring!", "cxg@126.com", "This is SpringApplicatoinContext test!"));
         classPathXmlApplicationContext.publishEvent(new MyContextStartedEvent(classPathXmlApplicationContext));
         //System.out.println(s);
+
     }
 
 }
