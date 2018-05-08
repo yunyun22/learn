@@ -22,6 +22,7 @@ public class ApplicationContextTest {
 
         aopService.doDealService();
 
+
     }
 
 }
