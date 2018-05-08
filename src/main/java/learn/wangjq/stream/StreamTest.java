@@ -51,9 +51,11 @@ public class StreamTest {
                 new Dish("南瓜", true, 2000, Dish.Type.OTHER),
                 new Dish("冬瓜", true, 2000, Dish.Type.OTHER));
 
-        Map<Dish.Type,List<Dish>> map = dishList.stream().collect(Collectors.groupingBy(Dish::getType));
 
-        System.out.println(map);
+        dishList.stream().peek(Dish::getCalories);
+//        Map<Dish.Type,List<Dish>> map = dishList.stream().collect(Collectors.groupingBy(Dish::getType));
+//
+//        System.out.println(map);
 
 
 
