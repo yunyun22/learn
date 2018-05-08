@@ -1,5 +1,8 @@
 package learn.wangjq.algorithm.tree;
 
+import com.sun.javafx.sg.prism.NodeEffectInput;
+import learn.wangjq.ArraysUtil;
+
 import java.util.Arrays;
 
 import static learn.wangjq.ArraysUtil.getLength;
@@ -14,8 +17,7 @@ public class ReBulidBinaryTree {
     }
 
     public static Node reBulidBinaryTree(int[] preorder, int[] midorder) {
-        Node root = new Node(preorder, midorder);
-        return null;
+        return Node.reBuild(preorder, midorder);
     }
 
 
@@ -23,7 +25,6 @@ public class ReBulidBinaryTree {
         private Node left;
         private Node right;
         private Object value;
-        private int[] sonTreeValue;
 
         public Node() {
         }
@@ -34,21 +35,48 @@ public class ReBulidBinaryTree {
             this.value = value;
         }
 
-        public Node(int[] preorder, int[] midorder) {
+        public static Node reBuild(int[] preorder, int[] midorder) {
 
 
             int root = preorder[0];
+            int indexOfRoot = ArraysUtil.indexof(midorder, root);
 
-            midorder = Arrays.copyOfRange(midorder, 0, getLength(midorder, root));
-            preorder = Arrays.copyOfRange(preorder, 1, midorder.length + 1);
+            /**
+             * 构建左子树
+             */
+            Node left = null;
 
-            Node left = new Node(preorder, midorder);
+            if (getLength(midorder, root) > 0 && midorder.length + 1 > 1) {
 
-            midorder = Arrays.copyOfRange(midorder, getLength(midorder, root), midorder.length);
-            preorder = Arrays.copyOfRange(preorder, midorder.length + 1, preorder.length);
+                int rightLength = indexOfRoot;
 
-            Node right = new Node(preorder, midorder);
+                left = reBuild(
+                        Arrays.copyOfRange(preorder, 1, rightLength + 1),
+                        Arrays.copyOfRange(midorder, 0, rightLength));
+            } else {
+                System.out.println("left preorder:" + ArraysUtil.arraysToString(preorder));
+                System.out.println("left midorder:" + ArraysUtil.arraysToString(midorder));
+                return new Node();
+            }
 
+            /**
+             * 构建右子树
+             */
+            Node right = null;
+            if (midorder.length > getLength(midorder, root) && preorder.length > midorder.length + 1) {
+
+                int leftLength = indexOfRoot + 1;
+
+                right = reBuild(
+                        Arrays.copyOfRange(preorder, leftLength, preorder.length),
+                        Arrays.copyOfRange(midorder, leftLength, midorder.length));
+            } else {
+                System.out.println("right preorder:" + ArraysUtil.arraysToString(preorder));
+                System.out.println("right midorder:" + ArraysUtil.arraysToString(midorder));
+                return new Node();
+            }
+
+            return new Node(left, right, root);
         }
 
     }
