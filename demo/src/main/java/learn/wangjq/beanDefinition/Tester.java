@@ -12,7 +12,6 @@ import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Component;
 
 
-@Component("t")
 public class Tester {
 
     @Autowired

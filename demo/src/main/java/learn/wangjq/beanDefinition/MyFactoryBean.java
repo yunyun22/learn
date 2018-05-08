@@ -5,7 +5,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Component;
 
-@Component("myFactoryBean")
 public class MyFactoryBean implements FactoryBean {
     @Nullable
     @Override

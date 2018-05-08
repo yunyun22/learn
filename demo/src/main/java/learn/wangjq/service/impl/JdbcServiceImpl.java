@@ -4,11 +4,9 @@ import learn.wangjq.jdbc.MyJdbc;
 import learn.wangjq.service.JdbcService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
+//import org.springframework.transaction.annotation.Propagation;
+//import org.springframework.transaction.annotation.Transactional;
 
-@Service
-@Transactional
 public class JdbcServiceImpl implements JdbcService {
 
     @Autowired
@@ -21,7 +19,7 @@ public class JdbcServiceImpl implements JdbcService {
      * 测试，nested 的传播性
      */
     @Override
-    @Transactional(propagation = Propagation.REQUIRED)
+    //@Transactional(propagation = Propagation.REQUIRED)
     public void insertStudent() {
         int count = myJdbc.insertStudent();
         //myServiceImp.insertTeacher();
@@ -35,7 +33,7 @@ public class JdbcServiceImpl implements JdbcService {
     }
 
     @Override
-    @Transactional(propagation = Propagation.NESTED)
+   // @Transactional(propagation = Propagation.NESTED)
     public void insertTeacher() throws Exception {
         int count = myJdbc.insertStudent();
         throw new RuntimeException("test exception");

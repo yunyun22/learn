@@ -1,7 +1,5 @@
 package learn.wangjq.nio;
 
-import org.junit.Test;
-
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.CharBuffer;
@@ -16,7 +14,6 @@ import java.nio.CharBuffer;
 public class TestBufferTest {
 
 
-    @Test
     public void testTestBufferView() throws Exception {
 
         ByteBuffer byteBuffer = ByteBuffer.allocate(7).order(ByteOrder.BIG_ENDIAN);
@@ -34,7 +31,6 @@ public class TestBufferTest {
         System.out.println(charBuffer);
     }
 
-    @Test
     public void testByteBufferView() {
         ByteBuffer byteBuffer = ByteBuffer.allocate(7).order(ByteOrder.BIG_ENDIAN);
 

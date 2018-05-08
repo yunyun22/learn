@@ -9,7 +9,6 @@ import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-@Component("testDisposableBean")
 public class TestDisposableBean implements DisposableBean, BeanNameAware, BeanFactoryAware {
 
 

@@ -6,7 +6,6 @@ import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Component;
 
 
-@Component("myBeanPostProcessor")
 public class MyBeanPostProcessor implements BeanPostProcessor {
 
     @Nullable
