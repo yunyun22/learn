@@ -1,6 +1,7 @@
 package wangjq.register;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.client.RestTemplateBuilder;
@@ -23,6 +24,8 @@ import java.util.List;
 @Controller
 public class RegisterApplication {
 
+    @Value("${name}")
+    private String name;
 
     @Autowired
     private RestTemplate restTemplate;
@@ -32,13 +35,13 @@ public class RegisterApplication {
 
     @RequestMapping("/hello")
     @ResponseBody
-    public String getHelloFromRrgister(){
-        return restTemplate.getForObject("http://register/helloWorld",String.class);
+    public String getHelloFromRrgister() {
+        return restTemplate.getForObject("http://register/helloWorld", String.class);
     }
 
-    private Boolean isInstanceAvailable(){
+    private Boolean isInstanceAvailable() {
         List<ServiceInstance> instances = discoveryClient.getInstances("register");
-        for(ServiceInstance si : instances){
+        for (ServiceInstance si : instances) {
             System.out.print("service:");
             System.out.print(si.getUri().toString());
         }
@@ -54,9 +57,9 @@ public class RegisterApplication {
 
     @RequestMapping("/helloWorld")
     @ResponseBody
-    public String getHelloFromDemo(){
+    public String getHelloFromDemo() {
         isInstanceAvailable();
-        return  "hello world";
+        return "hello world,"+name;
         //return restTemplate.getForObject("http://DEMO/helloWorld",String.class);
     }
 
