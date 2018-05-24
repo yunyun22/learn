@@ -1,6 +1,5 @@
-package learn.wangjq.algorithm.tree;
+package demo.wangjq.algorithm.tree;
 
-import com.sun.javafx.sg.prism.NodeEffectInput;
 import learn.wangjq.ArraysUtil;
 
 import java.util.Arrays;
