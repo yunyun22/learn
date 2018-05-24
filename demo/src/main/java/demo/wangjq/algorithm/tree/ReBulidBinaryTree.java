@@ -23,6 +23,10 @@ public class ReBulidBinaryTree {
         return Node.reBuild(preorder, midorder);
     }
 
+    /**
+     * 前序遍历
+     * @param node
+     */
     public static void preorder(Node node) {
         if (node == null) {
             return;
@@ -32,6 +36,10 @@ public class ReBulidBinaryTree {
         preorder(node.right);
     }
 
+    /**
+     * 中序遍历
+     * @param node
+     */
     public static void midorder(Node node) {
         if (node == null) {
             return;
@@ -42,6 +50,9 @@ public class ReBulidBinaryTree {
     }
 
 
+    /**
+     * 定义二叉树的数据结构
+     */
     private static class Node {
         private Node left;
         private Node right;
@@ -56,6 +67,12 @@ public class ReBulidBinaryTree {
             this.value = value;
         }
 
+        /**
+         * 重构二叉树
+         * @param preorder
+         * @param midorder
+         * @return
+         */
         public static Node reBuild(int[] preorder, int[] midorder) {
             if (preorder.length <= 0 || midorder.length <= 0) {
                 return null;
