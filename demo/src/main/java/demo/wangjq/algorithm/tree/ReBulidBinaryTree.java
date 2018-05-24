@@ -1,10 +1,10 @@
 package demo.wangjq.algorithm.tree;
 
-import learn.wangjq.ArraysUtil;
+import demo.wangjq.ArraysUtil;
 
 import java.util.Arrays;
 
-import static learn.wangjq.ArraysUtil.getLength;
+import static demo.wangjq.ArraysUtil.getLength;
 
 public class ReBulidBinaryTree {
 
@@ -25,6 +25,7 @@ public class ReBulidBinaryTree {
 
     /**
      * 前序遍历
+     *
      * @param node
      */
     public static void preorder(Node node) {
@@ -38,6 +39,7 @@ public class ReBulidBinaryTree {
 
     /**
      * 中序遍历
+     *
      * @param node
      */
     public static void midorder(Node node) {
@@ -69,6 +71,7 @@ public class ReBulidBinaryTree {
 
         /**
          * 重构二叉树
+         *
          * @param preorder
          * @param midorder
          * @return
