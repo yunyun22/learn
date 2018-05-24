@@ -68,44 +68,8 @@ public class MySort {
         int[] left = mergeSort(Arrays.copyOfRange(numbers, 0, mid));
         int[] right = mergeSort(Arrays.copyOfRange(numbers, mid, numbers.length));
 
-        return merge(left, right);
+        return ArraysUtil.merge(left, right);
     }
-
-    /**
-     * 合并两个有序的数组
-     *
-     * @param left
-     * @param right
-     * @return
-     */
-    public static int[] merge(int[] left, int[] right) {
-
-        int[] ret = new int[left.length + right.length];
-
-        int leftIndex = 0, rightIndex = 0, i = 0;
-        for (; ; ) {
-            if (leftIndex < left.length && rightIndex < right.length) {
-                if (left[leftIndex] < right[rightIndex]) {
-                    ret[i] = left[leftIndex];
-                    leftIndex++;
-                } else {
-                    ret[i] = right[rightIndex];
-                    rightIndex++;
-                }
-            } else if (leftIndex < left.length) {
-                ret[i] = left[leftIndex];
-                leftIndex++;
-            } else if (rightIndex < right.length) {
-                ret[i] = right[rightIndex];
-                rightIndex++;
-            } else {
-                break;
-            }
-            i++;
-        }
-        return ret;
-    }
-
 
     public static void main(String[] args) {
 
@@ -116,15 +80,15 @@ public class MySort {
 
         int[] left = {1, 3, 6, 8};
         int[] right = {2, 4, 6, 9, 10, 11};
-        System.out.println(ArraysUtil.arraysToString(merge(left, right)));
+        System.out.println(ArraysUtil.arraysToString(ArraysUtil.merge(left, right)));
 
         int[] left1 = {1, 3, 6, 8, 9, 10, 13, 15};
         int[] right1 = {2, 4, 6, 9, 10, 11};
-        System.out.println(ArraysUtil.arraysToString(merge(left1, right1)));
+        System.out.println(ArraysUtil.arraysToString(ArraysUtil.merge(left1, right1)));
 
         int[] left2 = {1, 3, 5, 7, 9};
         int[] right2 = {2, 4, 6, 8, 10};
-        System.out.println(ArraysUtil.arraysToString(merge(left2, right2)));
+        System.out.println(ArraysUtil.arraysToString(ArraysUtil.merge(left2, right2)));
     }
 
 }
