@@ -1,4 +1,4 @@
-package learn.wangjq.algorithm;
+package demo.wangjq.algorithm;
 
 public class MySeacher {
 
@@ -26,7 +26,7 @@ public class MySeacher {
             } else if (number > arrays[mid]) {
                 left = mid + 1;
             } else {
-                right = mid + 1;
+                right = mid - 1;
             }
         }
         return -1;

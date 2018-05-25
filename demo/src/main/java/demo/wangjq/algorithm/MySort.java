@@ -71,6 +71,20 @@ public class MySort {
         return ArraysUtil.merge(left, right);
     }
 
+
+    /**
+     * 快速排序
+     *
+     * @param disOrder
+     * @param left
+     * @param right
+     * @return
+     */
+    public static int[] quickSort(int[] disOrder, int left, int right) {
+
+        return null;
+    }
+
     public static void main(String[] args) {
 
         int[] disOrder = {2, 5, 3, 7, 6, 9, 1, 0};

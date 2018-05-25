@@ -1,4 +1,4 @@
-package learn.wangjq.algorithm;
+package demo.wangjq.algorithm;
 
 /**
  * Twitter_Snowflake<br>
