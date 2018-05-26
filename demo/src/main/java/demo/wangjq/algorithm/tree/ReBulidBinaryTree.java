@@ -1,5 +1,6 @@
-package demo.wangjq.algorithm.tree;
+package learn.wangjq.algorithm.tree;
 
+import com.sun.javafx.sg.prism.NodeEffectInput;
 import learn.wangjq.ArraysUtil;
 
 import java.util.Arrays;
@@ -52,7 +53,12 @@ public class ReBulidBinaryTree {
                 left = reBuild(
                         Arrays.copyOfRange(preorder, 1, rightLength + 1),
                         Arrays.copyOfRange(midorder, 0, rightLength));
+            } else {
+                System.out.println("left preorder:" + ArraysUtil.arraysToString(preorder));
+                System.out.println("left midorder:" + ArraysUtil.arraysToString(midorder));
+                return new Node();
             }
+
             /**
              * 构建右子树
              */
@@ -64,6 +70,10 @@ public class ReBulidBinaryTree {
                 right = reBuild(
                         Arrays.copyOfRange(preorder, leftLength, preorder.length),
                         Arrays.copyOfRange(midorder, leftLength, midorder.length));
+            } else {
+                System.out.println("right preorder:" + ArraysUtil.arraysToString(preorder));
+                System.out.println("right midorder:" + ArraysUtil.arraysToString(midorder));
+                return new Node();
             }
 
             return new Node(left, right, root);
