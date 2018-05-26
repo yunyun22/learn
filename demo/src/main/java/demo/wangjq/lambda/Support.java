@@ -1,4 +1,4 @@
-package learn.wangjq.lambda;
+package demo.wangjq.lambda;
 
 public interface Support {
 

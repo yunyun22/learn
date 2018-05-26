@@ -1,4 +1,4 @@
-package learn.wangjq;
+package demo.wangjq;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
