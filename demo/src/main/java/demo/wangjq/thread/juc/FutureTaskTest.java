@@ -6,7 +6,7 @@ import java.util.concurrent.FutureTask;
 import java.util.concurrent.TimeUnit;
 
 /**
- * Created by AMD on 2018/6/6.
+ * Created by wangjq on 2018/6/6.
  */
 public class FutureTaskTest {
 

@@ -1,4 +1,4 @@
-package learn.wangjq.lintcode;
+package demo.wangjq.lintcode;
 
 
 public class Solution {
