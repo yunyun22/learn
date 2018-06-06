@@ -14,6 +14,8 @@ public class FutureTaskTest {
 
         FutureTask<String> futureTask = new FutureTask<>(() -> {
 
+            System.out.println("sleeping");
+
             TimeUnit.SECONDS.sleep(10);
             return "wangjq";
         });
@@ -23,6 +25,7 @@ public class FutureTaskTest {
 
         Runnable runnable = () -> {
             try {
+                System.out.print("start get result :");
                 System.out.println(futureTask.get());
             } catch (InterruptedException e) {
                 e.printStackTrace();
