@@ -1,6 +1,6 @@
-package learn.wangjq.service.impl;
+package demo.wangjq.service.impl;
 
-import learn.wangjq.jdbc.MyJdbc;
+import demo.wangjq.jdbc.MyJdbc;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class MyServiceImp {

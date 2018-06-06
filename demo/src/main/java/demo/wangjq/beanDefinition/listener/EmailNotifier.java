@@ -1,6 +1,6 @@
-package learn.wangjq.beanDefinition.listener;
+package demo.wangjq.beanDefinition.listener;
 
-import learn.wangjq.beanDefinition.event.EmailEvent;
+import demo.wangjq.beanDefinition.event.EmailEvent;
 import org.springframework.context.ApplicationEvent;
 import org.springframework.context.ApplicationListener;
 

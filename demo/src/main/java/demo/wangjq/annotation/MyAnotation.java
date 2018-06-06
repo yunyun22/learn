@@ -1,4 +1,4 @@
-package learn.wangjq.annotation;
+package demo.wangjq.annotation;
 
 import org.springframework.stereotype.Component;
 

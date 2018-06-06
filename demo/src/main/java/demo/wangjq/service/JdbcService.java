@@ -1,4 +1,4 @@
-package learn.wangjq.service;
+package demo.wangjq.service;
 
 public interface JdbcService {
 

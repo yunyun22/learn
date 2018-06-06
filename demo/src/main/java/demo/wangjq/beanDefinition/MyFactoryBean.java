@@ -1,4 +1,4 @@
-package learn.wangjq.beanDefinition;
+package demo.wangjq.beanDefinition;
 
 import org.springframework.beans.factory.FactoryBean;
 import org.springframework.context.annotation.Bean;

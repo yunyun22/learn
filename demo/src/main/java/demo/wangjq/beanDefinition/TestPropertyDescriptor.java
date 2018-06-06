@@ -1,4 +1,4 @@
-package learn.wangjq.beanDefinition;
+package demo.wangjq.beanDefinition;
 
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.Method;

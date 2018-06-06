@@ -1,4 +1,4 @@
-package learn.wangjq.beanDefinition.listener;
+package demo.wangjq.beanDefinition.listener;
 
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextStartedEvent;

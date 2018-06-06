@@ -1,4 +1,4 @@
-package learn.wangjq.stream;
+package demo.wangjq.stream;
 
 import java.util.Arrays;
 import java.util.List;

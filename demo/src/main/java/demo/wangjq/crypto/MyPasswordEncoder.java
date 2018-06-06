@@ -1,4 +1,4 @@
-package learn.wangjq.crypto;
+package demo.wangjq.crypto;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
 

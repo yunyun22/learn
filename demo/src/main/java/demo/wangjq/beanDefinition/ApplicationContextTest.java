@@ -1,9 +1,9 @@
-package learn.wangjq.beanDefinition;
+package demo.wangjq.beanDefinition;
 
-import learn.wangjq.beanDefinition.event.EmailEvent;
-import learn.wangjq.beanDefinition.event.MyContextStartedEvent;
-import learn.wangjq.service.AopService;
-import learn.wangjq.service.impl.AopServiceImpl;
+import demo.wangjq.beanDefinition.event.EmailEvent;
+import demo.wangjq.beanDefinition.event.MyContextStartedEvent;
+import demo.wangjq.service.AopService;
+import demo.wangjq.service.impl.AopServiceImpl;
 import org.springframework.context.event.ContextStartedEvent;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 

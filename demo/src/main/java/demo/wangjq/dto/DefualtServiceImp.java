@@ -1,4 +1,4 @@
-package learn.wangjq.dto;
+package demo.wangjq.dto;
 
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;

@@ -1,4 +1,4 @@
-package learn.wangjq.math;
+package demo.wangjq.math;
 
 /**
  * 32位,前三位表示线程池的工作状态,后29表示线程的capactity

@@ -1,4 +1,4 @@
-package learn.wangjq.thread;
+package demo.wangjq.thread;
 
 import java.util.concurrent.*;
 

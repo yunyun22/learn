@@ -1,4 +1,4 @@
-package learn.wangjq;
+package demo.wangjq;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.boot.autoconfigure.http.HttpMessageConverters;

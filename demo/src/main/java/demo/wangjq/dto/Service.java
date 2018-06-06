@@ -1,4 +1,4 @@
-package learn.wangjq.dto;
+package demo.wangjq.dto;
 
 public interface Service {
 }

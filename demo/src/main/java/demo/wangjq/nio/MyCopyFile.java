@@ -1,4 +1,4 @@
-package learn.wangjq.nio;
+package demo.wangjq.nio;
 
 import java.io.FileInputStream;
 import java.io.IOException;

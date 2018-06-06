@@ -1,4 +1,4 @@
-package learn.wangjq.jdbc;
+package demo.wangjq.jdbc;
 
 import java.util.Random;
 

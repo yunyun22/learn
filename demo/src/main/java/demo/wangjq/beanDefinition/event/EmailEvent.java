@@ -1,4 +1,4 @@
-package learn.wangjq.beanDefinition.event;
+package demo.wangjq.beanDefinition.event;
 
 import org.springframework.context.ApplicationEvent;
 

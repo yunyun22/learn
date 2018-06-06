@@ -1,4 +1,4 @@
-package learn.wangjq.config;
+package demo.wangjq.config;
 
 
 //import org.springframework.context.annotation.Bean;

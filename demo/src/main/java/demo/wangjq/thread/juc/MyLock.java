@@ -1,4 +1,4 @@
-package learn.wangjq.thread.juc;
+package demo.wangjq.thread.juc;
 
 import java.util.Date;
 import java.util.concurrent.TimeUnit;

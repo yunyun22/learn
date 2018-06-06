@@ -1,4 +1,4 @@
-package learn.wangjq;
+package demo.wangjq;
 
 import java.util.Date;
 

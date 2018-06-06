@@ -1,4 +1,4 @@
-package learn.wangjq.ds;
+package demo.wangjq.ds;
 
 import java.util.LinkedHashMap;
 import java.util.Map;

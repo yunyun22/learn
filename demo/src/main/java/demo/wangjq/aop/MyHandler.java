@@ -1,4 +1,4 @@
-package learn.wangjq.aop;
+package demo.wangjq.aop;
 
 public class MyHandler {
 
