@@ -31,7 +31,7 @@ public class DelayedQueueTest {
         try {
             while (!delayQueue.isEmpty()) {
                 element = delayQueue.take();
-                System.out.println(element.toString() + " , start:" + simpleDateFormat.format(start) + ", current:" + simpleDateFormat.format(new Date()));
+                System.out.println(element.toString() +     " , start:" + simpleDateFormat.format(start) + ", current:" + simpleDateFormat.format(new Date()));
             }
         } catch (InterruptedException e) {
             e.printStackTrace();
