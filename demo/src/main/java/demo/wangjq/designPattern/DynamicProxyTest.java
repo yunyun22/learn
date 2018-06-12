@@ -102,7 +102,7 @@ class MyInvokerHandlerProxy implements InvocationHandler {
     }
 
     /**
-     * 获取目标对象的代理对象
+     * 获取目标对象的代理对象。参数this代表着将增强类传入了Proxy
      *
      * @return 代理对象
      */
