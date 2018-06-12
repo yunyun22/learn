@@ -10,6 +10,7 @@ import java.lang.reflect.Proxy;
 public class DynamicProxyTest {
 
     public static void main(String[] args) {
+
         MyInvokerHandler myInvokerHandler = new MyInvokerHandler();
 
         MyInvokerHandlerProxy myInvokerHandlerProxy = new MyInvokerHandlerProxy(myInvokerHandler);
@@ -26,6 +27,7 @@ public class DynamicProxyTest {
         /**
          * <code>
          *
+         *   //动态代理生成字节码反编译后的代码
          *   public final class $Proxy11 extends Proxy implements InvokerHandler{
          *
          *      public final void myHandler() throws  {
@@ -50,6 +52,10 @@ public class DynamicProxyTest {
          *      }
          *   }
          *
+         *  jdk 动态代理的流程。实例化出目标类。实例化增强类。生成代理里getProxy()，将增强传入到代理类中。
+         *  代理类调用增强的方法
+         *
+         *
          * </code>
          */
 
@@ -59,6 +65,9 @@ public class DynamicProxyTest {
     }
 }
 
+/**
+ * 对代理的类做增强作用
+ */
 class MyInvokerHandlerProxy implements InvocationHandler {
 
 
