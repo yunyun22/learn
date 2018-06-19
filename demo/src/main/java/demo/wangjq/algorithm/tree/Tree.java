@@ -5,10 +5,10 @@ package demo.wangjq.algorithm.tree;
  *
  * Created by wangjq on 2018/6/19.
  */
-public class AVLTree {
+public class Tree {
 
     public static void main(String[] args) {
-        AVLTree avlTree = new AVLTree();
+        Tree avlTree = new Tree();
 
         avlTree.insert(5);
         avlTree.insert(2);
@@ -32,7 +32,7 @@ public class AVLTree {
 
     private Node root;
 
-    public AVLTree() {
+    public Tree() {
     }
 
 
