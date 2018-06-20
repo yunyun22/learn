@@ -73,6 +73,28 @@ public class Tree {
     }
 
     /**
+     * 通过递归将node 插入到树中
+     * @param value
+     * @param node
+     * @return
+     */
+    private Node insertNode(Integer value, Node node) {
+        if (node == null) {
+            return new Node(null, null, value);
+        }
+        int cmp = node.getValue().compareTo(value);
+
+        if (cmp == -1) {
+            node.setLeftNode(insertNode(value, node.getLeftNode()));
+        } else if (cmp == 1) {
+            node.setRightNode(insertNode(value, node.getRightNode()));
+        } else {
+            return null;
+        }
+        return null;
+    }
+
+    /**
      * 二叉树插入操作
      */
     public boolean insert(Integer value) {
