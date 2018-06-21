@@ -88,9 +88,7 @@ public class Tree {
             node.setLeftNode(insertNode(value, node.getLeftNode()));
         } else if (cmp == 1) {
             node.setRightNode(insertNode(value, node.getRightNode()));
-        } else {
-            return null;
-        }
+        } else ;
         return null;
     }
 

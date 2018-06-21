@@ -58,7 +58,7 @@ public class RegisterApplication {
     @ResponseBody
     public String getHelloFromDemo() {
         isInstanceAvailable();
-        return "hello world,"+name;
+        return "hello world," + name;
         //return restTemplate.getForObject("http://DEMO/helloWorld",String.class);
     }
 
