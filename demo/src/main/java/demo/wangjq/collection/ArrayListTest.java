@@ -36,6 +36,10 @@ public class ArrayListTest {
 //        o[0] = new Integer(1);
 //        o[1] = new Object();
 
+        List<String> stringList = null;
+        List<Object> objectList = null;
+
+        //objectList = stringList;
 
         //List<Number> numbers =  new ArrayList<Integer>();
         List<Integer> integerList = new ArrayList<>();
@@ -52,6 +56,22 @@ public class ArrayListTest {
         List<Number> list = new ArrayList<>();
         list.add(null);
 
+
+        List<? super Number> nlist = new ArrayList<>();
+
+        //List<?>
+
+        //List<? super Number>  = List<?>  super List<Number>
+        //List<? extends Number>  = List<?>  extends List<Number>
+
+
+        nlist.add(new Integer(1));
+        Number number = new Integer(1);
+
+
+        System.out.println("getclass==========" + number.getClass());
+
+        nlist.add(number);
 
     }
 
