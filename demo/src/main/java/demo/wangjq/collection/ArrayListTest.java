@@ -61,6 +61,12 @@ public class ArrayListTest {
 
         //List<?>
 
+        /**
+         * 在泛型里面，泛型是具备继承的。  List<String> List<Object>没有继承关系。
+         * 如果需要模板方法对入参（泛型）做多态来封装，需要用到类型通配符。
+         * 例如：List<Integer> List<Float>  List<Long> 需要写个通用的方法将list遍历。
+         * 这时候的入参为：List<? extends Number> list
+         */
         //List<? super Number>  = List<?>  super List<Number>
         //List<? extends Number>  = List<?>  extends List<Number>
 
