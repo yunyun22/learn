@@ -3,12 +3,29 @@ package demo.wangjq.designPattern.Factory;
 /**
  * Created by wangjq on 2018/7/4.
  */
-public class AbstractFactory {
+public abstract class AbstractFactory {
+    public abstract Car createCar();
+
+    public abstract Tyre createTyre();
+}
+
+
+class BenzzFactory extends AbstractFactory {
+    @Override
+    public Car createCar() {
+        return null;
+    }
+
+    @Override
+    public Tyre createTyre() {
+        return null;
+    }
 }
 
 
 class Car {
+
 }
 
-class tyre {
+class Tyre {
 }
