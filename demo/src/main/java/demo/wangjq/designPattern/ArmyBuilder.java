@@ -17,8 +17,7 @@ public interface ArmyBuilder {
 }
 
 
-class
-Army {
+class Army {
     private String head;
     private String commissar;
     private List<?> soldiers;
