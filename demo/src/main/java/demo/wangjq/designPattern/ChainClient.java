@@ -65,7 +65,7 @@ enum Grade {
     private int value;
     private String name;
 
-    private Grade(int value, String name) {
+    Grade(int value, String name) {
         this.value = value;
         this.name = name;
     }
