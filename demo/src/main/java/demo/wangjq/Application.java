@@ -15,13 +15,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
 import demo.wangjq.config.Student;
 
 @SpringBootApplication(exclude = {DataSourceAutoConfiguration.class, HibernateJpaAutoConfiguration.class})
-@EnableDiscoveryClient
 @Controller
 public class Application {
 
@@ -37,6 +37,12 @@ public class Application {
     @Autowired
     private DiscoveryClient discoveryClient; //just here for testing
 
+    @RequestMapping("/getJson")
+    @ResponseBody
+    public ModelAndView getJson() {
+        return new ModelAndView("a.json");
+    }
+
     @RequestMapping("/hello")
     @ResponseBody
     public String getHelloFromRrgister() {
@@ -48,7 +54,7 @@ public class Application {
     @RequestMapping("/helloWorld")
     @ResponseBody
     public String helloWorld() {
-        return "hello world "+ student.toString();
+        return "hello world " + student.toString();
     }
 
     public static void main(String[] args) throws Exception {
