@@ -11,12 +11,14 @@ public class ArrayListTest {
 
     public static void main(String[] args) {
 
-//        List<? super Number> list = new ArrayList();
-//
-//        List<Object> objectList = new ArrayList<>();
-//
-//
-//        printObjet(objectList);
+        List<? super Number> listObjects = new ArrayList();
+
+        List<Number> objectsList = new ArrayList<>();
+
+
+        objectsList.add(1);
+
+        printObjet(objectsList);
 //
 //
 //        list = objectList;
@@ -84,6 +86,10 @@ public class ArrayListTest {
 
     public static void printObjet(List<? super Number> list) {
 
+        Object object = list.get(0);
+
+
+        list.add(1);
         System.out.println(list);
 
     }
@@ -92,6 +98,7 @@ public class ArrayListTest {
 
         Number o = list.get(0);
 
+        //list.add(1);
         System.out.println(list.get(0).getClass());
     }
 
