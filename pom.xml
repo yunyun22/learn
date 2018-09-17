@@ -11,6 +11,7 @@
         <module>demo</module>
         <module>register</module>
         <module>consumer</module>
+        <module>zuul</module>
     </modules>
 
     <dependencyManagement>
