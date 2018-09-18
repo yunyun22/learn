@@ -13,6 +13,12 @@ public class LockTest {
 
         Lock lock = new ReentrantLock();
 
+
+        //ReentrantLock.lock()-> Sync.lock()->NonfairSync.lock()
+        //ReentrantLock has a Sync
+        //Sync extend AbstractQueuedSynchronizer
+        //NonfairSync extend Sync
+
         new Thread(() -> {
             try {
                 lock.lock();
@@ -39,12 +45,16 @@ public class LockTest {
             try {
                 TimeUnit.SECONDS.sleep(1);
                 lock.lock();
+                lock.lock();
                 System.out.println("fuck,fuck.son of bitch");
             } catch (InterruptedException e) {
                 e.printStackTrace();
             } finally {
                 lock.unlock();
+                lock.unlock();
             }
+
+
         }).start();
 
 
