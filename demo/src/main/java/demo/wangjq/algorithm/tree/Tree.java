@@ -1,11 +1,17 @@
 package demo.wangjq.algorithm.tree;
 
+
 /**
  * delete binary tree
- *
+ * <p>
  * Created by wangjq on 2018/6/19.
  */
 public class Tree {
+
+    private Node root;
+
+    public Tree() {
+    }
 
     public static void main(String[] args) {
         Tree avlTree = new Tree();
@@ -29,12 +35,6 @@ public class Tree {
 
 
     }
-
-    private Node root;
-
-    public Tree() {
-    }
-
 
     public void prePrintTree() {
         preorder(root);
@@ -74,6 +74,7 @@ public class Tree {
 
     /**
      * 通过递归将node 插入到树中
+     *
      * @param value
      * @param node
      * @return
@@ -206,51 +207,44 @@ public class Tree {
         }
         return cNode;
     }
-}
-
-
-/**
- *
- */
-class Node {
-    private Node leftNode;
-    private Node rightNode;
-    private Integer value;
-
 
     /**
      *
-     * @param leftNode
-     * @param rightNode
-     * @param value
      */
-    public Node(Node leftNode, Node rightNode, Integer value) {
-        this.leftNode = leftNode;
-        this.rightNode = rightNode;
-        this.value = value;
-    }
+    static final class Node {
+        private Node leftNode;
+        private Node rightNode;
+        private Integer value;
 
-    public Node getLeftNode() {
-        return leftNode;
-    }
 
-    public void setLeftNode(Node leftNode) {
-        this.leftNode = leftNode;
-    }
+        public Node(Node leftNode, Node rightNode, Integer value) {
+            this.leftNode = leftNode;
+            this.rightNode = rightNode;
+            this.value = value;
+        }
 
-    public Node getRightNode() {
-        return rightNode;
-    }
+        public Node getLeftNode() {
+            return leftNode;
+        }
 
-    public void setRightNode(Node rightNode) {
-        this.rightNode = rightNode;
-    }
+        public void setLeftNode(Node leftNode) {
+            this.leftNode = leftNode;
+        }
 
-    public Integer getValue() {
-        return value;
-    }
+        public Node getRightNode() {
+            return rightNode;
+        }
 
-    public void setValue(Integer value) {
-        this.value = value;
+        public void setRightNode(Node rightNode) {
+            this.rightNode = rightNode;
+        }
+
+        public Integer getValue() {
+            return value;
+        }
+
+        public void setValue(Integer value) {
+            this.value = value;
+        }
     }
 }

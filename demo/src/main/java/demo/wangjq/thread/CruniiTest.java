@@ -10,10 +10,10 @@ public class CruniiTest {
 
         BlockingQueue<Runnable> workQueue = new ArrayBlockingQueue<Runnable>(20);
 
-        ThreadPoolExecutor poolExecutor = new ThreadPoolExecutor(8, 8, 10L, TimeUnit.SECONDS, workQueue);
+        ThreadPoolExecutor poolExecutor = new ThreadPoolExecutor(8, 8, 10L, TimeUnit.SECONDS, workQueue, new MyRejectedExecution());
 
 
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss S");
 
         for (int i = 0; i < 100; i++) {
             poolExecutor.execute(() -> {
@@ -36,13 +36,7 @@ class MyRejectedExecution implements RejectedExecutionHandler {
     @Override
     public void rejectedExecution(Runnable r, ThreadPoolExecutor executor) {
         try {
-
-            System.out.println("use the reject");
-
             executor.getQueue().put(r);
-
-            System.out.println("the task wait end");
-
         } catch (InterruptedException e) {
             r.run();
             e.printStackTrace();
