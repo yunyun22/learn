@@ -30,14 +30,10 @@ public class Application {
     @Autowired
     private ApplicationContext applicationContext;
 
-    @Autowired
-    private RestTemplate restTemplate;
 
     @Autowired
     private Student student;
 
-    @Autowired
-    private DiscoveryClient discoveryClient; //just here for testing
 
     @RequestMapping("/getJson")
     @ResponseBody
@@ -49,8 +45,7 @@ public class Application {
     @ResponseBody
     public String getHelloFromRrgister() {
 
-        isInstanceAvailable();
-        return restTemplate.getForObject("http://demo/helloWorld", String.class);
+        return "hello";
     }
 
     @RequestMapping("/helloWorld")
@@ -64,15 +59,6 @@ public class Application {
 
     }
 
-    private Boolean isInstanceAvailable() {
-        List<ServiceInstance> instances = discoveryClient.getInstances("demo");
-        System.out.println("get instance:" + instances);
-        for (ServiceInstance si : instances) {
-            System.out.print("service:");
-            System.out.print(si.getUri().toString());
-        }
-        return instances.size() > 0;
-    }
 
     @LoadBalanced
     @Bean
