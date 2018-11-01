@@ -1,5 +1,7 @@
 package demo.wangjq;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -22,6 +24,9 @@ import demo.wangjq.config.Student;
 @EnableAsync
 public class Application {
 
+
+    private static Logger log = LoggerFactory.getLogger(Application.class);
+
     @Autowired
     private ApplicationContext applicationContext;
 
@@ -33,19 +38,21 @@ public class Application {
     @RequestMapping("/getJson")
     @ResponseBody
     public ModelAndView getJson() {
+        log.info("method getJson");
         return new ModelAndView("a.json");
     }
 
     @RequestMapping("/hello")
     @ResponseBody
     public String getHelloFromRrgister() {
-
+        log.info("method getHelloFromRrgister");
         return "hello";
     }
 
     @RequestMapping("/helloWorld")
     @ResponseBody
     public String helloWorld() {
+        log.info("method helloWorld");
         return "hello world " + student.toString();
     }
 
