@@ -38,6 +38,5 @@ out
 test-output
 atlassian-ide-plugin.xml
 .gradletasknamecache
-
-/log*
-log*
+*.log
+/logs
