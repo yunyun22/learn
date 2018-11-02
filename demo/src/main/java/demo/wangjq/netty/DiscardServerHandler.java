@@ -24,7 +24,9 @@ public class DiscardServerHandler extends ChannelInboundHandlerAdapter {
 //            ReferenceCountUtil.release(msg);
 //        }
         ctx.write(msg); // (1)
+        System.out.println("2222");
         System.out.println(msg);
+        System.out.println("2222");
         ctx.flush(); // (2)
     }
 
