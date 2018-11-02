@@ -33,8 +33,8 @@ public class RedisController {
     }
 
     @PostMapping()
-    public String setValeu(@RequestBody Map<String, String> map) {
-        log.info("the method is setValeu,it parameter is :" + map);
+    public String setValue(@RequestBody Map<String, String> map) {
+        log.info("the method is setValue,it parameter is :" + map);
         stringRedisTemplate.opsForValue().multiSet(map);
         return "success";
     }
