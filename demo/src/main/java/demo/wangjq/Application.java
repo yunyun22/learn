@@ -1,14 +1,12 @@
 package demo.wangjq;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration;
-import org.springframework.cloud.client.ServiceInstance;
-import org.springframework.cloud.client.discovery.DiscoveryClient;
-import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
-import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.scheduling.annotation.EnableAsync;
@@ -18,7 +16,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.List;
 
 import demo.wangjq.config.Student;
 
@@ -27,35 +24,35 @@ import demo.wangjq.config.Student;
 @EnableAsync
 public class Application {
 
+
+    private static Logger log = LoggerFactory.getLogger(Application.class);
+
     @Autowired
     private ApplicationContext applicationContext;
 
-    @Autowired
-    private RestTemplate restTemplate;
 
     @Autowired
     private Student student;
 
-    @Autowired
-    private DiscoveryClient discoveryClient; //just here for testing
 
     @RequestMapping("/getJson")
     @ResponseBody
     public ModelAndView getJson() {
+        log.info("method getJson");
         return new ModelAndView("a.json");
     }
 
     @RequestMapping("/hello")
     @ResponseBody
     public String getHelloFromRrgister() {
-
-        isInstanceAvailable();
-        return restTemplate.getForObject("http://demo/helloWorld", String.class);
+        log.info("method getHelloFromRrgister");
+        return "hello";
     }
 
     @RequestMapping("/helloWorld")
     @ResponseBody
     public String helloWorld() {
+        log.info("method helloWorld");
         return "hello world " + student.toString();
     }
 
@@ -64,17 +61,7 @@ public class Application {
 
     }
 
-    private Boolean isInstanceAvailable() {
-        List<ServiceInstance> instances = discoveryClient.getInstances("demo");
-        System.out.println("get instance:" + instances);
-        for (ServiceInstance si : instances) {
-            System.out.print("service:");
-            System.out.print(si.getUri().toString());
-        }
-        return instances.size() > 0;
-    }
 
-    @LoadBalanced
     @Bean
     RestTemplate restTemplate() {
         return new RestTemplate();
