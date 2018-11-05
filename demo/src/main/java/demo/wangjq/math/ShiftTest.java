@@ -35,6 +35,11 @@ public class ShiftTest {
 
     public static void main(String[] args) {
 
+
+        int x = 0;
+        int y = 0;
+
+
 //        String capacityString = Integer.toBinaryString(~CAPACITY);
 //        System.out.println("~CAPACITY:" + capacityString);
 //        System.out.println("~CAPACITY length:" + capacityString.length());

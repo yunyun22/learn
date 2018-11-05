@@ -1,6 +1,9 @@
 package demo.wangjq.algorithm.tree;
 
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
+import java.util.Stack;
 
 /**
  * 红黑树实现
@@ -63,7 +66,7 @@ public class RedBlackTree<T> {
     /**
      * 红黑树节点
      */
-    static final class Node<T> implements demo.wangjq.algorithm.tree.Node {
+    static final class Node<T> {
 
         Node left;
         Node right;
@@ -81,24 +84,22 @@ public class RedBlackTree<T> {
             this.value = value;
             this.color = color;
         }
-
-        @Override
-        public T getValue() {
-            return value;
-        }
-
-        @Override
-        public demo.wangjq.algorithm.tree.Node getRigt() {
-            return right;
-        }
-
-        @Override
-        public demo.wangjq.algorithm.tree.Node getLeft() {
-            return left;
-        }
     }
 
+    /**
+     * 实现中序便利
+     */
     private class MidItr implements Iterator<T> {
+
+        Stack<Node> stack = new Stack<>();
+        List<Node> list = new ArrayList<>();
+
+        public MidItr() {
+            stack.push(root);
+            Node current = root;
+
+        }
+
         @Override
         public boolean hasNext() {
             return false;
