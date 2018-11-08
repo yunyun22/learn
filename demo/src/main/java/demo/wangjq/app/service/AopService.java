@@ -1,4 +1,4 @@
-package demo.wangjq.service;
+package demo.wangjq.app.service;
 
 public interface AopService {
 

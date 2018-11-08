@@ -1,6 +1,6 @@
-package demo.wangjq.service.impl;
+package demo.wangjq.app.service.impl;
 
-import demo.wangjq.service.AopService;
+import demo.wangjq.app.service.AopService;
 
 public class AopServiceImpl implements AopService {
     @Override

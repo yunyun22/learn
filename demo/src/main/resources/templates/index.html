@@ -1,40 +1,48 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<html>
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Login</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
-    <title>Bootstrap 101 Template</title>
-    <!-- Bootstrap -->
-    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="jquery/jquery-3.2.1.min.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script type="application/x-javascript"> addEventListener("load", function () {
+        setTimeout(hideURLbar, 0);
+    }, false);
+    function hideURLbar() {
+        window.scrollTo(0, 1);
+    } </script>
+    <meta name="keywords"
+          content="Flat Dark Web Login Form Responsive Templates, Iphone Widget Template, Smartphone login forms,Login form, Widget Template, Responsive Templates, a Ipad 404 Templates, Flat Responsive Templates"/>
+    <link th:href="@{/css/style.css}" rel='stylesheet' type='text/css'/>
 </head>
 <body>
-<script type="text/javascript">
-    $(document).ready(function () {
-        $("#hello").click(function () {
-            $.ajax({
-                url: "/home",
-                type: 'POST',
-                success: function (result) {
-                    $("#world").text(result);
-                },
-                error: function () {
-                    alert("发生错误!");
-                }
-
-            });
-        });
-    });
-</script>
-
-<h1 id="hello">你好，世界！aa</h1>
-<h1 id="world"></h1>
-
+<h1>wangjq Login Form</h1>
+<div class="login-form">
+    <div class="close"></div>
+    <div class="head-info">
+        <label class="lbl-1"> </label>
+        <label class="lbl-2"> </label>
+        <label class="lbl-3"> </label>
+    </div>
+    <div class="clear"></div>
+    <div class="avtar">
+        <img th:href="@{/img/avtar.png}"/>
+    </div>
+    <form>
+        <input type="text" class="text" value="Username" onfocus="this.value = '';"
+               onblur="if (this.value == '') {this.value = 'Username';}">
+        <div class="key">
+            <input type="password" value="Password" onfocus="this.value = '';"
+                   onblur="if (this.value == '') {this.value = 'Password';}">
+        </div>
+    </form>
+    <div class="signin">
+        <input type="submit" value="Login">
+    </div>
+</div>
+<div class="copy-rights">
+    <p>Copyright &copy; 2015.Company name All rights reserved.More Templates</p>
+</div>
 
 </body>
 </html>

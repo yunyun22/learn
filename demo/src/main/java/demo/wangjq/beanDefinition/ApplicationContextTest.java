@@ -1,10 +1,7 @@
 package demo.wangjq.beanDefinition;
 
-import demo.wangjq.beanDefinition.event.EmailEvent;
-import demo.wangjq.beanDefinition.event.MyContextStartedEvent;
-import demo.wangjq.service.AopService;
-import demo.wangjq.service.impl.AopServiceImpl;
-import org.springframework.context.event.ContextStartedEvent;
+import demo.wangjq.app.service.AopService;
+
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class ApplicationContextTest {
