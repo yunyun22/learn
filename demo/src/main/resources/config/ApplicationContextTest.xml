@@ -16,10 +16,10 @@
      <bean class="learn.wangjq.beanDefinition.listener.MyApplicationStartedListener"/>
     -->
 
-    <bean id="myHandler" class="demo.wangjq.aop.MyHandler"/>
+    <bean id="myHandler" class="demo.wangjq.app.aop.MyHandler"/>
 
 
-    <bean id="aopService" class="demo.wangjq.service.impl.AopServiceImpl"/>
+    <bean id="aopService" class="demo.wangjq.app.service.impl.AopServiceImpl"/>
 
     <aop:config>
         <aop:aspect id="handler" ref="myHandler">

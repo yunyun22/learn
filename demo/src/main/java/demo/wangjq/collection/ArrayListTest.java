@@ -11,6 +11,11 @@ public class ArrayListTest {
 
     public static void main(String[] args) {
 
+        /** The number of CPUs, for spin control */
+        final int NCPUS = Runtime.getRuntime().availableProcessors();
+
+        System.out.println(NCPUS);
+
         List<? super Number> listObjects = new ArrayList();
 
         List<Number> objectsList = new ArrayList<>();
