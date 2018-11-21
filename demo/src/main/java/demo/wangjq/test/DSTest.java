@@ -5,10 +5,8 @@ public class DSTest {
     public static void main(String[] args) throws InterruptedException {
         //System.out.println(Integer.bitCount(100));
         //System.out.println(bitCount(18787846));
-        System.out.println(Integer.toBinaryString(0x55555555));
-        System.out.println(Integer.toBinaryString(0x33333333));
-        System.out.println(Integer.toBinaryString(0x0f0f0f0f));
-        System.out.println(Integer.toBinaryString(0x3f));
+
+        System.out.println(Integer.reverseBytes(123));
     }
 
     public static void incre() throws InterruptedException {
