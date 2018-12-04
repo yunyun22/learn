@@ -30,7 +30,10 @@ public class OptionalTest {
         Student temp = new Student();
         temp.setAge("12");
         list.add(temp);
-        list.stream().findFirst().ifPresent(student -> Optional.ofNullable(student.getAge()).ifPresent(age -> System.out.println(student)));
+
+        list.stream().findFirst().ifPresent(
+                student -> Optional.ofNullable(student.getAge()).ifPresent(
+                        age -> System.out.println(student)));
 
         if (!list.isEmpty()) {
             Student student = list.get(0);
