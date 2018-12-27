@@ -3,8 +3,8 @@ package demo.wangjq.test;
 
 public class DSTest {
     public static void main(String[] args) throws InterruptedException {
-        //System.out.println(Integer.bitCount(100));
-        //System.out.println(bitCount(18787846));
+        System.out.println(Integer.bitCount(123456));
+        System.out.println(bitCount(18787846));
 
         System.out.println(Integer.reverseBytes(123));
     }
