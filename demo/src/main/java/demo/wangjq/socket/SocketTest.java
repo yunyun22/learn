@@ -7,6 +7,9 @@ import java.util.concurrent.TimeUnit;
 public class SocketTest {
     public static void main(String[] args) throws IOException {
         Socket socket = new Socket("localhost", 20000);
+        /**
+         * 不断接受服务器的数据
+         */
         new Thread(() -> {
             while (true) {
                 try {
@@ -21,6 +24,9 @@ public class SocketTest {
                 }
             }
         }).start();
+        /**
+         *不断向服务器发送信息
+         */
         new Thread(() -> {
             OutputStream os = null;
             BufferedReader in = null;
@@ -39,6 +45,9 @@ public class SocketTest {
                 }
             }
         }).start();
+        /**
+         * 将main线程睡眠
+         */
         try {
             TimeUnit.HOURS.sleep(1);
         } catch (InterruptedException e) {
