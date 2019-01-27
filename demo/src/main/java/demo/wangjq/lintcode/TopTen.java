@@ -40,10 +40,6 @@ public class TopTen {
 
     /**
      * Two Sum
-     *
-     * @param nums
-     * @param target
-     * @return
      */
     public static int[] twoSum(int[] nums, int target) {
         Map<Integer, Integer> map = new HashMap<>(nums.length);
@@ -66,10 +62,6 @@ public class TopTen {
 
     /**
      * Add Two Numbers
-     *
-     * @param l1
-     * @param l2
-     * @return
      */
     public static ListNode addTwoNumbers(ListNode l1, ListNode l2) {
         ListNode head = new ListNode(0);
@@ -106,48 +98,89 @@ public class TopTen {
         addTwoNumbers(l1, l2);
     }
 
-    public static double findMedianSortedArrays(int[] nums1, int[] nums2) {
-
-        int n1Length = nums1.length;
-        int n2Length = nums2.length;
-
-        int[] newArr = new int[(nums1.length + nums2.length) / 2 + 1];
-        int i = 0, n1 = 0, n2 = 0;
-        while (i < newArr.length) {
-            int val = 0;
-            if (n1 < n1Length && n2 < n2Length) {
-                val = nums1[n1] - nums2[n2] <= 0 ? nums1[n1++] : nums2[n2++];
-            } else if (n1 < n1Length) {
-                val = nums1[n1++];
-            } else if (n2 < n2Length) {
-                val = nums2[n2++];
-            }
-            newArr[i++] = val;
+    /**
+     * z
+     *
+     * @param s
+     * @param numRows
+     * @return
+     */
+    public static String convert(String s, int numRows) {
+        if (s == null || "".equals(s) || numRows == 1 || s.length() < numRows) {
+            return s;
         }
-        return (nums1.length + nums2.length) % 2 == 0 ? (newArr[newArr.length - 1] + newArr[newArr.length - 2]) / 2.0 : newArr[newArr.length - 1];
+        int length = s.length(),
+                rows = numRows,
+                vChar = (numRows * 2 - 2),
+                vCharNum = length / (numRows * 2 - 2),
+                columns = vCharNum * (numRows - 1) + ((length % vChar) == 0 ? 0 : ((vCharNum != 0 && length % vChar <= numRows) ? 1 : (length % vChar - numRows + 1)));
+        char[][] z = new char[rows][columns];
+        int i = 0;
+        int rowsMinusOne = rows - 1;
+        for (int y = 0; y < columns && i < length; y++) {
+            if (y % rowsMinusOne == 0) {// vertically down
+                for (int x = 0; x < rows && i < length; x++) {
+                    z[x][y] = s.charAt(i++);
+                }
+            } else {// obliquely up
+                z[rowsMinusOne - y % rowsMinusOne][y] = s.charAt(i++);
+            }
+        }
+        StringBuilder sb = new StringBuilder();
+        for (int k = 0; k < z.length; k++) {
+            for (int l = 0; l < z[k].length; l++) {
+                sb.append(z[k][l] != 0 ? z[k][l] : "");
+            }
+        }
+        return sb.toString();
     }
-
 
     @Test
-    public void testFindMedianSortedArrays() {
-
-        int[] nums1 = new int[]{1, 2};
-        int[] nums2 = new int[]{3, 4};
-        Assert.assertEquals(2.5, findMedianSortedArrays(nums1, nums2), 0);
-
+    public void testConvert() {
+        String s = "A";
+        System.out.println(convert(s, 3));
     }
 
-    public static String convert(String s, int numRows) {
-        char[][] ret = new char[s.length() % numRows == 0 ? s.length() / numRows : s.length() / numRows + 1][numRows];
-        int k = 0;
-        for (int j = 0; j < numRows; j++) {
-            for (int i = 0; i < ret.length; i++) {
-                ret[i][j] = k < s.length() ? s.charAt(k++) : ' ';
+    /**
+     * @param x
+     * @return
+     */
+    public static int reverse(int x) {
+        char[] chars = x < 0 ? new Integer(x).toString().substring(1).toCharArray() : new Integer(x).toString().toCharArray();
+        char temp;
+        for (int i = 0; i < chars.length / 2; i++) {
+            temp = chars[i];
+            chars[i] = chars[chars.length - i - 1];
+            chars[chars.length - i - 1] = temp;
+        }
+
+        return x < 0 ? new Integer("-" + new String(chars)) : new Integer(new String(chars));
+    }
+
+    @Test
+    public void testReverse() {
+        System.out.println(reverse(1534236469));
+    }
+
+    public static int maxArea(int[] height) {
+        int left = 0, right = height.length - 1, max = 0;
+        while (left < right) {
+            max = Math.max(height[left] > height[right] ? (height[right] * (right - left)) : (height[left] * (right - left)), max);
+            if (height[left] > height[right]) {
+                right--;
+            } else {
+                left++;
             }
         }
-        return null;
+        return max;
     }
 
+    @Test
+    public void testMaxArea() {
+        int[] height = new int[]{1, 8, 6, 2, 5, 4, 8, 3, 7};
+        Assert.assertEquals(49, maxArea(height));
+        Assert.assertEquals(1, maxArea(new int[]{1, 1}));
+    }
 
     public String longestPalindrome(String s) {
         int l = s.length();
