@@ -100,10 +100,6 @@ public class TopTen {
 
     /**
      * z
-     *
-     * @param s
-     * @param numRows
-     * @return
      */
     public static String convert(String s, int numRows) {
         if (s == null || "".equals(s) || numRows == 1 || s.length() < numRows) {
@@ -261,4 +257,52 @@ public class TopTen {
 //        int test = Integer.MAX_VALUE + 10000;
 //        System.out.println(test);
     }
+
+    public static String intToRoman(int num) {
+        Map<Integer, String[]> map = new HashMap<>();
+        map.put(1, new String[]{"I", "V"});
+        map.put(2, new String[]{"X", "L"});
+        map.put(3, new String[]{"C", "D"});
+        map.put(4, new String[]{"M"});
+        String res = "";
+        int c = num;
+        int i = 1;//0个位，1十位，2百位，3千位
+        while (c > 0) {
+            int numBit = c % 10;
+            String[] symbol = map.get(i);
+            if (numBit <= 5) {
+                if (numBit == 5) {
+                    res = symbol[1] + res;
+                } else if (numBit == 4) {
+                    res = symbol[0] + symbol[1] + res;
+                } else {
+                    String temp = "";
+                    for (int j = 0; j < numBit; j++) {
+                        temp += symbol[0];
+                    }
+                    res = temp + res;
+                }
+            } else {
+                String symbol2[] = map.get(i + 1);
+                if (numBit == 9) {
+                    res = symbol[0] + symbol2[0] + res;
+                } else {
+                    String temp = "";
+                    for (int j = 0; j < numBit - 5; j++) {
+                        temp += symbol[0];
+                    }
+                    res = symbol[1] + temp + res;
+                }
+            }
+            i++;
+            c /= 10;
+        }
+        return res;
+    }
+
+    @Test
+    public void testIntToRoman() {
+        System.out.println(intToRoman(61));
+    }
+
 }
