@@ -47,15 +47,27 @@ public class TwentyToThirty {
     }
 
     public static ListNode mergeKLists(ListNode[] lists) {
-        ListNode start = new ListNode(0);
-        ListNode max = null;
-        for (int i = 0; i < lists.length; i++) {
-
+        ListNode head = new ListNode(0), tail = head;
+        ListNode[] current = lists;
+        int minIndex = 0;
+        while (minIndex > -1) {
+            minIndex = -1;
+            for (int i = 0; i < current.length; i++) {
+                minIndex = minIndex == -1 && current[i] != null ? i : minIndex;
+                minIndex = current[i] != null && current[i].val < current[minIndex].val ? i : minIndex;
+            }
+            if (minIndex != -1) {
+                tail.next = current[minIndex];
+                tail = tail.next;
+                current[minIndex] = current[minIndex].next;
+            }
         }
-        return null;
+        return head.next;
     }
 
-    public void testmergeKLists() {
+    @Test
+    public void testMergeKLists() {
+
         ListNode temp, l1 = new ListNode(1);
         temp = l1;
         temp = temp.next = new ListNode(2);
@@ -64,9 +76,39 @@ public class TwentyToThirty {
         temp = l2;
         temp = temp.next = new ListNode(3);
         temp.next = new ListNode(4);
+        ListNode l3 = new ListNode(8);
+        temp = l3;
+        temp = temp.next = new ListNode(9);
+        temp.next = new ListNode(10);
         List<ListNode> list = new ArrayList<>();
         list.add(l1);
         list.add(l2);
+        list.add(l3);
         mergeKLists(list.toArray(new ListNode[list.size()]));
+    }
+
+    public static ListNode swapPairs(ListNode head) {
+        ListNode start = new ListNode(0), tail = start, cur = head;
+        for (; cur != null; ) {
+            ListNode preParis = cur;
+            ListNode paris = cur.next;
+            if (paris != null) {
+                tail.next = paris;
+                cur = cur.next.next;
+                tail.next.next = preParis;
+                tail = tail.next.next;
+            }
+        }
+        return start.next;
+    }
+
+    @Test
+    public void testSwapPairs() {
+        ListNode temp, l1 = new ListNode(1);
+        temp = l1;
+        temp = temp.next = new ListNode(2);
+        temp = temp.next = new ListNode(3);
+        temp.next = new ListNode(4);
+        swapPairs(l1);
     }
 }
