@@ -96,7 +96,11 @@ public class TwentyToThirty {
                 tail.next = paris;
                 cur = cur.next.next;
                 tail.next.next = preParis;
+                preParis.next = null;
                 tail = tail.next.next;
+            } else {
+                tail.next = cur;
+                cur = cur.next;
             }
         }
         return start.next;
@@ -108,7 +112,8 @@ public class TwentyToThirty {
         temp = l1;
         temp = temp.next = new ListNode(2);
         temp = temp.next = new ListNode(3);
-        temp.next = new ListNode(4);
+        temp = temp.next = new ListNode(4);
+        temp.next = new ListNode(5);
         swapPairs(l1);
     }
 }
