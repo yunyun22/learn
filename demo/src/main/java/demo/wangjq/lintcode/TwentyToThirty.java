@@ -116,4 +116,59 @@ public class TwentyToThirty {
         temp.next = new ListNode(5);
         swapPairs(l1);
     }
+
+    public static ListNode reverseKGroup(ListNode head, int k) {
+        ListNode start = new ListNode(0), tail = start, cur = head;
+        int count = 0;
+        for (; cur != null && k > 1; ) {
+            if (++count % k == 0) {
+                ListNode temp = cur.next;
+                cur.next = null;
+                tail.next = reverse(head);
+                tail = head;
+                head = cur = temp;
+            } else {
+                cur = cur.next;
+            }
+        }
+        tail.next = head;
+        return start.next;
+    }
+
+    private static ListNode reverse(ListNode head) {
+        ListNode start = new ListNode(0);
+        for (; head != null; ) {
+            ListNode cur = head;
+            head = head.next;
+            cur.next = start.next;
+            start.next = cur;
+        }
+        return start.next;
+    }
+
+    @Test
+    public void testReverseKGroup() {
+        ListNode temp, l1 = new ListNode(1);
+        temp = l1;
+        temp = temp.next = new ListNode(2);
+        temp = temp.next = new ListNode(3);
+        temp = temp.next = new ListNode(4);
+        temp.next = new ListNode(5);
+        //reverseKGroup(l1, 2);
+        reverseKGroup(l1, 3);
+    }
+
+    public static int removeDuplicates(int[] nums) {
+        int k = 1;
+        for (int i = 1; i < nums.length; i++) {
+            nums[i] = nums[i - 1] == nums[i] ? nums[i + 1] : nums[i];
+        }
+        return k;
+    }
+
+    @Test
+    public void testRemoveDuplicates() {
+        int[] nums = {0, 0, 1, 1, 1, 2, 2, 3, 3, 4};
+        removeDuplicates(nums);
+    }
 }

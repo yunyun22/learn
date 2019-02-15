@@ -3,6 +3,8 @@ package demo.wangjq.algorithm.list;
 import org.junit.Assert;
 import org.junit.Test;
 
+import demo.wangjq.lintcode.TopTen;
+
 
 public class LinkedListProblem {
     static class ListNode {
@@ -16,20 +18,18 @@ public class LinkedListProblem {
 
 
     /**
-     * @param listNode
+     * @param head
      * @return
      */
-    public static ListNode reverse(ListNode listNode) {
-        ListNode pre = null;
-        ListNode next = listNode;
-
-        for (; next != null; ) {
-            ListNode current = next;
-            next = next.next;
-            current.next = pre;
-            pre = current;
+    public static ListNode reverse(ListNode head) {
+        ListNode start = new ListNode(0);
+        for (; head != null; ) {
+            ListNode cur = head;
+            head = head.next;
+            cur.next = start.next;
+            start.next = cur;
         }
-        return pre;
+        return start.next;
     }
 
     @Test
