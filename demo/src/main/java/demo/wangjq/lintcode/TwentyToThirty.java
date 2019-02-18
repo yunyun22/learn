@@ -171,4 +171,28 @@ public class TwentyToThirty {
         int[] nums = {0, 0, 1, 1, 1, 2, 2, 3, 3, 4};
         removeDuplicates(nums);
     }
+
+    public static int strStr(String haystack, String needle) {
+        if (needle.isEmpty()) {
+            return 0;
+        }
+        for (int i = 0; i < haystack.length(); i++) {
+            for (int k = 0; k < needle.length() && k + i < haystack.length(); k++) {
+                if (haystack.charAt(i + k) != needle.charAt(k)) {
+                    break;
+                }
+                if (k == needle.length() - 1) {
+                    return i;
+                }
+            }
+        }
+        return -1;
+    }
+
+    @Test
+    public void testStrStr() {
+        String haystack = "hello";
+        String needle = "ll";
+        System.out.println(strStr(haystack, needle));
+    }
 }
