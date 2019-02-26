@@ -1,4 +1,4 @@
-package demo.wangjq.beandefinition;
+package demo.wangjq.app.beandefinition;
 
 public class Student {
 

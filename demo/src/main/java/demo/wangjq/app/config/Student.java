@@ -1,4 +1,4 @@
-package demo.wangjq.config;
+package demo.wangjq.app.config;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.PropertySource;

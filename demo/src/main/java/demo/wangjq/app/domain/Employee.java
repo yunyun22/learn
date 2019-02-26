@@ -1,4 +1,4 @@
-package demo.wangjq.domain;
+package demo.wangjq.app.domain;
 
 import java.io.Serializable;
 

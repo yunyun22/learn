@@ -1,4 +1,4 @@
-package demo.wangjq.beandefinition;
+package demo.wangjq.app.beandefinition;
 
 import demo.wangjq.app.service.AopService;
 

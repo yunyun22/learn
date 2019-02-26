@@ -1,4 +1,4 @@
-package demo.wangjq.beandefinition;
+package demo.wangjq.app.beandefinition;
 
 import org.springframework.beans.factory.BeanFactoryAware;
 import org.springframework.beans.factory.annotation.Autowired;

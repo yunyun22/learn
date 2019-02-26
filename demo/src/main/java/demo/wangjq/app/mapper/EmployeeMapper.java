@@ -1,6 +1,6 @@
-package demo.wangjq.mapper;
+package demo.wangjq.app.mapper;
 
-import demo.wangjq.domain.Employee;
+import demo.wangjq.app.domain.Employee;
 
 public interface EmployeeMapper {
 

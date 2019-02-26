@@ -1,4 +1,4 @@
-package demo.wangjq.beandefinition.listener;
+package demo.wangjq.app.beandefinition.listener;
 
 
 import org.springframework.context.ApplicationListener;

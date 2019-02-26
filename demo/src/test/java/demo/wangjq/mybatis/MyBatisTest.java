@@ -1,8 +1,8 @@
 package demo.wangjq.mybatis;
 
 
-import demo.wangjq.domain.Employee;
-import demo.wangjq.mapper.EmployeeMapper;
+import demo.wangjq.app.domain.Employee;
+import demo.wangjq.app.mapper.EmployeeMapper;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;

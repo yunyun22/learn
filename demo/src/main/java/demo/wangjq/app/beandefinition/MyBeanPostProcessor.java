@@ -1,4 +1,4 @@
-package demo.wangjq.beandefinition;
+package demo.wangjq.app.beandefinition;
 
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanPostProcessor;

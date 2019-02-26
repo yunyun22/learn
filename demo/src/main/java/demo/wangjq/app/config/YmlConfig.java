@@ -1,4 +1,4 @@
-package demo.wangjq.config;
+package demo.wangjq.app.config;
 
 import org.springframework.beans.factory.config.YamlPropertiesFactoryBean;
 import org.springframework.context.annotation.Bean;
