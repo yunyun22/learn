@@ -6,14 +6,17 @@ import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.client.RestTemplate;
 
+import javax.sql.DataSource;
+
 import demo.wangjq.app.servlet.MyServlet;
 
 
-@SpringBootApplication(exclude = {DataSourceAutoConfiguration.class, HibernateJpaAutoConfiguration.class})
+@SpringBootApplication(exclude = {HibernateJpaAutoConfiguration.class})
 @Controller
 @EnableAsync
 public class Application {
@@ -33,4 +36,8 @@ public class Application {
         return new RestTemplate();
     }
 
+    @Bean
+    public JdbcTemplate jdbcTemplate(DataSource dataSource) {
+        return new JdbcTemplate(dataSource);
+    }
 }
