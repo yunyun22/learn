@@ -66,7 +66,7 @@ public class PollingMessageReceiver {
     private Queue<String> queue;
 
 
-    public PollingMessageReceiver(BlockingQueue<String> queue, String queueName) {
+    public  PollingMessageReceiver(BlockingQueue<String> queue, String queueName) {
         this.queue = queue;
         this.queueName = queueName;
 
