@@ -1,6 +1,6 @@
 package demo.wangjq.app.service.impl;
 
-import demo.wangjq.jdbc.MyJdbc;
+import demo.wangjq.app.jdbc.MyJdbc;
 import demo.wangjq.app.service.JdbcService;
 import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.transaction.annotation.Propagation;
