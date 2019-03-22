@@ -4,7 +4,9 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Stack;
 
 import demo.wangjq.algorithm.lintcode.TopTen.*;
@@ -50,9 +52,39 @@ public class TenToTwenty {
     }
 
     public static List<List<Integer>> threeSum(int[] nums) {
-
         return null;
     }
+
+
+    public static int romanToInt(String s) {
+        Map<Character, Integer> map = new HashMap();
+        map.put('I', 1);
+        map.put('V', 5);
+        map.put('X', 10);
+        map.put('L', 50);
+        map.put('C', 100);
+        map.put('D', 500);
+        map.put('M', 1000);
+        int ret = 0;
+        int length = s.length();
+        int contrast = map.get('I');
+        for (int i = length - 1; i >= 0; i--) {
+            int cur = map.get(s.charAt(i));
+            if (cur >= contrast) {
+                ret += cur;
+                contrast = cur;
+            } else {
+                ret -= cur;
+            }
+        }
+        return ret;
+    }
+
+    @Test
+    public void testRomanToInt() {
+        romanToInt("MCMXCIV");
+    }
+
 
     public List<String> letterCombinations(String digits) {
         List<String> list = new ArrayList<>();

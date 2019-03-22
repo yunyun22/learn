@@ -11,11 +11,11 @@ import java.util.Map;
 
 public class TopTen {
 
-    static class ListNode {
+    public static class ListNode {
         int val;
-        ListNode next;
+        public ListNode next;
 
-        ListNode(int x) {
+        public ListNode(int x) {
             val = x;
         }
     }
