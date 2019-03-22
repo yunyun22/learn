@@ -112,4 +112,8 @@ public class TenToTwenty {
     public void testIsValid() {
         System.out.println(isValid("["));
     }
+
+    public static List<String> generateParenthesis(int n) {
+        return null;
+    }
 }
