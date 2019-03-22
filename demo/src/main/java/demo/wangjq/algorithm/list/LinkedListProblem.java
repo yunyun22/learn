@@ -3,8 +3,6 @@ package demo.wangjq.algorithm.list;
 import org.junit.Assert;
 import org.junit.Test;
 
-import demo.wangjq.lintcode.TopTen;
-
 
 public class LinkedListProblem {
     static class ListNode {

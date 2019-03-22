@@ -20,7 +20,7 @@ public final class SeqGenerator {
 
     private static int sequence = 0;
 
-    private static int MAX = 10;
+    private static int MAX = 100000;
 
     private static Long lastTimestamp = -1L;
 
@@ -63,18 +63,10 @@ public final class SeqGenerator {
 
     public static void main(String[] args) throws InterruptedException {
 
-        Object o = new Object();
-
         CountDownLatch countDownLatch = new CountDownLatch(1000000);
-
         ExecutorService executorService = Executors.newFixedThreadPool(100);
-        ConcurrentHashMap<String, Object> concurrentHashMap = new ConcurrentHashMap<>(1000000);
-
         System.out.println("start");
-
         long start = System.currentTimeMillis();
-
-
         for (int i = 0; i < 1000000; i++) {
             executorService.submit(() -> {
                 System.out.println(SeqGenerator.getSeq());
