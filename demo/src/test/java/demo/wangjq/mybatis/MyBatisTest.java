@@ -3,7 +3,10 @@ package demo.wangjq.mybatis;
 
 import demo.wangjq.app.domain.Employee;
 import demo.wangjq.app.mapper.EmployeeMapper;
+
+import org.apache.ibatis.builder.xml.XMLMapperBuilder;
 import org.apache.ibatis.io.Resources;
+import org.apache.ibatis.session.Configuration;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
@@ -28,4 +31,13 @@ public class MyBatisTest {
         System.out.println(employee);
     }
 
+    @Test
+    public void shouldSuccessfullyLoadXMLMapperFile() throws Exception {
+        Configuration configuration = new Configuration();
+        String resource = "mybatis/EmployeeMapper.xml";
+        InputStream inputStream = Resources.getResourceAsStream(resource);
+        XMLMapperBuilder builder = new XMLMapperBuilder(inputStream, configuration, resource, configuration.getSqlFragments());
+        builder.parse();
+        inputStream.close();
+    }
 }

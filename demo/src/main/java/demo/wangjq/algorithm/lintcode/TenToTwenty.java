@@ -12,7 +12,7 @@ import java.util.Stack;
 import demo.wangjq.algorithm.lintcode.TopTen.*;
 
 /**
- * Created by wangjq on 2019/1/29.
+ * @author wangjq
  */
 public class TenToTwenty {
 
