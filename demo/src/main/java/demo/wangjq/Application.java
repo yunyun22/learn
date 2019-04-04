@@ -15,7 +15,9 @@ import javax.sql.DataSource;
 
 import demo.wangjq.app.servlet.MyServlet;
 
-
+/**
+ * @author wangjq
+ */
 @SpringBootApplication(exclude = {HibernateJpaAutoConfiguration.class})
 @Controller
 @EnableAsync

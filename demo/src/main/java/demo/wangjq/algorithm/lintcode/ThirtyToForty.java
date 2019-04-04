@@ -13,7 +13,7 @@ public class ThirtyToForty {
      */
     public static int longestValidParentheses(String s) {
         Stack<Character> stack = new Stack<>();
-        return max;
+        return 0;
 
     }
 }

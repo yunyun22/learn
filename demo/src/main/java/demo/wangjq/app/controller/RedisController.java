@@ -13,9 +13,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Map;
 
-
 /**
- * Created by wangjq on 2018/11/2.
+ * @author wangjq
  */
 @RestController()
 @RequestMapping("/redis")
