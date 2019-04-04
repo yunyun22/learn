@@ -89,18 +89,22 @@ abstract class Division implements Chain {
         this.grade = grade;
     }
 
+    @Override
     public int order() {
         return grade.getValue();
     }
 
+    @Override
     public Chain next() {
         return chain;
     }
 
+    @Override
     public Grade getGrade() {
         return grade;
     }
 
+    @Override
     public void dealChain(User user) {
         if (chain == null) {
             System.out.println("name:" + user.getName() + ",段位为:" + grade.name());
