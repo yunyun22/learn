@@ -27,12 +27,12 @@ public class ThirtyToForty {
             if (target == nums[mid]) {
                 return mid;
             }
-            if (target >= nums[left] && target <= nums[mid]) {
+            boolean isBefore = (target >= nums[left] && target <= nums[mid])
+                    || (target > nums[mid] && target > nums[left]);
+            if (isBefore) {
                 right = mid;
-            } else if (target >= nums[mid] && target <= nums[right]) {
-                left = mid + 1;
             } else {
-                right = mid;
+                left = mid + 1;
             }
         }
         return -1;
