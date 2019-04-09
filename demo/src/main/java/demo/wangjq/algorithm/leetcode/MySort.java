@@ -1,4 +1,4 @@
-package demo.wangjq.algorithm.lintcode;
+package demo.wangjq.algorithm.leetcode;
 
 import org.junit.Test;
 

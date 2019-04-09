@@ -54,8 +54,8 @@ public class ThirtyToForty {
 
     @Test
     public void testSearch() {
-        int[] nums = {1, 3};
-        int target = 2;
+        int[] nums = {5, 1, 3};
+        int target = 5;
         search(nums, target);
     }
 

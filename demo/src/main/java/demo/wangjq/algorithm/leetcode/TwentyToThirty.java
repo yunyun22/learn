@@ -1,11 +1,11 @@
-package demo.wangjq.algorithm.lintcode;
+package demo.wangjq.algorithm.leetcode;
 
 import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import demo.wangjq.algorithm.lintcode.TopTen.*;
+import demo.wangjq.algorithm.leetcode.TopTen.*;
 
 /**
  * Created by wangjq on 2019/2/1.

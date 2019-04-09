@@ -1,4 +1,4 @@
-package demo.wangjq.algorithm.lintcode;
+package demo.wangjq.algorithm.leetcode;
 
 import org.junit.Test;
 
@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Stack;
 
-import demo.wangjq.algorithm.lintcode.TopTen.*;
+import demo.wangjq.algorithm.leetcode.TopTen.*;
 
 /**
  * @author wangjq

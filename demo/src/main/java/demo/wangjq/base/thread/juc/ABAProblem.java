@@ -3,7 +3,7 @@ package demo.wangjq.base.thread.juc;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicReference;
 
-import demo.wangjq.algorithm.lintcode.TopTen.*;
+import demo.wangjq.algorithm.leetcode.TopTen.*;
 
 /**
  * @author wangjq
