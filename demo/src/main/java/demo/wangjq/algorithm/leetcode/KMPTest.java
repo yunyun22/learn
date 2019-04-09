@@ -1,4 +1,4 @@
-package demo.wangjq.algorithm.lintcode;
+package demo.wangjq.algorithm.leetcode;
 
 /**
  * Created by wangjq on 2019/2/11.
