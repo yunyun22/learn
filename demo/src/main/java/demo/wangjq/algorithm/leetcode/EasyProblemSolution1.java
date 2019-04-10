@@ -2,6 +2,9 @@ package demo.wangjq.algorithm.leetcode;
 
 import org.junit.Test;
 
+import java.util.HashMap;
+import java.util.Map;
+
 
 /**
  * @author:wangjq
@@ -37,5 +40,32 @@ public class EasyProblemSolution1 {
         int[] nums = {1, 3, 5, 6};
         int target = 7;
         System.out.println(searchInsert(nums, target));
+    }
+
+    static Map<Integer, String> countAndSay = new HashMap<>();
+
+    public static String countAndSay(int n) {
+        if (n == 1) {
+            return "1";
+        }
+        String preSay = countAndSay(n - 1);
+        StringBuilder stringBuilder = new StringBuilder();
+        int count = 0;
+        char current = '\0';
+        for (int i = 0; i < preSay.length(); i++) {
+            current = preSay.charAt(i);
+            if (i == 0 || current == preSay.charAt(i - 1)) {
+                count++;
+            } else {
+                stringBuilder.append(count).append(preSay.charAt(i - 1));
+                count = 1;
+            }
+        }
+        return stringBuilder.append(count).append(current).toString();
+    }
+
+    @Test
+    public void testCountAndSay() {
+        System.out.println(countAndSay(5));
     }
 }
