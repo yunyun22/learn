@@ -24,7 +24,7 @@ public class FindNotExistNumber {
         File file = new File("number.txt");
         try {
             OutputStream outputStream = new FileOutputStream(file);
-            for (long i = 0l; i < 100000L; i++) {
+            for (long i = 0L; i < 100000L; i++) {
                 int writeInt = 0;
                 if (i > Integer.MAX_VALUE) {
                     writeInt = Integer.MAX_VALUE;

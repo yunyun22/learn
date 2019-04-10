@@ -52,7 +52,7 @@ public class AbstractBaseDaoImpl<T, K> {
         sb.append(" SET ");
         Field[] fields = entityClass.getDeclaredFields();
         for (int i = 0; i < fields.length; i++) {
-            if (fields[i].getName().toLowerCase().equals("id")) {
+            if ("id".equals(fields[i].getName().toLowerCase())) {
                 continue;
             }
             sb.append(fields[i].getName());

@@ -22,8 +22,9 @@ public class LockTest {
         new Thread(() -> {
             try {
                 lock.lock();
-                while (true)
+                while (true) {
                     System.out.println("I am aquire the lock,others go away.");
+                }
             } finally {
                 lock.unlock();
             }

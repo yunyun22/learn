@@ -97,7 +97,9 @@ public class TenToTwenty {
     public static ListNode removeNthFromEnd(ListNode head, int n) {
         int size = 0;
         ListNode cur = head, preRemove = null;
-        for (; cur != null; size++, cur = cur.next) ;
+        for (; cur != null; size++, cur = cur.next) {
+            ;
+        }
         cur = head;
         for (int i = 0; i < size - n && cur.next != null; i++) {
             preRemove = cur;
@@ -143,5 +145,9 @@ public class TenToTwenty {
     @Test
     public void testIsValid() {
         System.out.println(isValid("["));
+    }
+
+    public static List<String> generateParenthesis(int n) {
+        return null;
     }
 }

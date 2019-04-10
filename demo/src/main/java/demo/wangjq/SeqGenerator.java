@@ -10,6 +10,7 @@ import java.util.concurrent.locks.ReentrantLock;
 /**
  * Created by wangjq on 2018/8/13.
  */
+@SuppressWarnings("ALL")
 public final class SeqGenerator {
 
     private static SeqGenerator seqGenerator = new SeqGenerator();
@@ -36,7 +37,7 @@ public final class SeqGenerator {
                 //判断当前时间戳与上一个时间戳是否一致
                 if (lastTimestamp == timestamp) {
                     //获取下一个时间戳
-                    timestamp = seqGenerator.tilNextMillis(lastTimestamp);
+                    timestamp = tilNextMillis(lastTimestamp);
                 }
                 sequence = 0;
             } else {
@@ -64,7 +65,7 @@ public final class SeqGenerator {
     public static void main(String[] args) throws InterruptedException {
 
         CountDownLatch countDownLatch = new CountDownLatch(1000000);
-        ExecutorService executorService = Executors.newFixedThreadPool(100);
+        @SuppressWarnings("AlibabaThreadPoolCreation") ExecutorService executorService = Executors.newFixedThreadPool(100);
         System.out.println("start");
         long start = System.currentTimeMillis();
         for (int i = 0; i < 1000000; i++) {

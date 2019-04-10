@@ -1,4 +1,4 @@
-package demo.wangjq.algorithm.leetcode;
+package demo.wangjq.algorithm.lintcode;
 
 import org.junit.Test;
 
@@ -27,12 +27,26 @@ public class ThirtyToForty {
             if (target == nums[mid]) {
                 return mid;
             }
-            boolean isBefore = (target >= nums[left] && target <= nums[mid])
-                    || (target > nums[mid] && target > nums[left]);
-            if (isBefore) {
-                right = mid;
-            } else {
-                left = mid + 1;
+            /**
+             * 左边连续
+             */
+            if (nums[left] <= nums[mid]) {
+                if (target >= nums[left] && target <= nums[mid]) {
+                    right = mid;
+                } else {
+                    left = mid + 1;
+                }
+                continue;
+            }
+            /**
+             * 右边连续
+             */
+            if (nums[mid] < nums[right]) {
+                if (target >= nums[mid] && target <= nums[right]) {
+                    left = mid;
+                } else {
+                    right = mid;
+                }
             }
         }
         return -1;
@@ -43,5 +57,24 @@ public class ThirtyToForty {
         int[] nums = {5, 1, 3};
         int target = 5;
         search(nums, target);
+    }
+
+
+    public static int[] searchRange(int[] nums, int target) {
+        int start = -1, end = -1;
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] == target) {
+                start = start == -1 ? i : start;
+                end = i;
+            }
+        }
+        return new int[]{start, end};
+    }
+
+    @Test
+    public void testSearchRange() {
+        int[] nums = {5, 7, 7, 8, 8, 10};
+        int target = 8;
+        searchRange(nums, 6);
     }
 }
