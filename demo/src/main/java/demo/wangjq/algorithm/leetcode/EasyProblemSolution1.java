@@ -2,6 +2,7 @@ package demo.wangjq.algorithm.leetcode;
 
 import org.junit.Test;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -67,5 +68,21 @@ public class EasyProblemSolution1 {
     @Test
     public void testCountAndSay() {
         System.out.println(countAndSay(5));
+    }
+
+    public static int maxSubArray(int[] nums) {
+        int[] dp = new int[nums.length];
+        int max = dp[0] = nums[0];
+        for (int i = 1; i < nums.length; i++) {
+            dp[i] = nums[i] + (dp[i - 1] > 0 ? dp[i - 1] : 0);
+            max = Math.max(max, dp[i]);
+        }
+        return max;
+    }
+
+    @Test
+    public void testMaxSubArray() {
+        int[] nums = {-2, -1};
+        System.out.println(maxSubArray(nums));
     }
 }
