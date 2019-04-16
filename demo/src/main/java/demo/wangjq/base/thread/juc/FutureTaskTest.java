@@ -5,7 +5,7 @@ import java.util.concurrent.FutureTask;
 import java.util.concurrent.TimeUnit;
 
 /**
- * Created by wangjq on 2018/6/6.
+ * @author wangjq
  */
 public class FutureTaskTest {
 
@@ -19,8 +19,8 @@ public class FutureTaskTest {
             return "wangjq";
         });
 
-        futureTask.run();
 
+        new Thread(futureTask).start();
 
         Runnable runnable = () -> {
             try {
@@ -38,6 +38,7 @@ public class FutureTaskTest {
             new Thread(runnable).start();
         }
 
+        System.out.println("ending");
 
     }
 

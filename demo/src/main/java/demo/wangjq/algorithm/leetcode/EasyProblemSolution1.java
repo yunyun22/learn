@@ -2,9 +2,16 @@ package demo.wangjq.algorithm.leetcode;
 
 import org.junit.Test;
 
+import java.io.PrintStream;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
+import java.util.function.IntFunction;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 
 /**
@@ -85,4 +92,67 @@ public class EasyProblemSolution1 {
         int[] nums = {-2, -1};
         System.out.println(maxSubArray(nums));
     }
+
+    public static int lengthOfLastWord(String s) {
+        s = s.trim();
+        Integer spaceIndex = null, length = s.length();
+        for (int i = 0; i < length; i++) {
+            if (s.charAt(i) == 0x20) {
+                spaceIndex = i;
+            }
+        }
+        return spaceIndex == null ? s.length() : length - spaceIndex - 1;
+    }
+
+    @Test
+    public void testLengthOfLastWord() {
+        HashMap<String, String> map = new HashMap<>();
+        for (int i = 0; i < 13; i++) {
+            map.put("one two" + i + "three", "1");
+        }
+
+    }
+
+    public static final byte FRONT_RESOURCE_TYPE = 1;
+
+    public static final byte INTERFACE_RESOURCE_TYPE = 2;
+
+    @Test
+    public void testStreamAnyMatch() {
+        List<Integer> list1 = Arrays.asList(1, 2, 4);
+        List<Integer> list2 = Arrays.asList();
+        System.out.println(list1.containsAll(list2));
+        Long[] longs = list1.stream().mapToLong(Integer::longValue).boxed().toArray(new IntFunction<Long[]>() {
+            @Override
+            public Long[] apply(int value) {
+                System.out.println(value);
+                return new Long[3];
+            }
+        });
+
+        System.out.println();
+        Arrays.stream(longs).forEach(l -> System.out.println(l));
+    }
+
+    public static String addBinary(String a, String b) {
+        StringBuilder sb = new StringBuilder();
+        int overFlow = 0;
+
+        return "";
+    }
+
+
+    class ByteTest {
+        private Byte ok;
+
+        public Byte getOk() {
+            return ok;
+        }
+
+        public void setOk(Byte ok) {
+            this.ok = ok;
+        }
+    }
+
+
 }
