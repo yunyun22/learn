@@ -217,7 +217,7 @@ public class EasyProblemSolution1 {
             if (im >= 0 && in >= 0) {
                 nums1[i] = nums1[im] > nums2[in] ? nums1[im--] : nums2[in--];
             } else if (in >= 0) {
-                nums1[i] = nums2[in];
+                nums1[i] = nums2[in--];
             }
         }
     }
