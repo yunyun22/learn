@@ -1,22 +1,12 @@
 package demo.wangjq.algorithm.leetcode;
 
-import com.sun.corba.se.impl.protocol.giopmsgheaders.LocateReplyMessage_1_0;
-
 import org.junit.Test;
 
-import sun.awt.SunHints;
-
-import java.io.PrintStream;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.function.IntFunction;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 
 /**
@@ -166,6 +156,39 @@ public class EasyProblemSolution1 {
         System.out.println(addBinary(a, b));
     }
 
+    public static int mySqrt(int x) {
+        long r = x;
+        while (r * r > x) {
+            r = (r + x / r) / 2;
+        }
+        return (int) r;
+    }
+
+    @Test
+    public void testMySqrt() {
+        System.out.println(mySqrt(2147395600));
+    }
+
+    public static int climbStairs(int n) {
+        int[] climb = new int[n + 1];
+        for (int i = 0; i < climb.length; i++) {
+            if (i <= 2) {
+                climb[i] = i;
+            } else {
+                climb[i] = climb[i - 1] + climb[i - 2];
+            }
+        }
+        return climb[n];
+    }
+
+    @Test
+    public void testClimbStairs() {
+        System.out.println(climbStairs(1));
+    }
+
+    public static TopTen.ListNode deleteDuplicates(TopTen.ListNode head) {
+
+    }
 
     class ByteTest {
         private Byte ok;
