@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.IntFunction;
 
+import static demo.wangjq.algorithm.leetcode.TopTen.*;
 
 /**
  * @author:wangjq
@@ -186,7 +187,31 @@ public class EasyProblemSolution1 {
         System.out.println(climbStairs(1));
     }
 
-    public static TopTen.ListNode deleteDuplicates(TopTen.ListNode head) {
+    public static ListNode deleteDuplicates(ListNode head) {
+        ListNode cur = head, pre = cur;
+        for (; cur != null; cur = cur.next) {
+            if (pre.val != cur.val) {
+                pre.next = cur;
+                pre = cur;
+            }
+        }
+        if (pre != null) {
+            pre.next = null;
+        }
+        return head;
+    }
+
+    @Test
+    public void testDeleteDuplicates() {
+        ListNode temp, l1 = new ListNode(2);
+        temp = l1;
+        temp = temp.next = new ListNode(3);
+        temp = temp.next = new ListNode(4);
+        temp = temp.next = new ListNode(4);
+        deleteDuplicates(l1);
+    }
+
+    public static void merge(int[] nums1, int m, int[] nums2, int n) {
 
     }
 
