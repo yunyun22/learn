@@ -85,4 +85,22 @@ public class EasyProblemSolution1 {
         int[] nums = {-2, -1};
         System.out.println(maxSubArray(nums));
     }
+
+    public int[] plusOne(int[] digits) {
+        int overflow = 0, index = digits.length - 1;
+        for (int i = index; i >= 0; i--) {
+            int value = (i == index) ? (digits[i] + 1) : digits[i] + overflow;
+            overflow = value >= 10 ? 1 : 0;
+            digits[i] = value >= 10 ? 0 : value;
+        }
+        if (overflow == 0) {
+            return digits;
+        } else {
+            int[] ret = new int[index + 1];
+            ret[0] = 1;
+            System.arraycopy(ret, 1, digits, 0, digits.length);
+            return ret;
+        }
+
+    }
 }
