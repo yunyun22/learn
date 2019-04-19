@@ -1,12 +1,17 @@
 package demo.wangjq.algorithm.leetcode;
 
+import com.sun.corba.se.impl.protocol.giopmsgheaders.LocateReplyMessage_1_0;
+
 import org.junit.Test;
+
+import sun.awt.SunHints;
 
 import java.io.PrintStream;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.function.IntFunction;
@@ -135,10 +140,30 @@ public class EasyProblemSolution1 {
     }
 
     public static String addBinary(String a, String b) {
-        StringBuilder sb = new StringBuilder();
+        String ret = new String();
+        int i1 = a.length() - 1, i2 = b.length() - 1;
         int overFlow = 0;
+        while (i1 >= 0 || i2 >= 0) {
+            int cur = overFlow;
+            if (i1 >= 0) {
+                cur = cur + a.charAt(i1--) - '0';
+            }
+            if (i2 >= 0) {
+                cur = cur + b.charAt(i2--) - '0';
+            }
+            int value = cur % 2;
+            overFlow = cur / 2;
+            ret = value + ret;
+        }
 
-        return "";
+        return overFlow == 0 ? ret : overFlow + ret;
+    }
+
+    @Test
+    public void testAddBinary() {
+        String a = "11";
+        String b = "1";
+        System.out.println(addBinary(a, b));
     }
 
 
