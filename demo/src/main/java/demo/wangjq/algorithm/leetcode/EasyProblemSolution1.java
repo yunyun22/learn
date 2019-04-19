@@ -212,7 +212,21 @@ public class EasyProblemSolution1 {
     }
 
     public static void merge(int[] nums1, int m, int[] nums2, int n) {
+        int i = m + n - 1, im = m - 1, in = n - 1;
+        for (; i >= 0; i--) {
+            if (im >= 0 && in >= 0) {
+                nums1[i] = nums1[im] > nums2[in] ? nums1[im--] : nums2[in--];
+            } else if (in >= 0) {
+                nums1[i] = nums2[in];
+            }
+        }
+    }
 
+    @Test
+    public void testMerge() {
+        int[] nums1 = {2, 0};
+        int[] nums2 = {1};
+        merge(nums1, 1, nums2, 1);
     }
 
     class ByteTest {
