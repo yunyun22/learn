@@ -9,6 +9,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * @author wangjq
+ */
 public class TopTen {
 
     public static class ListNode {

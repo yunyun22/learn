@@ -23,7 +23,8 @@
 
     <aop:config>
         <aop:aspect id="handler" ref="myHandler">
-            <aop:pointcut id="addAllMethod" expression="execution(* demo.wangjq.service.*.*(..))"/>
+            <aop:pointcut id="addAllMethod"
+                          expression="execution(* demo.wangjq.app.service.*.*(..))"/>
             <aop:before method="beforeSayHello" pointcut-ref="addAllMethod"/>
             <aop:after method="afterSayBye" pointcut-ref="addAllMethod"/>
         </aop:aspect>
