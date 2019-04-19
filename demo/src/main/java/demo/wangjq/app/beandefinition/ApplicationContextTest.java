@@ -4,6 +4,9 @@ import demo.wangjq.app.service.AopService;
 
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+/**
+ * @author wangjq
+ */
 public class ApplicationContextTest {
 
     public static void main(String[] args) {
