@@ -9,6 +9,7 @@ import java.util.Map;
 import java.util.function.IntFunction;
 
 import demo.wangjq.algorithm.leetcode.TopTen.ListNode;
+import demo.wangjq.algorithm.leetcode.BaseDataStructure.TreeNode;
 
 /**
  * @author:wangjq
@@ -245,6 +246,20 @@ public class EasyProblemSolution1 {
         int[] nums1 = {2, 0};
         int[] nums2 = {1};
         merge(nums1, 1, nums2, 1);
+    }
+
+    public static boolean isSameTree(TreeNode p, TreeNode q) {
+        if (p == null && q == null) {
+            return true;
+        }
+        if (p == null || q == null) {
+            return false;
+        }
+        if (p.val != q.val) {
+            return false;
+        }
+        return isSameTree(p.left, q.left)
+                && isSameTree(p.right, p.right);
     }
 
     class ByteTest {
