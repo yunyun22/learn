@@ -4,8 +4,10 @@ import org.junit.Test;
 
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Queue;
 import java.util.function.IntFunction;
 
 import demo.wangjq.algorithm.leetcode.TopTen.ListNode;
@@ -259,5 +261,23 @@ public class EasyProblemSolution1 {
         }
     }
 
+    public static boolean isSymmetric(TreeNode root) {
+        if (root == null) {
+            return true;
+        }
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.offer(root);
+        if (!queue.isEmpty()) {
+            TreeNode cur = queue.poll();
+            if (cur.left != null) {
+                queue.offer(cur.left);
+            }
+            if (cur.right != null) {
+                queue.offer(cur.right);
+            }
+
+        }
+        return false;
+    }
 
 }
