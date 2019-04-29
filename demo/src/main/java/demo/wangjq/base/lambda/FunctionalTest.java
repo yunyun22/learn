@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 /**
- * Created by wangjq on 2018/6/8.
+ * @author wangjq
  */
 public class FunctionalTest {
 
@@ -29,5 +29,8 @@ public class FunctionalTest {
 
 
     }
+
+
+
 
 }

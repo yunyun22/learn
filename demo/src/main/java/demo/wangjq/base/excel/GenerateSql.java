@@ -1,8 +1,6 @@
 package demo.wangjq.base.excel;
 
 
-import com.sun.org.apache.xpath.internal.SourceTree;
-
 import org.apache.commons.collections.map.HashedMap;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.Cell;
@@ -27,7 +25,7 @@ public class GenerateSql {
     @Test
     public void testReadExcel() {
         List<Map<Integer, Object>> excel = readExcelToObj("D:\\areatosql.xls");
-        //System.out.println(excel);
+        System.out.println(excel);
 //        List<Map<Integer, Object>> filter = excel.stream().filter(map ->
 //                map.get(0).equals("南岸区") || map.get(0).equals("巴南区")
 //        ).collect(Collectors.toList());

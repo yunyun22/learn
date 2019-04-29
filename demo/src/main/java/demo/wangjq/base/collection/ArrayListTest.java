@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by wangjq on 2018/6/29.
+ * @author wangjq
  */
 public class ArrayListTest {
 
