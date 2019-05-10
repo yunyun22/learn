@@ -354,4 +354,28 @@ public class EasyProblemSolution1 {
         return Math.max(maxDepth(root.right) + 1, maxDepth(root.left) + 1);
     }
 
+
+    public static List<List<Integer>> levelOrderBottom(TreeNode root) {
+        List<List<Integer>> lists = new LinkedList<>();
+        List<TreeNode> list = new LinkedList<>();
+        if (root != null) {
+            list.add(root);
+        }
+        while (!list.isEmpty()) {
+            List<TreeNode> temps = new LinkedList<>();
+            List<Integer> ret = new LinkedList<>();
+            for (TreeNode temp : list) {
+                ret.add(temp.val);
+                if (temp.left != null) {
+                    temps.add(temp.left);
+                }
+                if (temp.right != null) {
+                    temps.add(temp.right);
+                }
+            }
+            lists.add(0, ret);
+            list = temps;
+        }
+        return lists;
+    }
 }
