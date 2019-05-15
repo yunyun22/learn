@@ -6,6 +6,10 @@ package demo.wangjq.base.shift;
 public class ShiftTest {
 
     public static void main(String[] args) {
+
+
+        System.out.println(~6 - 1);
+
         System.out.println(1L << 6);
     }
 }
