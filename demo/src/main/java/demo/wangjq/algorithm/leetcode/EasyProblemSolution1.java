@@ -2,8 +2,10 @@ package demo.wangjq.algorithm.leetcode;
 
 import org.junit.Test;
 
+import java.util.ArrayDeque;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.function.IntFunction;
@@ -245,10 +247,13 @@ public class EasyProblemSolution1 {
     public void testMerge() {
         int[] nums1 = {2, 0};
         int[] nums2 = {1};
-        merge(nums1, 1, nums2, 1);
+        // merge(nums1, 1, nums2, 1);
+        Integer i = null;
+        Object o = null;
+        System.out.println(i == o);
     }
 
-    public static boolean isSameTree(TreeNode p, TreeNode q) {
+    public static boolean isSameTree1(TreeNode p, TreeNode q) {
         if (p == null && q == null) {
             return true;
         }
@@ -258,8 +263,8 @@ public class EasyProblemSolution1 {
         if (p.val != q.val) {
             return false;
         }
-        return isSameTree(p.left, q.left)
-                && isSameTree(p.right, p.right);
+        return isSameTree1(p.left, q.left)
+                && isSameTree1(p.right, p.right);
     }
 
     class ByteTest {
@@ -275,4 +280,117 @@ public class EasyProblemSolution1 {
     }
 
 
+    public static boolean check(TreeNode p, TreeNode q) {
+        if (p == null && q == null) return true;
+        if (p == null || q == null) return false;
+        if (p.val == q.val) return true;
+        return false;
+    }
+
+    public static boolean isSameTree(TreeNode r, TreeNode l) {
+        if (r == null && l == null) return true;
+        if (!check(r, l)) {
+            return false;
+        }
+        ArrayDeque<TreeNode> rArrayDeque = new ArrayDeque<>();
+        ArrayDeque<TreeNode> lArrayDeque = new ArrayDeque<>();
+        rArrayDeque.addLast(r);
+        lArrayDeque.addLast(l);
+        while (!rArrayDeque.isEmpty()) {
+            TreeNode p = rArrayDeque.removeFirst();
+            TreeNode q = lArrayDeque.removeFirst();
+            if (!check(p, q)) {
+                return false;
+            }
+            if (p.left != null && q.left != null) {
+                rArrayDeque.addLast(p.left);
+                lArrayDeque.addLast(q.left);
+            } else if (p.left != q.left) {
+                return false;
+            }
+            if (p.right != null && q.right != null) {
+                rArrayDeque.addLast(p.right);
+                lArrayDeque.addLast(q.right);
+            } else if (p.right != q.right) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+
+    @Test
+    public void testIsSameTree() {
+        TreeNode r = new TreeNode(1);
+        r.left = new TreeNode(2);
+        TreeNode l = new TreeNode(1);
+        l.right = new TreeNode(2);
+        isSameTree(r, l);
+
+    }
+
+
+    public static boolean isSymmetric(TreeNode root) {
+        LinkedList<TreeNode> linkedList = new LinkedList<>();
+        if (root == null) {
+            return true;
+        }
+        linkedList.addLast(root.left);
+        linkedList.addLast(root.right);
+        while (!linkedList.isEmpty()) {
+            TreeNode t1 = linkedList.pollFirst();
+            TreeNode t2 = linkedList.pollFirst();
+            if (t1 == null && t2 == null) {
+                continue;
+            }
+            if (t1 == null || t2 == null) {
+                return false;
+            }
+            if (t1.val != t2.val) {
+                return false;
+            }
+            linkedList.addLast(t1.left);
+            linkedList.addLast(t2.right);
+            linkedList.addLast(t1.right);
+            linkedList.addLast(t2.left);
+        }
+        return true;
+    }
+
+    public static int maxDepth(TreeNode root) {
+        if (root == null) {
+            return 0;
+        }
+        if (root.right == null && root.left == null) {
+            return 1;
+        }
+//        int rightDepth = root.right != null ? maxDepth(root.right) + 1 : 0;
+//        int leftDepth = root.left != null ? maxDepth(root.left) + 1 : 0;
+        return Math.max(maxDepth(root.right) + 1, maxDepth(root.left) + 1);
+    }
+
+
+    public static List<List<Integer>> levelOrderBottom(TreeNode root) {
+        List<List<Integer>> lists = new LinkedList<>();
+        List<TreeNode> list = new LinkedList<>();
+        if (root != null) {
+            list.add(root);
+        }
+        while (!list.isEmpty()) {
+            List<TreeNode> temps = new LinkedList<>();
+            List<Integer> ret = new LinkedList<>();
+            for (TreeNode temp : list) {
+                ret.add(temp.val);
+                if (temp.left != null) {
+                    temps.add(temp.left);
+                }
+                if (temp.right != null) {
+                    temps.add(temp.right);
+                }
+            }
+            lists.add(0, ret);
+            list = temps;
+        }
+        return lists;
+    }
 }

@@ -1,8 +1,6 @@
 package demo.wangjq.base.excel;
 
 
-import com.sun.org.apache.xpath.internal.SourceTree;
-
 import org.apache.commons.collections.map.HashedMap;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.Cell;
@@ -18,6 +16,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * @author:wangjq
@@ -27,14 +26,14 @@ public class GenerateSql {
     @Test
     public void testReadExcel() {
         List<Map<Integer, Object>> excel = readExcelToObj("D:\\areatosql.xls");
-        //System.out.println(excel);
-//        List<Map<Integer, Object>> filter = excel.stream().filter(map ->
-//                map.get(0).equals("南岸区") || map.get(0).equals("巴南区")
-//        ).collect(Collectors.toList());
+        System.out.println(excel);
+        List<Map<Integer, Object>> filter = excel.stream().filter(map ->
+                !map.get(0).equals("鄞州区") && !map.get(0).equals("南岸区") && !map.get(0).equals("巴南区") && !map.get(0).equals("建邺区")
+        ).collect(Collectors.toList());
 
 
         System.out.println("filter after");
-        excel.forEach(map ->
+        filter.forEach(map ->
                 System.out.println("UPDATE u_user_address SET fourth=area,area=" + map.get(1)
                         + " where  area=" + map.get(2) + ";#" + map.get(3))
         );

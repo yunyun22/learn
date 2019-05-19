@@ -1,6 +1,10 @@
 package demo.wangjq.base.test;
 
 
+import org.junit.Test;
+
+import java.util.Objects;
+
 public class DSTest {
     public static void main(String[] args) throws InterruptedException {
         System.out.println(Integer.bitCount(123456));
@@ -30,6 +34,13 @@ public class DSTest {
                 return bits;
             }
         }
+    }
+
+    @Test
+    public void testObjects() {
+
+        System.out.println(Objects.equals(new Byte("1"), new Byte("1")));
+
     }
 
 
