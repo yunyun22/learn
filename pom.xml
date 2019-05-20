@@ -11,7 +11,6 @@
     <modules>
         <module>demo</module>
         <module>web</module>
-        <module>web</module>
     </modules>
 
     <dependencyManagement>
@@ -31,13 +30,6 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
-
-            <dependency>
-                <groupId>com.google.guava</groupId>
-                <artifactId>guava</artifactId>
-                <version>25.1-jre</version>
-            </dependency>
-
         </dependencies>
     </dependencyManagement>
 
