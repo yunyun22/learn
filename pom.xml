@@ -10,9 +10,8 @@
 
     <modules>
         <module>demo</module>
-        <module>register</module>
-        <module>consumer</module>
-        <module>zuul</module>
+        <module>web</module>
+        <module>web</module>
     </modules>
 
     <dependencyManagement>
