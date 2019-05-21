@@ -106,6 +106,18 @@ public class TwentyToThirty {
         return start.next;
     }
 
+
+    public static ListNode swapPairs2(ListNode head) {
+        if ((head == null) || (head.next == null)) {
+            return head;
+        }
+        ListNode n = head.next;
+        head.next = swapPairs2(head.next.next);
+        n.next = head;
+        return n;
+    }
+
+
     @Test
     public void testSwapPairs() {
         ListNode temp, l1 = new ListNode(1);
@@ -113,8 +125,10 @@ public class TwentyToThirty {
         temp = temp.next = new ListNode(2);
         temp = temp.next = new ListNode(3);
         temp = temp.next = new ListNode(4);
-        temp.next = new ListNode(5);
-        swapPairs(l1);
+        //temp.next = new ListNode(5);
+        swapPairs2(l1);
+
+        System.out.println(l1);
     }
 
     public static ListNode reverseKGroup(ListNode head, int k) {
