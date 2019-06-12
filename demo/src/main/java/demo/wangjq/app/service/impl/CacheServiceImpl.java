@@ -17,8 +17,8 @@ import demo.wangjq.base.annotation.User;
 @Service
 public class CacheServiceImpl implements CacheService {
     @Override
-    @Cacheable(value = "user")
-    public User cache(String name) {
+    @Cacheable(value = "userAddress", key = "#acId")
+    public User cache(Long acId) {
         /**
          * 模拟数据库查询速度慢
          */
@@ -27,7 +27,7 @@ public class CacheServiceImpl implements CacheService {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        return new User().builder().setId(1).setName(name);
+        return new User().builder().setId(acId).setName("fuck the world");
     }
 
     @Override

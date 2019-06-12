@@ -6,7 +6,7 @@ import org.apache.logging.log4j.Logger;
 public class LogTest {
 
     public static void main(String[] args) {
-        Logger logger = LogManager.getLogger("myLog");
+        Logger logger = LogManager.getLogger(LogTest.class);
         logger.trace("trace level");
         logger.debug("debug level");
         logger.info("info level");

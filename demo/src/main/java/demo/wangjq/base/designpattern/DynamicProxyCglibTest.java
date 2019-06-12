@@ -8,7 +8,7 @@ import net.sf.cglib.proxy.MethodProxy;
 import java.lang.reflect.Method;
 
 /**
- * Created by wangjq on 2018/6/12.
+ * @author wangjq
  */
 public class DynamicProxyCglibTest {
 

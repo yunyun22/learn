@@ -13,10 +13,10 @@ public interface CacheService {
     /**
      * 缓存当前操作者的名字
      *
-     * @param name 名称
+     * @param acId 名称
      * @return 返回名称
      */
-    User cache(String name);
+    User cache(Long acId);
 
     /**
      * 缓存list

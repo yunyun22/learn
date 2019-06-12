@@ -5,6 +5,9 @@ import java.util.concurrent.BrokenBarrierException;
 import java.util.concurrent.CyclicBarrier;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * @author wangjq
+ */
 public class CyclicBarrierTest {
 
     public static void main(String[] args) {
@@ -14,9 +17,10 @@ public class CyclicBarrierTest {
         Runnable r = () -> {
 
             try {
-                System.out.println("this thread start wait,having waited threads:"+cyclicBarrier.getNumberWaiting());
-                cyclicBarrier.await();
+                System.out.println("this thread start wait,having waited threads:" + cyclicBarrier.getNumberWaiting());
                 TimeUnit.SECONDS.sleep(10);
+                cyclicBarrier.await();
+
             } catch (InterruptedException e) {
                 e.printStackTrace();
             } catch (BrokenBarrierException e) {

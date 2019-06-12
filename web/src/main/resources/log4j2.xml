@@ -1,58 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- status:log4j内部console日志级别,monitorInterval:自动更新配置(单位:秒) -->
-<Configuration status="error" monitorInterval="3600">
-    <Properties>
-        <Property name="baseDir">./</Property>
-    </Properties>
+<Configuration name="baseConf" status="warn" monitorInterval="30">
+
     <Appenders>
-        <RollingRandomAccessFile name="stdFile"
-                                 filePattern="${baseDir}/log/std/stdLog-%d{yyyy-MM-dd}.log">
-            <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
-            <DirectWriteRolloverStrategy/>
-            <PatternLayout
-                    pattern="%c{1} %d{yyyy-MM-dd HH:mm:ss SSS} [%t] %T %-5p - user:%X{user_id,user_name} %m%n"/>
-        </RollingRandomAccessFile>
-        <!-- layout中不要使用定位信息,影响性能,特使是异步logger -->
-        <!-- 错误日志文件,数量小采用SizeBased策略 -->
-        <RollingRandomAccessFile name="errorFile"
-                                 filePattern="${baseDir}/log/error/errorLog-%d{yyyy-MM-dd}.log">
-            <!-- 只记录错误日志,包括系统使用非ErrorLogger类输出的日志 -->
-            <ThresholdFilter level="warn" onMatch="ACCEPT"
-                             onMismatch="DENY"/>
-            <!-- 每天一个日志文件 -->
-            <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
-            <DirectWriteRolloverStrategy/>
-            <JSONLayout compact="true" eventEol="true" properties="true">
-                <KeyValuePair key="timeFormat" value="$${date:yyyy-MM-dd HH:mm:ss SSS}"/>
-            </JSONLayout>
-        </RollingRandomAccessFile>
-        <!-- 业务日志文件,数量大,采用timeBased策略 -->
-        <RollingRandomAccessFile name="appFile"
-                                 filePattern="${baseDir}/log/app/appLog-%d{yyyy-MM-dd}.log">
-            <!-- 1天一个日志文件 -->
-            <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
-            <DirectWriteRolloverStrategy/>
-            <PatternLayout
-                    pattern="%c{1} %d{yyyy-MM-dd HH:mm:ss SSS} [%t] %T %-5p - user:%X{user_id,user_name} %m%n"/>
-        </RollingRandomAccessFile>
+
+        <Console name="Console">
+            <!--
+                设置 onMismatch="NEUTRAL" 可以让日志经过后续的过滤器
+                最后一个过滤器建议设置 onMismatch="DENY", 不然日志就输出了。
+            -->
+            <Filters>
+                <!-- 从大到小：error, warn, info, debug, trace -->
+                <LevelRangeFilter minLevel="error" maxLevel="info" onMatch="ACCEPT"
+                                  onMismatch="NEUTRAL"/>
+                <!-- 只允许在每天的 8点~8点半 之间输出日志 -->
+                <TimeFilter start="08:00:00" end="08:30:00" onMatch="ACCEPT" onMismatch="DENY"/>
+            </Filters>
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"
+                           charset="UTF-8"/>
+        </Console>
+
     </Appenders>
+
     <Loggers>
-        <Root level="debug">
-            <AppenderRef ref="stdFile"/>
-            <AppenderRef ref="errorFile"/>
+
+        <Root level="info">
+            <AppenderRef ref="Console"/>
         </Root>
-        <!-- 错误日志,子logger不追加root日志内容 -->
-        <AsyncLogger name="errorLogger" level="error" additivity="false">
-            <AppenderRef ref="errorFile"/>
-        </AsyncLogger>
-        <!-- 业务日志 -->
-        <AsyncLogger name="appLogger" level="info" additivity="false">
-            <AppenderRef ref="appFile"/>
-        </AsyncLogger>
-        <Logger
-                name="org.springframework.aop.interceptor.PerformanceMonitorInterceptor"
-                level="trace" additivity="false">
-            <AppenderRef ref="stdFile"/>
-        </Logger>
+
     </Loggers>
+
 </Configuration>
