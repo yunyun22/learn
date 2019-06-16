@@ -6,17 +6,9 @@ import java.io.Serializable;
  * @author wangjq
  */
 public class User implements Serializable {
-    private Integer id;
+    private Long id;
     private String name;
 
-    public Integer getId() {
-        return id;
-    }
-
-    public User setId(Integer id) {
-        this.id = id;
-        return this;
-    }
 
     public String getName() {
         return name;
@@ -25,6 +17,14 @@ public class User implements Serializable {
     public User setName(String name) {
         this.name = name;
         return this;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     @Override
@@ -51,7 +51,7 @@ public class User implements Serializable {
             return user;
         }
 
-        public User setId(Integer id) {
+        public User setId(Long id) {
             user.setId(id);
             return user;
         }

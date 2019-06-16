@@ -32,8 +32,8 @@ public class TestController {
 
     @RequestMapping("/cache")
     @ResponseBody
-    public User testCache(String name) {
-        return cacheService.cache(name);
+    public User testCache(Long acId) {
+        return cacheService.cache(acId);
     }
 
     @RequestMapping("/list")

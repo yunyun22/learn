@@ -1,15 +1,19 @@
 package demo.wangjq.base.shift;
 
 /**
- * Created by wangjq on 2018/6/15.
+ * @author wangjq
  */
 public class ShiftTest {
 
     public static void main(String[] args) {
 
 
-        System.out.println(~6 + 1);
+        // System.out.println(~6 + 1);
 
-        System.out.println(1L << 6);
+        // System.out.println(1L << 6);
+
+
+        System.out.println(-101 >>> 33);
+
     }
 }

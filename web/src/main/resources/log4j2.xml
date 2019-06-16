@@ -1,60 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- status:log4j内部console日志级别,monitorInterval:自动更新配置(单位:秒) -->
-<Configuration status="error" monitorInterval="0">
-    <Properties>
-        <Property name="baseDir">./</Property>
-    </Properties>
+<Configuration name="baseConf" status="warn" monitorInterval="30">
+
     <Appenders>
-        <!-- 文本输出 immediateFlush:每次写都flush buffer,默认为true,只配合同步logger和appender使用,
-            如果logger为异步，则忽略该值 -->
-        <RollingRandomAccessFile name="stdFile" fileName="${baseDir}/log/std/stdLog.log"
-                                 filePattern="${baseDir}/log/std/%d{yyyy-MM}/stdLog-%d{yyyy-MM-dd}.log.zip">
-            <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
-            <DefaultRolloverStrategy>
-                <Delete basePath="${baseDir}/log/std" maxDepth="2">
-                    <IfFileName glob="*/stdLog-*.log.zip"/>
-                    <!-- 只保存最近10天 -->
-                    <IfLastModified age="10d"/>
-                </Delete>
-            </DefaultRolloverStrategy>
-            <PatternLayout
-                    pattern="%c{1} %d{yyyy-MM-dd HH:mm:ss SSS} [%t] %-5p %m%n"/>
-        </RollingRandomAccessFile>
-        <!-- layout中不要使用定位信息,影响性能,特使是异步logger -->
-        <!-- 错误日志文件,数量小采用SizeBased策略 -->
-        <RollingRandomAccessFile name="errorFile"
-                                 fileName="${baseDir}/log/error/errorLog.log"
-                                 filePattern="${baseDir}/log/error/%d{yyyy-MM}/errorLog-%d{yyyy-MM-dd}.log.zip">
-            <!-- 只记录错误日志,包括系统使用非ErrorLogger类输出的日志 -->
-            <ThresholdFilter level="warn" onMatch="ACCEPT"
-                             onMismatch="DENY"/>
-            <!-- 每天一个日志文件,防止基于大小策略的删除旧的日志 -->
-            <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
-            <PatternLayout
-                    pattern="%c{1} %d{yyyy-MM-dd HH:mm:ss SSS} [%t] %-5p %m%n"/>
-        </RollingRandomAccessFile>
-        <!-- 业务日志文件,数量大,采用timeBased策略 -->
-        <RollingRandomAccessFile name="appFile"
-                                 fileName="${baseDir}/log/app/appLog.log"
-                                 filePattern="${baseDir}/log/app/%d{yyyy-MM}/appLog-%d{yyyy-MM-dd-HH}.log.zip">
-            <!-- 6小时一个日志文件 -->
-            <TimeBasedTriggeringPolicy interval="6" modulate="true"/>
-            <PatternLayout
-                    pattern="%c{1} %d{yyyy-MM-dd HH:mm:ss SSS} [%t] %-5p %m%n"/>
-        </RollingRandomAccessFile>
+
+        <Console name="Console">
+            <!--
+                设置 onMismatch="NEUTRAL" 可以让日志经过后续的过滤器
+                最后一个过滤器建议设置 onMismatch="DENY", 不然日志就输出了。
+            -->
+            <Filters>
+                <!-- 从大到小：error, warn, info, debug, trace -->
+                <LevelRangeFilter minLevel="error" maxLevel="info" onMatch="ACCEPT"
+                                  onMismatch="NEUTRAL"/>
+                <!-- 只允许在每天的 8点~8点半 之间输出日志 -->
+                <TimeFilter start="08:00:00" end="08:30:00" onMatch="ACCEPT" onMismatch="DENY"/>
+            </Filters>
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"
+                           charset="UTF-8"/>
+        </Console>
+
     </Appenders>
+
     <Loggers>
-        <Root level="debug">
-            <AppenderRef ref="stdFile"/>
-            <AppenderRef ref="errorFile"/>
+
+        <Root level="info">
+            <AppenderRef ref="Console"/>
         </Root>
-        <!-- 错误日志,子logger不追加root日志内容 -->
-        <AsyncLogger name="errorLogger" level="error" additivity="false">
-            <AppenderRef ref="errorFile"/>
-        </AsyncLogger>
-        <!-- 业务日志 -->
-        <AsyncLogger name="appLogger" level="info" additivity="false">
-            <AppenderRef ref="appFile"/>
-        </AsyncLogger>
+
     </Loggers>
+
 </Configuration>
