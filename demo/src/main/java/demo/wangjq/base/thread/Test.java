@@ -4,7 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.concurrent.*;
 
-public class CruniiTest {
+public class Test {
 
     public static void main(String[] args) {
 

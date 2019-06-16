@@ -23,7 +23,7 @@
         <!--<scope>test</scope>-->
         <!--</dependency>-->
         <dependency>
-            <groupId>org.apache.logging.log4j</groupId>
+            <groupId>org.apache.logging.log4j</groupId>AbstractAppender
             <artifactId>log4j-api</artifactId>
             <version>2.5</version>
         </dependency>
