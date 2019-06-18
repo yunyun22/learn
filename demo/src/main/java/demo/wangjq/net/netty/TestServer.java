@@ -1,5 +1,6 @@
 package demo.wangjq.net.netty;
 
+import demo.wangjq.net.netty.initializer.MyServerInitializer;
 import demo.wangjq.net.netty.initializer.TestServceInitializer;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
@@ -22,7 +23,7 @@ public class TestServer {
             serverBootstrap
                     .group(bossGroup, workerGroup)
                     .channel(NioServerSocketChannel.class)
-                    .childHandler(new TestServceInitializer());
+                    .childHandler(new MyServerInitializer());
             ChannelFuture channelFuture = serverBootstrap.bind(8080).sync();
             channelFuture.channel().closeFuture().sync();
         } finally {
