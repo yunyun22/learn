@@ -1,7 +1,6 @@
 package demo.wangjq.net.netty;
 
-import demo.wangjq.net.netty.initializer.MyServerInitializer;
-import demo.wangjq.net.netty.initializer.TestServceInitializer;
+import demo.wangjq.net.netty.initializer.ChatServerInitializer;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.EventLoopGroup;
@@ -23,13 +22,12 @@ public class TestServer {
             serverBootstrap
                     .group(bossGroup, workerGroup)
                     .channel(NioServerSocketChannel.class)
-                    .childHandler(new MyServerInitializer());
+                    .childHandler(new ChatServerInitializer());
             ChannelFuture channelFuture = serverBootstrap.bind(8080).sync();
             channelFuture.channel().closeFuture().sync();
         } finally {
             bossGroup.shutdownGracefully();
             workerGroup.shutdownGracefully();
         }
-
     }
 }

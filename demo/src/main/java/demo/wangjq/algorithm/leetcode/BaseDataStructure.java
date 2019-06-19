@@ -14,6 +14,12 @@ public class BaseDataStructure {
         TreeNode(int x) {
             val = x;
         }
+
+
+        public void  test(){
+            TreeNode node = new TreeNode(1);
+        }
+
     }
 
 }
