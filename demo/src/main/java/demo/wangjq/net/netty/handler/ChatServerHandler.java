@@ -1,7 +1,5 @@
 package demo.wangjq.net.netty.handler;
 
-import java.util.Objects;
-
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
@@ -15,17 +13,18 @@ import io.netty.util.concurrent.GlobalEventExecutor;
  */
 public class ChatServerHandler extends SimpleChannelInboundHandler<String> {
 
-    ChannelGroup channels = new DefaultChannelGroup(GlobalEventExecutor.INSTANCE);
+    static ChannelGroup channels = new DefaultChannelGroup(GlobalEventExecutor.INSTANCE);
 
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, String msg) throws Exception {
         Channel channel = ctx.channel();
 
+        channels.add(channel);
         for (Channel ch : channels) {
-            if (!Objects.equals(ch, channel)) {
+            if (ch != channel) {
+                System.out.println("server get msg:" + msg);
                 ch.writeAndFlush(msg);
             }
         }
-        channels.add(channel);
     }
 }
