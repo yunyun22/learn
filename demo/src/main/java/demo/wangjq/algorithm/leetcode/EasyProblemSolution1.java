@@ -3,6 +3,7 @@ package demo.wangjq.algorithm.leetcode;
 import org.junit.Test;
 
 import java.util.ArrayDeque;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -10,8 +11,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.IntFunction;
 
-import demo.wangjq.algorithm.leetcode.TopTen.ListNode;
 import demo.wangjq.algorithm.leetcode.BaseDataStructure.TreeNode;
+import demo.wangjq.algorithm.leetcode.TopTen.ListNode;
 
 /**
  * @author:wangjq
@@ -393,4 +394,111 @@ public class EasyProblemSolution1 {
         }
         return lists;
     }
+
+
+    public static int threeSumClosest(int[] num, int target) {
+
+        int min = num[0] + num[1] + num[num.length - 1];
+        Arrays.sort(num);
+        for (int i = 0; i < num.length - 2; i++) {
+            if (i > 0 && num[i] == num[i - 1]) {
+                continue;
+            }
+            int cur = num[i], l = i + 1, r = num.length - 1;
+            while (l < r) {
+                int sum = cur + num[l] + num[r];
+                min = Math.abs(target - sum) > Math.abs(target - min) ? min : sum;
+                if (num[l] + num[r] + cur < target) {
+                    l++;
+                } else {
+                    r--;
+                }
+            }
+        }
+        return min;
+
+    }
+
+
+    public static List<List<Integer>> threeSum(int[] num) {
+        List<List<Integer>> ret = new ArrayList<>();
+        if (num == null || num.length < 3) {
+            return ret;
+        }
+        Arrays.sort(num);
+        int length = num.length;
+
+        for (int i = 0; i < length - 2; i++) {
+            if (i > 0 && num[i] == num[i - 1]) {
+                continue;
+            }
+            int cur = num[i], l = i + 1, r = length - 1;
+            while (l < r) {
+                if (cur + num[l] + num[r] == 0) {
+                    ret.add(Arrays.asList(cur, num[l], num[r]));
+                    while (l < r && num[l] == num[++l]) {
+                    }
+                    while (l < r && num[r] == num[--r]) {
+                    }
+                } else if (num[l] + num[r] + cur < 0) {
+                    l++;
+                } else {
+                    r--;
+                }
+            }
+
+        }
+
+        return ret;
+    }
+
+
+    @Test
+    public void testThreeSum() {
+        int[] num = {-1, 2, 1, -4};
+
+        System.out.println(threeSumClosest(num, 1));
+    }
+
+
+    public static List<String> letterCombinations(String digits) {
+
+        Map<Character, String> map = new HashMap<>(9);
+        map.put('2', "abc");
+        map.put('3', "def");
+        map.put('4', "ghi");
+        map.put('5', "jkl");
+        map.put('6', "mno");
+        map.put('7', "pqrs");
+        map.put('8', "tuv");
+        map.put('9', "wxyz");
+        map.put('1', "");
+        LinkedList<String> list = new LinkedList<>();
+
+
+        if (digits.length() < 1) {
+            return list;
+        }
+
+        list.offer("");
+
+        for (int i = 0; i < digits.length(); i++) {
+            String s = map.get(digits.charAt(i));
+            while (list.peek().length() == i) {
+                String joined = list.poll();
+                for (int j = 0; j < s.length(); j++) {
+                    StringBuilder sb = new StringBuilder(joined);
+                    sb.append(s.charAt(j));
+                    list.offer(sb.toString());
+                }
+            }
+        }
+        return list;
+    }
+
+    @Test
+    public void testLetterCombinations() {
+        letterCombinations("");
+    }
+
 }
