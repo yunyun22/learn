@@ -3,18 +3,17 @@ package demo.wangjq.base.characterset;
 import java.nio.ByteBuffer;
 import java.nio.CharBuffer;
 import java.nio.charset.Charset;
-import java.nio.charset.CharsetDecoder;
-import java.nio.charset.CharsetEncoder;
-import java.util.Arrays;
 
+/**
+ * 编码
+ *
+ * @author wangjq
+ */
 public class CharacterSetTest {
-
 
     public static void main(String[] args) {
 
-
         String s = "你";
-
 
         //客户端编码
         Charset utf = Charset.forName("UTF-8");
@@ -28,7 +27,7 @@ public class CharacterSetTest {
 
 
         for (char c : decode1.array()) {
-            System.out.println((byte) c);
+            System.out.print((int) c + "  ");
             System.out.print(c + "  ");
         }
 
@@ -39,7 +38,6 @@ public class CharacterSetTest {
         CharBuffer decode = utf.decode(encode1);
 
         System.out.println(decode.array());
-
 
     }
 
