@@ -1,18 +1,17 @@
 package demo.wangjq.algorithm;
 
-import demo.wangjq.ArraysUtil;
-
 import java.util.Arrays;
+
+import demo.wangjq.ArraysUtil;
 
 /**
  * a sort util
+ *
+ * @author wangjq
  */
 public class MySort {
     /**
      * 冒泡排序
-     *
-     * @param numbers
-     * @return
      */
     public static int[] bubbleSort(int[] numbers) {
         for (int i = 0; i < numbers.length; i++) {
@@ -30,9 +29,6 @@ public class MySort {
 
     /**
      * 选择排序
-     *
-     * @param numbers
-     * @return
      */
     public static int[] selectionSort(int[] numbers) {
         for (int i = 0; i < numbers.length; i++) {
@@ -50,9 +46,6 @@ public class MySort {
 
     /**
      * 并归排序
-     *
-     * @param numbers
-     * @return
      */
     public static int[] mergeSort(int[] numbers) {
         if (numbers == null) {
@@ -75,34 +68,52 @@ public class MySort {
     /**
      * 快速排序
      *
-     * @param disOrder
-     * @param left
-     * @param right
-     * @return
+     * @param disOrder 未被排序的数组
+     * @return 已经排序的数组
      */
-    public static int[] quickSort(int[] disOrder, int left, int right) {
+    public static void quickSort(int[] disOrder) {
+        sort(disOrder, 0, disOrder.length - 1);
+    }
 
-        return null;
+    private static void sort(int[] arr, int low, int high) {
+        if (low < high) {
+            int pivot = partition(arr, low, high);
+            sort(arr, low, pivot - 1);
+            sort(arr, pivot + 1, high);
+        }
+    }
+
+    private static int partition(int[] arr, int low, int high) {
+        int pivot = arr[low];
+        while (low < high) {
+            while (low < high && arr[high] >= pivot) high--;
+            arr[low] = arr[high];
+            while (low < high && arr[low] < pivot) low++;
+            arr[high] = arr[low];
+        }
+        arr[low] = pivot;
+        return low;
+
     }
 
     public static void main(String[] args) {
 
         int[] disOrder = {2, 5, 3, 7, 6, 9, 1, 0};
+        quickSort(disOrder);
+        System.out.println(ArraysUtil.arraysToString(disOrder));
 
-        System.out.println(ArraysUtil.arraysToString(mergeSort(disOrder)));
 
-
-        int[] left = {1, 3, 6, 8};
-        int[] right = {2, 4, 6, 9, 10, 11};
-        System.out.println(ArraysUtil.arraysToString(ArraysUtil.merge(left, right)));
-
-        int[] left1 = {1, 3, 6, 8, 9, 10, 13, 15};
-        int[] right1 = {2, 4, 6, 9, 10, 11};
-        System.out.println(ArraysUtil.arraysToString(ArraysUtil.merge(left1, right1)));
-
-        int[] left2 = {1, 3, 5, 7, 9};
-        int[] right2 = {2, 4, 6, 8, 10};
-        System.out.println(ArraysUtil.arraysToString(ArraysUtil.merge(left2, right2)));
+//        int[] left = {1, 3, 6, 8};
+//        int[] right = {2, 4, 6, 9, 10, 11};
+//        System.out.println(ArraysUtil.arraysToString(ArraysUtil.merge(left, right)));
+//
+//        int[] left1 = {1, 3, 6, 8, 9, 10, 13, 15};
+//        int[] right1 = {2, 4, 6, 9, 10, 11};
+//        System.out.println(ArraysUtil.arraysToString(ArraysUtil.merge(left1, right1)));
+//
+//        int[] left2 = {1, 3, 5, 7, 9};
+//        int[] right2 = {2, 4, 6, 8, 10};
+//        System.out.println(ArraysUtil.arraysToString(ArraysUtil.merge(left2, right2)));
     }
 
 }
