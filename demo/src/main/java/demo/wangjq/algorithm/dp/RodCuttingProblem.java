@@ -8,7 +8,7 @@ public class RodCuttingProblem {
     public static int[] value = new int[]{0, 1, 5, 8, 9, 10, 17, 17, 20, 24, 30};
 
     public static void main(String[] args) {
-        System.out.println(profitDown(34));
+        System.out.println(profitDown(2));
     }
 
     public static Map<Integer, Integer> ret = new HashMap<>();
@@ -35,9 +35,9 @@ public class RodCuttingProblem {
         int[] profit = new int[n + 1];
         profit[0] = 0;
 
-        for (int i = 0; i <= n; i++) {
+        for (int i = 1; i <= n; i++) {
             int max = 0;
-            for (int j = 0; j <= i; j++) {
+            for (int j = 1; j <= i; j++) {
                 int v = j > 10 ? value[10] : value[j];
                 max = Math.max(max, v + profit[i - j]);
             }
