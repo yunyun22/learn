@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.IntFunction;
 
+import demo.wangjq.ArraysUtil;
 import demo.wangjq.algorithm.leetcode.BaseDataStructure.TreeNode;
 import demo.wangjq.algorithm.leetcode.TopTen.ListNode;
 
@@ -500,5 +501,61 @@ public class EasyProblemSolution1 {
     public void testLetterCombinations() {
         letterCombinations("");
     }
+
+
+    public static void nextPermutation(int[] nums) {
+
+        int i = nums.length - 2;
+
+        while (i >= 0 && nums[i] >= nums[i + 1]) {
+            i--;
+        }
+
+        if (i >= 0) {
+            int j = nums.length - 1;
+            while (j >= 0 && nums[i] >= nums[j]) {
+                j--;
+            }
+            swap(nums, i, j);
+        }
+
+        revers(nums, i + 1, nums.length - 1);
+
+    }
+
+    public static void revers(int[] num, int start, int end) {
+
+        while (start < end) {
+            swap(num, start, end);
+            start++;
+            end--;
+        }
+
+    }
+
+    public static void swap(int[] num, int i, int j) {
+
+        if (i < 0 || i > num.length - 1) {
+            throw new RuntimeException("");
+        }
+        if (j < 0 || j > num.length - 1) {
+            throw new RuntimeException("");
+        }
+
+        int temp = num[i];
+        num[i] = num[j];
+        num[j] = temp;
+
+    }
+
+
+    @Test
+    public void testNextPermutation() {
+        int[] nums = {1, 2};
+        nextPermutation(nums);
+
+        System.out.println(ArraysUtil.arraysToString(nums));
+    }
+
 
 }

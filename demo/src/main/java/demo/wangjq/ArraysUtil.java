@@ -7,10 +7,6 @@ public class ArraysUtil {
 
     /**
      * 合并两个有序的数组
-     *
-     * @param left
-     * @param right
-     * @return
      */
     public static int[] merge(int[] left, int[] right) {
 
@@ -42,11 +38,6 @@ public class ArraysUtil {
 
     /**
      * 获取子数组
-     *
-     * @param src
-     * @param from
-     * @param to
-     * @return
      */
     public static int[] subInt(int[] src, int from, int to) {
         if (src == null || src.length == 0) {
@@ -58,10 +49,6 @@ public class ArraysUtil {
 
     /**
      * 正序获取value在数组中的index
-     *
-     * @param src
-     * @param value
-     * @return
      */
     public static int indexof(int[] src, int value) {
         for (int i = 0; i < src.length; i++) {
@@ -75,10 +62,6 @@ public class ArraysUtil {
 
     /**
      * 倒序获取value在数组中的index
-     *
-     * @param src
-     * @param value
-     * @return
      */
     public static int lastIndexOf(int[] src, int value) {
         for (int i = src.length - 1; i > 0; i--) {
@@ -91,10 +74,6 @@ public class ArraysUtil {
 
     /**
      * value 的length
-     *
-     * @param src
-     * @param value
-     * @return
      */
     public static int getLength(int[] src, int value) {
         for (int i = 0; i < src.length; i++) {
@@ -114,9 +93,6 @@ public class ArraysUtil {
 
     /**
      * 将数组转换为字符串
-     *
-     * @param arrays
-     * @return
      */
     public static String arraysToString(int[] arrays) {
         if (arrays == null || arrays.length == 0) {
@@ -131,4 +107,6 @@ public class ArraysUtil {
         }
         return sb.toString();
     }
+
+
 }
