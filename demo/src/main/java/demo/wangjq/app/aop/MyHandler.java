@@ -1,13 +1,16 @@
 package demo.wangjq.app.aop;
 
+/**
+ * @author wangjq
+ */
 public class MyHandler {
 
-    public void beforeSayHello(){
+    public void beforeSayHello() {
         System.out.println("hi,hello");
     }
 
 
-    public void afterSayBye(){
+    public void afterSayBye() {
         System.out.println("good bye");
     }
 
