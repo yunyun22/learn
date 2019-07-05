@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Created by wangjq on 2018/11/16.
+ * @author wangjq
  */
 public class CoinProblem {
 
