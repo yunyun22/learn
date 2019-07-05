@@ -3,6 +3,9 @@ package demo.wangjq.algorithm.dp;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * @author wangjq
+ */
 public class RodCuttingProblem {
 
     public static int[] value = new int[]{0, 1, 5, 8, 9, 10, 17, 17, 20, 24, 30};
