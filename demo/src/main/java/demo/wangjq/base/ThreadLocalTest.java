@@ -8,15 +8,16 @@ public class ThreadLocalTest {
 
 
     public static void main(String[] args) {
-        for (int i = 0; i < 100; i++) {
+        ThreadLocal<String> threadLocal = new ThreadLocal<>();
 
-            ThreadLocal<Integer> threadLocal = new ThreadLocal<>();
-            threadLocal.set(i);
+        threadLocal.set("fuck");
 
+        while (threadLocal.get() != null) {
+            System.gc();
         }
-        System.gc();
-
-        Thread thread = Thread.currentThread();
+        System.out.println("fuck");
 
     }
+
+
 }
