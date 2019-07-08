@@ -31,7 +31,7 @@ public class MatrixChainMultiProblem {
          */
         int l = n - 1;
 
-        int[][] opt = new int[n - 1][n - 1];
+        int[][] opt = new int[n][n];
 
         for (int i = 0; i < n - 1; i++) {
             opt[i][i] = 0;
