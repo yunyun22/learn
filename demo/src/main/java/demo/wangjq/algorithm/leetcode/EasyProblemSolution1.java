@@ -558,4 +558,36 @@ public class EasyProblemSolution1 {
     }
 
 
+    public static int[] searchRange(int[] nums, int target) {
+        int start = binarySearch(nums, target);
+        if (nums.length == start || nums[start] != target) {
+            return new int[]{-1, -1};
+        }
+        return new int[]{start, binarySearch(nums, target + 1) - 1};
+    }
+
+    public static int binarySearch(int[] nums, int target) {
+        int lo = 0, hi = nums.length;
+
+        while (lo < hi) {
+            int mid = lo + ((hi - lo) >> 1);
+            if (nums[mid] < target) {
+                lo = mid + 1;
+            } else {
+                hi = mid;
+            }
+        }
+        return lo;
+    }
+
+
+    @Test
+    public void testSearchRange() {
+        int[] num = {5, 7, 7, 8, 8, 10};
+        int target = 8;
+        int[] range = searchRange(num, target);
+        System.out.println(range[0] + " " + range[1]);
+    }
+
+
 }

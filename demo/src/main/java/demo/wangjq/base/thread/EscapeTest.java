@@ -1,5 +1,8 @@
 package demo.wangjq.base.thread;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -37,7 +40,22 @@ public class EscapeTest {
 
 
     public static void main(String[] args) throws InterruptedException {
-        EscapeTest escapeTest = new EscapeTest();
+        //EscapeTest escapeTest = new EscapeTest();
+
+
+        List<Integer> list = new ArrayList<>();
+        list.add(101);
+        list.add(101);
+        list.add(101);
+        list.add(101);
+        list.add(301);
+        list.add(301);
+        list.add(301);
+        list.add(401);
+
+        boolean removed = list.removeAll(Arrays.asList(101, 301));
+        System.out.println(removed);
+        System.out.println(list);
 
     }
 }
