@@ -13,7 +13,10 @@ public class ShiftTest {
         // System.out.println(1L << 6);
 
 
-        System.out.println(-101 >>> 33);
+        int i = 989898989;
+
+
+        System.out.println(i << 33);
 
     }
 }

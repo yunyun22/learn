@@ -1,5 +1,6 @@
 package demo.wangjq.algorithm.leetcode;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.ArrayDeque;
@@ -587,6 +588,91 @@ public class EasyProblemSolution1 {
         int target = 8;
         int[] range = searchRange(num, target);
         System.out.println(range[0] + " " + range[1]);
+    }
+
+
+    public static int uniquePaths(int m, int n) {
+
+        return loopPaths(m, n);
+    }
+
+
+    public static int loopPaths(int m, int n) {
+        int[][] cache = new int[m][n];
+
+        cache[0][0] = 1;
+
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if (i == 0 || j == 0) {
+                    cache[i][j] = 1;
+                } else {
+                    cache[i][j] = cache[i - 1][j] + cache[i][j - 1];
+                }
+            }
+        }
+        return cache[m - 1][n - 1];
+
+    }
+
+
+    public static int recursionPath(int[][] cache, int m, int n) {
+        if (m == 0 || n == 0) {
+            return 1;
+        }
+        if (cache[m][n] != 0) {
+            return cache[m][n];
+        }
+        cache[m][n] = recursionPath(cache, m - 1, n) + recursionPath(cache, m, n - 1);
+        return cache[m][n];
+
+    }
+
+    @Test
+    public void testUniquePaths() {
+        Assert.assertSame(1, uniquePaths(1, 1));
+    }
+
+
+    public static int uniquePathsWithObstacles(int[][] obstacleGrid) {
+
+        int m = obstacleGrid.length;
+
+        if (obstacleGrid[0][0] == 1) {
+            return 0;
+        }
+
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < obstacleGrid[i].length; j++) {
+                if (i == 0 && j == 0) {
+                    obstacleGrid[0][0] = 1;
+                } else if (obstacleGrid[i][j] == 1) {
+                    obstacleGrid[i][j] = 0;
+                } else if (i == 0) {
+                    obstacleGrid[i][j] = obstacleGrid[i][j - 1];
+                } else if (j == 0) {
+                    obstacleGrid[i][j] = obstacleGrid[i - 1][j];
+                } else {
+                    obstacleGrid[i][j] = obstacleGrid[i - 1][j] + obstacleGrid[i][j - 1];
+                }
+            }
+        }
+        return obstacleGrid[m - 1][obstacleGrid[m - 1].length - 1];
+    }
+
+
+    @Test
+    public void testUniquePathsWithObstacles() {
+
+        int[][] obstacleGrid = new int[][]{
+                {0, 0, 0},
+                {0, 1, 0},
+                {0, 0, 0}};
+
+
+        Assert.assertSame(2, uniquePathsWithObstacles(obstacleGrid));
+
+
     }
 
 

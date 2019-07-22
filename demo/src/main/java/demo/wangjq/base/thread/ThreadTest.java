@@ -1,61 +1,40 @@
 package demo.wangjq.base.thread;
 
-import java.util.concurrent.*;
-
+/**
+ * @author wangjq
+ */
 public class ThreadTest {
-    public static void main(String[] args) {
-        Thread t = new Thread(() -> {
-            try {
-                System.out.println("wait");
-                TimeUnit.SECONDS.sleep(10);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        },"test_1");
-        t.start();
-        try {
-            t.join();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        System.out.println("end");
+    private static boolean initialized = false;
 
-
-//        MyRejectedExecutionHandler myRejectedExecutionHandler = new MyRejectedExecutionHandler();
+//    static {
+//        Thread t = new Thread(() -> {
+//            //System.out.println("sure?");
+//            //initialized = true;
+//        }, "fuck you");
+//        t.start();
 //
-//        ThreadPoolExecutor ThreadPoolExecutor =
-//                new ThreadPoolExecutor(0, 5, 0L
-//                        , TimeUnit.MILLISECONDS, new LinkedBlockingQueue<Runnable>(1), myRejectedExecutionHandler);
-//
-//        for (int i = 0; i < 10; i++) {
-//            System.out.println("已经生产的记录条数 = " + i);
-//            ThreadPoolExecutor.execute(() -> {
-//                try {
-//                    Thread.sleep(10000);
-//                } catch (InterruptedException e) {
-//                    e.printStackTrace();
-//                }
-//                System.out.println("消费了一条记录");
-//            });
+//        try {
+//            t.join();
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
 //        }
-//        ThreadPoolExecutor.getActiveCount();
+//
+//
+//    }
 
-    }
-}
+    public static void main(String[] args) throws InterruptedException {
 
-class MyRejectedExecutionHandler implements RejectedExecutionHandler {
 
-    public MyRejectedExecutionHandler() {
-    }
+        Thread thread = new Thread(() -> {
+            while (true) {
+                System.out.println("fuck the world");
+            }
+        });
 
-    @Override
-    public void rejectedExecution(Runnable r, ThreadPoolExecutor executor) {
-        try {
-            executor.getQueue().put(r);
-        } catch (InterruptedException e) {
-            r.run();
-            e.printStackTrace();
-            throw new RuntimeException("The thread is interrupted");
-        }
+        //thread.setDaemon(true);
+
+        thread.start();
+
+
     }
 }
