@@ -1,6 +1,9 @@
 package demo.wangjq.app.beandefinition;
 
-public class Student {
+/**
+ * @author AMD
+ */
+public class Student extends Human{
 
     private String name;
     private String sex;
