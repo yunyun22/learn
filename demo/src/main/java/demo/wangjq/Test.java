@@ -1,7 +1,8 @@
 package demo.wangjq;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.time.Instant;
+
+import static java.time.temporal.ChronoField.MICRO_OF_SECOND;
 
 /**
  * @author:wangjq
@@ -15,15 +16,29 @@ public class Test {
     private static final long NANO_OFFSET = System.nanoTime() - System.currentTimeMillis() * 1000000L;
 
     public static void main(String[] args) {
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:MM:ss SSS ");
         for (int i = 0; i < 1000000; i++) {
-            long microsecond = getMicrosecondTime();
-            Date date = new Date(microsecond / 1000L);
-            System.out.println(simpleDateFormat.format(date) + (microsecond % 1000L));
+
+
+            System.currentTimeMillis();
+
+
+            Instant now = Instant.now();
+
+            Instant after = Instant.now();
+
+            Long duration = after.getLong(MICRO_OF_SECOND) - now.getLong(MICRO_OF_SECOND);
+            // after.getNano()
+
+            System.out.println(duration);
+
+            //LocalDateTime localDateTime = LocalDateTime.ofInstant(now, ZoneId.systemDefault());
+
+
+            // System.out.println(localDateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss SSS")) + " " + after.getNano() % 1000L);
+
+
         }
+
     }
 
-    private static long getMicrosecondTime() {
-        return (System.nanoTime() - NANO_OFFSET) / 1000L;
-    }
 }
