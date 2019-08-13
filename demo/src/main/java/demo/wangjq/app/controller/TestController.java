@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+import demo.wangjq.app.annotaation.GetJsonProperty;
 import demo.wangjq.app.service.CacheService;
 import demo.wangjq.base.annotation.User;
 
@@ -40,5 +41,11 @@ public class TestController {
     @ResponseBody
     public List<Integer> testCache() {
         return cacheService.cacheList();
+    }
+
+    @RequestMapping(value = "/getJson", method = RequestMethod.POST)
+    @ResponseBody
+    public String getJson(@GetJsonProperty String name, @GetJsonProperty int age) {
+        return "name:" + name + ",age:" + age;
     }
 }
