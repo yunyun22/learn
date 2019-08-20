@@ -2,6 +2,7 @@ package demo.wangjq.base.collection;
 
 import org.junit.Test;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -32,5 +33,16 @@ public class MapTest {
         map.forEach((k, v) -> System.out.println(k + "=" + v));
 
     }
+
+    @Test
+    public void testMapCapacity() {
+
+
+        Map<String, Object> map = new HashMap(3);
+
+        map.put("w", new Object());
+        map.put("a", new Object());
+    }
+
 
 }

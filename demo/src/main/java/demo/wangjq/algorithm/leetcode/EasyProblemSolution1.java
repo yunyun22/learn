@@ -676,4 +676,19 @@ public class EasyProblemSolution1 {
     }
 
 
+    @Test
+    public void testMaxProfit() {
+        int[] prices = {1,2,3,4,1,3,9,1,2};
+        int s1 = -prices[0], s2 = Integer.MIN_VALUE, s3 = Integer.MIN_VALUE, s4 = Integer.MIN_VALUE;
+
+        for (int i = 1; i < prices.length; ++i) {
+            s1 = Math.max(s1, -prices[i]);
+            s2 = Math.max(s2, s1 + prices[i]);
+            s3 = Math.max(s3, s2 - prices[i]);
+            s4 = Math.max(s4, s3 + prices[i]);
+        }
+        System.out.println(Math.max(0, s4));
+    }
+
+
 }

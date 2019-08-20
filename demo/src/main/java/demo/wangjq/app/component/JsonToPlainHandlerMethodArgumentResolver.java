@@ -1,6 +1,7 @@
 package demo.wangjq.app.component;
 
 import org.springframework.core.MethodParameter;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.support.WebDataBinderFactory;
 import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
@@ -9,11 +10,12 @@ import org.springframework.web.method.support.ModelAndViewContainer;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
+import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 
 import javax.servlet.http.HttpServletRequest;
 
+import cn.hutool.core.convert.Convert;
 import cn.hutool.core.io.IoUtil;
 import demo.wangjq.app.annotaation.GetJsonProperty;
 
@@ -34,31 +36,52 @@ public class JsonToPlainHandlerMethodArgumentResolver implements HandlerMethodAr
     public Object resolveArgument(MethodParameter parameter, ModelAndViewContainer mavContainer, NativeWebRequest webRequest, WebDataBinderFactory binderFactory) throws Exception {
         Class<?> parameterType = parameter.getParameterType();
         getJson(webRequest);
-        //Object arg = null;
 
-        Map<String, Object> map = mapThreadLocal.get();
-        //如果是基本数据类型直接返回
-        if (isPrimitive(parameterType)) {
-            return map.get(Objects.requireNonNull(parameter.getParameterName()));
+        GetJsonProperty annotation = parameter.getParameterAnnotation(GetJsonProperty.class);
+        if (annotation != null) {
+            String name = annotation.value();
+            String[] split;
+            if (StringUtils.hasText(name)) {
+                split = name.split("\\.");
+            } else {
+                split = new String[]{parameter.getParameterName()};
+            }
+            Map<String, Object> map = mapThreadLocal.get();
+            if (isPrimitive(parameterType)) {
+                return recurGetValue(split, map);
+            }
+            if (String.class.equals(parameterType)) {
+                return recurGetValue(split, map);
+            }
+            if (List.class.equals(parameterType)) {
+                return recurGetValue(split, map);
+            }
+            if (Map.class.equals(parameterType)) {
+                return recurGetValue(split, map);
+            }
+            return Convert.convert(parameterType, recurGetValue(split, map));
         }
-        //如果是String直接返回
-        if (String.class.equals(parameterType)) {
-            return map.get(Objects.requireNonNull(parameter.getParameterName()));
-        }
-//        Field[] fields = FieldUtil.getDeclaredFields(parameterType);
-//        Object result = parameterType.newInstance();
-//        for (Field field : fields) {
-//            arg = map.get(field.getName());
-//            if (arg == null) continue;
-//            if (isPrimitive(field.getType())) {
-//                Class<?> parType = field.getType();
-//                arg = getArg(parType, arg);
-//            }
-//            Method setter = getSetterMethod(parameterType, field);
-//            if (setter != null) setter.invoke(result, arg);
-//        }
         return null;
     }
+
+
+    private Object recurGetValue(String[] keys, Map<String, Object> map) {
+        int i = 0;
+        Object ret = map;
+        for (String key : keys) {
+            if (i == 0) {
+                ret = map.get(key);
+            } else if (ret instanceof Map) {
+                ret = ((Map) ret).get(key);
+            } else {
+                throw new RuntimeException("无法解析参数");
+            }
+
+            i++;
+        }
+        return ret;
+    }
+
 
     private boolean isPrimitive(Class<?> clazz) {
         return Integer.class.equals(clazz) ||
@@ -77,7 +100,7 @@ public class JsonToPlainHandlerMethodArgumentResolver implements HandlerMethodAr
         HttpServletRequest request = webRequest.getNativeRequest(HttpServletRequest.class);
         Map<String, Object> map;
         if (request != null) {
-            if (mapThreadLocal.get() != null) {
+            if (mapThreadLocal.get() == null) {
                 InputStream inputStream = request.getInputStream();
                 String read = IoUtil.read(inputStream, StandardCharsets.UTF_8);
                 map = com.alibaba.fastjson.JSON.parseObject(read);
