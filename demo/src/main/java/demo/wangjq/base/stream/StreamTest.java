@@ -2,6 +2,8 @@ package demo.wangjq.base.stream;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 public class StreamTest {
     public static void main(String[] args) {
@@ -47,14 +49,18 @@ public class StreamTest {
                 new Dish("土豆", true, 2000, Dish.Type.OTHER),
                 new Dish("上海青", true, 2000, Dish.Type.OTHER),
                 new Dish("南瓜", true, 2000, Dish.Type.OTHER),
-                new Dish("冬瓜", true, 2000, Dish.Type.OTHER));
+                new Dish("冬瓜", true, 1, Dish.Type.OTHER),
+                new Dish("冬瓜", true, 2, Dish.Type.OTHER));
 
 
-        dishList.stream().peek(Dish::getCalories);
+        Map<String, Integer> collect = dishList.stream().collect(Collectors.toMap(Dish::getName, Dish::getCalories, (preValue, curValue) -> curValue));
+        System.out.println(collect);
+
+
+        //dishList.stream().peek(Dish::getCalories);
 //        Map<Dish.Type,List<Dish>> map = dishList.stream().collect(Collectors.groupingBy(Dish::getType));
 //
 //        System.out.println(map);
-
 
 
 //        double avg = dishList.stream().collect(Collectors.averagingInt(Dish::getCalories));
