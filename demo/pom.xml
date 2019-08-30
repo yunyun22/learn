@@ -171,6 +171,11 @@
             <artifactId>hutool-all</artifactId>
             <version>4.6.1</version>
         </dependency>
+        <dependency>
+            <groupId>io.reactivex</groupId>
+            <artifactId>rxjava</artifactId>
+            <version>1.0.10</version>
+        </dependency>
     </dependencies>
 
     <build>
