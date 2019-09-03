@@ -6,4 +6,14 @@
     <select id="selectEmployee" resultType="demo.wangjq.app.domain.Employee">
         select * from employee where id = #{id}
     </select>
+
+    <insert id="insertEmployee" useGeneratedKeys="true" keyProperty="id">
+      insert into employee (id,name,age) values (#{id},#{name},#{age})
+   </insert>
+
+    <update id="updateEmployee">update employee
+        set name = #{name},
+        age = #{age}
+        where id = #{id}
+    </update>
 </mapper>

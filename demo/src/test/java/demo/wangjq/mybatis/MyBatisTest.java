@@ -1,9 +1,6 @@
 package demo.wangjq.mybatis;
 
 
-import demo.wangjq.app.domain.Employee;
-import demo.wangjq.app.mapper.EmployeeMapper;
-
 import org.apache.ibatis.builder.xml.XMLMapperBuilder;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.Configuration;
@@ -14,6 +11,9 @@ import org.junit.Test;
 
 import java.io.IOException;
 import java.io.InputStream;
+
+import demo.wangjq.app.domain.Employee;
+import demo.wangjq.app.mapper.EmployeeMapper;
 
 public class MyBatisTest {
 
@@ -28,6 +28,18 @@ public class MyBatisTest {
         SqlSession sqlSession = sqlSessionFactory.openSession();
         EmployeeMapper employeeMapper = sqlSession.getMapper(EmployeeMapper.class);
         Employee employee = employeeMapper.selectEmployee(1);
+        System.out.println(employee);
+
+        SqlSession sqlSession1 = sqlSessionFactory.openSession();
+        EmployeeMapper employeeMapper1 = sqlSession1.getMapper(EmployeeMapper.class);
+        Employee employee1 = new Employee();
+        employee1.setId(1);
+        employee1.setAge(20);
+        employee1.setName("zzz");
+        employeeMapper1.updateEmployee(employee1);
+        sqlSession1.commit();
+
+        employee = employeeMapper.selectEmployee(1);
         System.out.println(employee);
     }
 

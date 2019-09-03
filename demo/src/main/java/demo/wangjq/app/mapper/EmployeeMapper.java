@@ -15,4 +15,12 @@ public interface EmployeeMapper {
      * @return 员工信息
      */
     Employee selectEmployee(Integer id);
+
+    /**
+     * 更新员工信息
+     *
+     * @param employee 员工
+     * @return 成功的数量
+     */
+    int updateEmployee(Employee employee);
 }
