@@ -27,7 +27,7 @@ public class MyBatisTest {
                 new SqlSessionFactoryBuilder().build(inputStream);
         SqlSession sqlSession = sqlSessionFactory.openSession();
         EmployeeMapper employeeMapper = sqlSession.getMapper(EmployeeMapper.class);
-        Employee employee = employeeMapper.selectEmployee(1);
+        Employee employee = employeeMapper.selectEmployee(1, "wwww");
         System.out.println(employee);
 
         SqlSession sqlSession1 = sqlSessionFactory.openSession();
@@ -39,7 +39,7 @@ public class MyBatisTest {
         employeeMapper1.updateEmployee(employee1);
         sqlSession1.commit();
 
-        employee = employeeMapper.selectEmployee(1);
+        employee = employeeMapper.selectEmployee(1, null);
         System.out.println(employee);
     }
 

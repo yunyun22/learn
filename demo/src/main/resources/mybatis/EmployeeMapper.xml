@@ -5,6 +5,9 @@
 <mapper namespace="demo.wangjq.app.mapper.EmployeeMapper">
     <select id="selectEmployee" resultType="demo.wangjq.app.domain.Employee">
         select * from employee where id = #{id}
+        <if test="name != null">
+            AND name like #{name }
+        </if>
     </select>
 
     <insert id="insertEmployee" useGeneratedKeys="true" keyProperty="id">
