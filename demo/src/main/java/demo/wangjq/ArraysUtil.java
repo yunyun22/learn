@@ -50,7 +50,7 @@ public class ArraysUtil {
     /**
      * 正序获取value在数组中的index
      */
-    public static int indexof(int[] src, int value) {
+    public static int indexOf(int[] src, int value) {
         for (int i = 0; i < src.length; i++) {
             if (src[i] == value) {
                 return i;
