@@ -1,8 +1,8 @@
 package demo.wangjq.algorithm.tree;
 
-import demo.wangjq.ArraysUtil;
-
 import java.util.Arrays;
+
+import demo.wangjq.ArraysUtil;
 
 
 public class ReBulidBinaryTree {
@@ -84,7 +84,7 @@ public class ReBulidBinaryTree {
             /**
              * root 节点在中序中的位置
              */
-            int indexOfRoot = ArraysUtil.indexof(midorder, root);
+            int indexOfRoot = ArraysUtil.indexOf(midorder, root);
             /**
              * 构建左子树
              */
