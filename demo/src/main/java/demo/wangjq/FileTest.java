@@ -1,7 +1,6 @@
 package demo.wangjq;
 
 import java.io.FileNotFoundException;
-import java.net.URL;
 
 /**
  * @author:wangjq
@@ -11,10 +10,10 @@ public class FileTest {
 
     public static void main(String[] args) throws FileNotFoundException {
 
+        System.out.println(System.getProperty("user.dir"));
+        //URL base = FileTest.class.getResource("");
 
-        URL base = FileTest.class.getResource("");
-
-        ClassLoader.getSystemClassLoader();
+        //ClassLoader.getSystemClassLoader();
 
 //        System.out.println(base);
 //
