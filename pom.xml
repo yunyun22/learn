@@ -10,7 +10,7 @@
 
     <modules>
         <module>demo</module>
-        <module>web</module>
+        <module>demo-eureka</module>
     </modules>
 
     <dependencyManagement>
