@@ -1,6 +1,12 @@
 package demo.wangjq;
 
+import com.google.common.primitives.Ints;
+
 import java.io.FileNotFoundException;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 /**
  * @author:wangjq
@@ -25,6 +31,14 @@ public class FileTest {
 //        System.out.println(ClassLoader.getSystemResource("/"));
 //
 //        System.out.println(file.getPath());
+
+
+        int[] i = new int[]{1, 2, 3};
+
+        List<Integer> integers = IntStream.of(i).boxed().collect(Collectors.toList());
+
+
+        List<Integer> list = Ints.asList(i);
 
     }
 

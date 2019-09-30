@@ -10,12 +10,6 @@
               value="%d{yyyy-MM-dd  HH:mm:ss.SSS} [%thread] %-5level %logger{80} - %msg%n"/>
     <contextName>${APP_NAME}</contextName>
 
-    <!-- 控制台日志：输出全部日志到控制台 -->
-    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
-        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
-            <Pattern>${ENCODER_PATTERN}</Pattern>
-        </encoder>
-    </appender>
 
     <appender name="FILE"
               class="ch.qos.logback.core.rolling.RollingFileAppender">
@@ -44,7 +38,6 @@
 
     <root>
         <level value="INFO"/>
-        <appender-ref ref="STDOUT"/>
         <appender-ref ref="FILE"/>
         <appender-ref ref="ERROR_FILE"/>
     </root>
