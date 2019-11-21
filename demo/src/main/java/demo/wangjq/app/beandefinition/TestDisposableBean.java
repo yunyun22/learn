@@ -8,6 +8,9 @@ import org.springframework.beans.factory.BeanNameAware;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.annotation.Value;
 
+/**
+ * @author jinqwang
+ */
 public class TestDisposableBean implements DisposableBean, BeanNameAware, BeanFactoryAware {
 
 

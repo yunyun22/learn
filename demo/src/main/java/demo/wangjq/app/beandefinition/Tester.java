@@ -10,6 +10,9 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 
 
+/**
+ * @author jinqwang
+ */
 public class Tester {
 
     @Autowired
