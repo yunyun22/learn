@@ -3,12 +3,18 @@ package demo.wangjq.app.beandefinition;
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.Method;
 
+/**
+ * @author Administrator
+ */
 public class TestPropertyDescriptor {
 
     public static void main(String[] args) {
         Student student = new Student();
         student.setName("wangjq");
-        getFiled(student, "name");//结果输出 zhangsan
+        /**
+         * 结果输出 zhangsan
+         */
+        getFiled(student, "name");
         System.out.println(student);
     }
 
