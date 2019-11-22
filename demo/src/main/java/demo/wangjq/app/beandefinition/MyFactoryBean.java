@@ -3,6 +3,9 @@ package demo.wangjq.app.beandefinition;
 import org.springframework.beans.factory.FactoryBean;
 import org.springframework.lang.Nullable;
 
+/**
+ * @author jinqwang
+ */
 public class MyFactoryBean implements FactoryBean {
     @Nullable
     @Override

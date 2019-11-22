@@ -5,6 +5,9 @@ import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.lang.Nullable;
 
 
+/**
+ * @author jinqwang
+ */
 public class MyBeanPostProcessor implements BeanPostProcessor {
 
     @Nullable

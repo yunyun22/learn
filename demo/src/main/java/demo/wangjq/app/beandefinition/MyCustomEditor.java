@@ -2,6 +2,9 @@ package demo.wangjq.app.beandefinition;
 
 import java.beans.PropertyEditorSupport;
 
+/**
+ * @author jinqwang
+ */
 public class MyCustomEditor extends PropertyEditorSupport {
 
     @Override
