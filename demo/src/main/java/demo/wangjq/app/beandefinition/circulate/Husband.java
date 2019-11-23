@@ -7,10 +7,14 @@ import org.springframework.stereotype.Component;
 /**
  * @author Administrator
  */
-@Lazy
 @Component
+@Lazy
 public class Husband {
 
+
+    public Husband() {
+        System.out.println("===============husband init");
+    }
 
     @Autowired
     public Wife wife;
