@@ -14,7 +14,7 @@ public class ActivitiInit {
         ProcessEngineConfiguration configuration = ProcessEngineConfiguration.createStandaloneProcessEngineConfiguration();
         //定义连接mysql数据库
         configuration.setJdbcDriver("com.mysql.jdbc.Driver");
-        configuration.setJdbcUrl("jdbc:mysql://localhost:3306/test?createDatabaseIfNotExist=true&useUnicode=true&characterEncoding=utf8");
+        configuration.setJdbcUrl("jdbc:mysql://118.25.67.106:3306/test?createDatabaseIfNotExist=true&useUnicode=true&characterEncoding=utf8");
         configuration.setJdbcUsername("root");
         configuration.setJdbcPassword("root");
 
@@ -24,6 +24,6 @@ public class ActivitiInit {
         configuration.setDatabaseSchemaUpdate(ProcessEngineConfiguration.DB_SCHEMA_UPDATE_TRUE);
         //activiti核心对象（流程引擎）
         ProcessEngine processEngine = configuration.buildProcessEngine();
-        System.out.println("processEngine："+processEngine);
+        System.out.println("processEngine：" + processEngine);
     }
 }

@@ -33,12 +33,9 @@ public class BeanUtil {
 
         Class supperClass = clazz.getSuperclass();
 
-        while (true) {
-            if (supperClass != null) {
-                classes.add(supperClass);
-                supperClass = supperClass.getSuperclass();
-            }
-            break;
+        while (supperClass != null) {
+            classes.add(supperClass);
+            supperClass = supperClass.getSuperclass();
         }
 
 
