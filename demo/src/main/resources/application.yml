@@ -8,7 +8,10 @@ spring:
     port: 6379
     password:
   datasource:
-    password: 123456
+    password: root
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost/mall?serverTimezone=UTC&useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&tinyInt1isBit=false&zeroDateTimeBehavior=convertToNull
+    url: jdbc:mysql://118.25.67.106/test?serverTimezone=UTC&useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&tinyInt1isBit=false&zeroDateTimeBehavior=convertToNull
     username: root
+logging:
+  level:
+    root: DEBUG
