@@ -70,7 +70,7 @@
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-pool2</artifactId>
-            <version>2.6.0</version>
+            <version>2.6.2</version>
         </dependency>
         <dependency>
             <groupId>org.mybatis</groupId>
@@ -170,7 +170,7 @@
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>transmittable-thread-local</artifactId>
-            <version>2.11.0</version>
+            <version>2.10.0</version>
         </dependency>
         <dependency>
             <groupId>org.activiti</groupId>
@@ -178,9 +178,10 @@
             <version>6.0.0</version>
         </dependency>
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-security</artifactId>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-ribbon</artifactId>
         </dependency>
+
     </dependencies>
 
     <build>
