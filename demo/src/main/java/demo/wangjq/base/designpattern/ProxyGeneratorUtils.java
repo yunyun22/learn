@@ -6,13 +6,13 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 /**
- * Created by wangjq on 2018/6/12.
+ * @author wangjq
  */
 public class ProxyGeneratorUtils {
 
 
     public static void main(String[] args) {
-        ProxyGeneratorUtils.writeProxyClassToHardDisk("D:/$Proxy11.class");
+        ProxyGeneratorUtils.writeProxyClassToHardDisk("C:/Users/jinqwang/$Proxy11.class");
     }
 
     /**

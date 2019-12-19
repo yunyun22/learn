@@ -5,7 +5,7 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 
 /**
- * Created by wangjq on 2018/6/12.
+ * @author wangjq
  */
 public class DynamicProxyTest {
 
