@@ -1,6 +1,7 @@
 package demo.wangjq.feign;
 
 import feign.Feign;
+import feign.Logger;
 import feign.gson.GsonDecoder;
 
 import java.util.List;
@@ -14,6 +15,7 @@ public class MyApp {
 
     public static void main(String... args) {
         GitHub github = Feign.builder()
+                .logLevel(Logger.Level.FULL)
                 .decoder(new GsonDecoder())
                 .target(GitHub.class, "https://api.github.com");
 

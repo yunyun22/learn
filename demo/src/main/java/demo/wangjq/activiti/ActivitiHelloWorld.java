@@ -56,11 +56,23 @@ public class ActivitiHelloWorld {
     @Test
     public void findTask() {
         TaskService taskService = getProcessEngineConfiguration().getTaskService();
-        List<Task> taskList = taskService.createTaskQuery().taskAssignee("张三").list();
+        List<Task> taskList = taskService.createTaskQuery().taskAssignee("王五").list();
         if (CollectionUtil.isNotEmpty(taskList)) {
             taskList.forEach(task -> {
-                System.out.println(task.getId());
+                System.out.println("taskId=" + task.getId());
+                System.out.println("taskName=" + task.getName());
+                System.out.println("assignee=" + task.getAssignee());
+
             });
         }
+    }
+
+    @Test
+    public void completeTask() {
+        TaskService taskService = getProcessEngineConfiguration().getTaskService();
+        String taskId = "15002";
+        taskService.complete(taskId);
+        System.out.println("完成任务");
+
     }
 }

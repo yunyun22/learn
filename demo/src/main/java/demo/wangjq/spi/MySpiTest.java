@@ -5,6 +5,9 @@ import sun.misc.Service;
 import java.util.Iterator;
 import java.util.ServiceLoader;
 
+/**
+ * @author wangjq
+ */
 public class MySpiTest {
 
     public static void main(String[] args) {
