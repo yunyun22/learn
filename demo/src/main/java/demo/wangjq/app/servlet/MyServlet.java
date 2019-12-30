@@ -2,14 +2,13 @@ package demo.wangjq.app.servlet;
 
 import org.springframework.web.util.UrlPathHelper;
 
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by wangjq on 2018/12/4.
@@ -23,6 +22,12 @@ public class MyServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         String path = urlPathHelper.getLookupPathForRequest(req);
+
+        String[] array = req.getParameterValues("array");
+
+        for (String s : array) {
+            System.out.println(s);
+        }
 
 
         System.out.println(urlPathHelper.getPathWithinServletMapping(req));
