@@ -29,6 +29,9 @@
             </Policies>
             <Filters>
                 <!-- 只记录info和warn级别信息-->
+                <!-- 通過level作为条件来判断流程是否继续执行下去 -->
+                <!-- 如果日志级别大于filter配置的level,返回onMatch,否则返回onMissMatch -->
+                <!-- DENY直接拒绝,ACCEPT接受,NEUTRAL中立 -->
                 <ThresholdFilter level="error" onMatch="DENY" onMismatch="NEUTRAL"/>
                 <ThresholdFilter level="info" onMatch="ACCEPT" onMismatch="DENY"/>
             </Filters>
@@ -60,7 +63,7 @@
         <Root includeLocation="true" additivity="true" level="INFO">
             <AppenderRef ref="infoLog"/>
             <AppenderRef ref="errorLog"/>
-            <AppenderRef ref="console"/>
+<!--            <AppenderRef ref="console"/>-->
         </Root>
     </Loggers>
 </Configuration>

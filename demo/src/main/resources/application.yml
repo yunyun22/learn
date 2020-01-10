@@ -7,14 +7,33 @@ spring:
     host: localhost
     port: 6379
     password:
-  datasource:
-    password: root
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://118.25.67.106/test?serverTimezone=UTC&useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&tinyInt1isBit=false&zeroDateTimeBehavior=convertToNull
-    username: root
 logging:
   level:
-    root: INFO
-ribbon:
-  client:
-    name: test
+    root: DEBUG
+
+mysql:
+  datasource:
+    test1:
+      borrowConnectionTimeout: 30
+      loginTimeout: 30
+      maintenanceInterval: 60
+      maxIdleTime: 60
+      maxLifetime: 20000
+      maxPoolSize: 25
+      minPoolSize: 3
+      password: root
+      testQuery: select 1
+      url: jdbc:mysql://localhost:3306/test01?useUnicode=true&characterEncoding=utf-8
+      username: root
+    test2:
+      borrowConnectionTimeout: 30
+      loginTimeout: 30
+      maintenanceInterval: 60
+      maxIdleTime: 60
+      maxLifetime: 20000
+      maxPoolSize: 25
+      minPoolSize: 3
+      password: root
+      testQuery: select 1
+      url: jdbc:mysql://localhost:3306/test02?useUnicode=true&characterEncoding=utf-8
+      username: root
