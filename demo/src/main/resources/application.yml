@@ -12,6 +12,9 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://118.25.67.106/test?serverTimezone=UTC&useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&tinyInt1isBit=false&zeroDateTimeBehavior=convertToNull
     username: root
+  data:
+    mongodb:
+      uri: mongodb://118.25.67.106:27017/RECOVERY
 logging:
   level:
     root: INFO
