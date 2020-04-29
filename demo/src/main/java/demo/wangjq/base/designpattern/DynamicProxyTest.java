@@ -11,56 +11,18 @@ public class DynamicProxyTest {
 
     public static void main(String[] args) {
 
-        MyInvokerHandler myInvokerHandler = new MyInvokerHandler();
+        System.getProperties().put("sun.misc.ProxyGenerator.saveGeneratedFiles", true);
 
-        MyInvokerHandlerProxy myInvokerHandlerProxy = new MyInvokerHandlerProxy(myInvokerHandler);
-
-
+        TargetImpl target = new TargetImpl();
+        MyInvokerHandlerProxy myInvokerHandlerProxy = new MyInvokerHandlerProxy(target);
         /**
          * 获取代理后的对象。
          */
-        InvokerHandler invokerHandler = (InvokerHandler) myInvokerHandlerProxy.getProxy();
-
+        TargetService service = (TargetService) myInvokerHandlerProxy.getProxy();
         /**
          * 调用代理后的方法。
          */
-        /**
-         * <code>
-         *
-         *   //动态代理生成字节码反编译后的代码
-         *   public final class $Proxy11 extends Proxy implements InvokerHandler{
-         *
-         *      public final void myHandler() throws  {
-         *          try {
-         *              // protected InvocationHandler h;
-         *              super.h.invoke(this, m3, (Object[])null);
-         *          } catch (RuntimeException | Error var2) {
-         *              throw var2;
-         *          }
-         *      }
-         *
-         *  }
-         *
-         *
-         *
-         *   class MyInvokerHandlerProxy implements InvocationHandler {
-         *
-         *      //获取的代理是$Proxy11的实例，也是Proxy的实例
-         *      public Object getProxy() {
-         *          return Proxy.newProxyInstance(Thread.currentThread().getContextClassLoader(),
-         *                  target.getClass().getInterfaces(), this);
-         *      }
-         *   }
-         *
-         *  jdk 动态代理的流程。实例化出目标类。实例化增强类。生成代理里getProxy()，将增强传入到代理类中。
-         *  代理类调用增强的方法
-         *
-         *
-         * </code>
-         */
-
-        invokerHandler.myHandler();
-
+        service.sayHello();
 
     }
 }
@@ -70,34 +32,26 @@ public class DynamicProxyTest {
  */
 class MyInvokerHandlerProxy implements InvocationHandler {
 
-
-    private Object target;
-
+    private TargetService target;
 
     /**
      * 构造方法
      *
      * @param target 目标对象
      */
-    public MyInvokerHandlerProxy(Object target) {
+    public MyInvokerHandlerProxy(TargetService target) {
         super();
         this.target = target;
-
-
     }
-
 
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
         // 在目标对象的方法执行之前简单的打印一下
         System.out.println("------------------before------------------");
-
         // 执行目标对象的方法
         Object result = method.invoke(target, args);
-
         // 在目标对象的方法执行之后简单的打印一下
         System.out.println("-------------------after------------------");
-
         return result;
     }
 
@@ -113,15 +67,11 @@ class MyInvokerHandlerProxy implements InvocationHandler {
 }
 
 /**
- * invokerHandler 实现类
+ * 实现类
  */
-class MyInvokerHandler implements InvokerHandler {
+class TargetImpl implements TargetService {
     @Override
-    public void myHandler() {
-        System.out.println("I am a handler");
+    public void sayHello() {
+        System.out.println("hello world");
     }
-}
-
-interface InvokerHandler {
-    void myHandler();
 }
