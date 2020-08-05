@@ -59,10 +59,12 @@ public class DynamicProxyTest {
          * </code>
          */
 
-        invokerHandler.myHandler();
+        //invokerHandler.myHandler();
+        invokerHandler.toString();
 
 
     }
+
 }
 
 /**
