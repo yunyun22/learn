@@ -1,14 +1,19 @@
 package demo.wangjq.app.controller;
 
-import demo.wangjq.app.annotaation.GetJsonProperty;
-import demo.wangjq.app.service.CacheService;
-import demo.wangjq.app.service.TransactionalTest;
-import demo.wangjq.base.annotation.User;
+import demo.wangjq.app.service.impl.MyServiceImp;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 import java.util.Map;
+
+import demo.wangjq.app.annotaation.GetJsonProperty;
+import demo.wangjq.app.service.CacheService;
+import demo.wangjq.base.annotation.User;
 
 /**
  * @author:wangjq
@@ -23,14 +28,7 @@ public class TestController {
     private CacheService cacheService;
 
     @Autowired
-    private TransactionalTest transactionalTest;
-
-    @RequestMapping("/insert")
-    @ResponseBody
-    public String insert() {
-        transactionalTest.update();
-        return "OK";
-    }
+    private MyServiceImp myServiceImp;
 
     @RequestMapping(headers = {"method=test"}, method = RequestMethod.GET)
     public String testHeader(@RequestHeader("myHeader") String name) {

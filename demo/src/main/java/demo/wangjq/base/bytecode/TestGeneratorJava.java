@@ -1,5 +1,8 @@
 package demo.wangjq.base.bytecode;
 
+
+import demo.wangjq.base.designpattern.TargetService;
+
 import java.io.IOException;
 
 /**
@@ -8,6 +11,6 @@ import java.io.IOException;
  */
 public class TestGeneratorJava {
     public static void main(String[] args) throws IOException {
-        byte[] proxyClassFile = ProxyGenerator.generateProxyClass(".demo.wangjq.base.bytecode.MyInterface$Proxy0", new Class[]{MyInterface.class});
+        byte[] proxyClassFile = ProxyGenerator.generateProxyClass(".demo.wangjq.base.designpattern.Service$Proxy0", new Class[]{TargetService.class});
     }
 }

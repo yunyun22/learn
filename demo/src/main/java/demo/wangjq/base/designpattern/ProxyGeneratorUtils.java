@@ -12,7 +12,7 @@ public class ProxyGeneratorUtils {
 
 
     public static void main(String[] args) {
-        ProxyGeneratorUtils.writeProxyClassToHardDisk("C:/Users/jinqwang/$Proxy11.class");
+        ProxyGeneratorUtils.writeProxyClassToHardDisk("C:/Users/Service$Proxy1.class");
     }
 
     /**
@@ -22,11 +22,11 @@ public class ProxyGeneratorUtils {
      */
     public static void writeProxyClassToHardDisk(String path) {
         // 第一种方法，这种方式在刚才分析ProxyGenerator时已经知道了
-        // System.getProperties().put("sun.misc.ProxyGenerator.saveGeneratedFiles", true);
+        System.getProperties().put("sun.misc.ProxyGenerator.saveGeneratedFiles", true);
 
 
         // 获取代理类的字节码
-        byte[] classFile = ProxyGenerator.generateProxyClass("$Proxy11", MyInvokerHandler.class.getInterfaces());
+        byte[] classFile = ProxyGenerator.generateProxyClass("Service$Proxy1", TargetService.class.getInterfaces());
 
         FileOutputStream out = null;
 

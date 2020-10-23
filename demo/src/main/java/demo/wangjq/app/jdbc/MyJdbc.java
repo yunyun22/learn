@@ -1,8 +1,11 @@
 package demo.wangjq.app.jdbc;
 
+import org.springframework.stereotype.Repository;
+
 import java.util.Random;
 
 
+@Repository
 public class MyJdbc {
 
 //    @Autowired
