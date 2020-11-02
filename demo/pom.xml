@@ -177,8 +177,7 @@
             <groupId>io.github.openfeign</groupId>
             <artifactId>feign-gson</artifactId>
             <version>10.7.0</version>
-        </dependency>DelegatingWebSocketMessageBrokerConfiguration
-
+        </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-websocket</artifactId>
@@ -197,30 +196,12 @@
             <artifactId>guava</artifactId>
             <version>28.2-jre</version>
         </dependency>
+        <dependency>
+            <groupId>org.openjdk.jol</groupId>
+            <artifactId>jol-core</artifactId>
+            <version>0.9</version>
+        </dependency>
 
-
-        <!-- https://mvnrepository.com/artifact/com.netflix.ribbon/ribbon-core
-        <dependency>
-            <groupId>com.netflix.ribbon</groupId>
-            <artifactId>ribbon-core</artifactId>
-            <version>${netflix.ribbon}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.netflix.ribbon</groupId>
-            <artifactId>ribbon</artifactId>
-            <version>${netflix.ribbon}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.netflix.ribbon</groupId>
-            <artifactId>ribbon-loadbalancer</artifactId>
-            <version>${netflix.ribbon}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.netflix.ribbon</groupId>
-            <artifactId>ribbon-httpclient</artifactId>
-            <version>${netflix.ribbon}</version>
-        </dependency>
-     -->
     </dependencies>
 
     <build>
