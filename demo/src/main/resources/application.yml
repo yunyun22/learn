@@ -10,11 +10,11 @@ spring:
   datasource:
     password: root
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://118.25.67.106/test?serverTimezone=UTC&useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&tinyInt1isBit=false&zeroDateTimeBehavior=convertToNull
+    url: jdbc:mysql://localhost/test?serverTimezone=UTC&useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&tinyInt1isBit=false&zeroDateTimeBehavior=convertToNull
     username: root
   data:
     mongodb:
-      uri: mongodb://118.25.67.106:27017/RECOVERY
+      uri: mongodb://localhost:27017/RECOVERY
 logging:
   level:
     root: INFO

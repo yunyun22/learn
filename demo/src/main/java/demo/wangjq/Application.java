@@ -13,6 +13,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.client.RestTemplate;
 
 import javax.sql.DataSource;
@@ -24,6 +25,7 @@ import javax.sql.DataSource;
 @Controller
 @EnableAsync
 @EnableCaching
+@EnableTransactionManagement
 public class Application {
 
 

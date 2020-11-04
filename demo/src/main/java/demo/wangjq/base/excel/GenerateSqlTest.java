@@ -3,11 +3,7 @@ package demo.wangjq.base.excel;
 
 import org.apache.commons.collections.map.HashedMap;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Workbook;
-import org.apache.poi.ss.usermodel.WorkbookFactory;
+import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.ss.util.CellRangeAddress;
 import org.junit.Test;
 
@@ -16,35 +12,77 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
+import java.util.Objects;
 
 /**
  * @author:wangjq
  * @Date: 2019/4/18 09:17
  */
-public class GenerateSql {
+public class GenerateSqlTest {
+
+
+    public static String sql = "INSERT INTO tax_base.dbo.SYS_USER(" +
+            "USER_ID, USERNAME, PASSWORD_,salt, PHONE," +//1
+            "LOCK_FLAG, DEL_FLAG, TENANT_ID, STAFF_LEVEL, STAFF_NO," +//2
+            " SERVICE_GROUP, SERVICE_GROUP_DESC, CNAME_, ENAME_, AREA, DEPARTMENT, EMAIL)\n" +//3
+            "VALUES(NEWID(), '%s', '$2a$10$71xj0yqwrayf/hFwu1SlY.OrUS/7iIkZLND7ZZtUMrZ33C1CP/W6G', '','19944466600'," +//1
+            " 0, 0, 'FA', 'Senior Senior SII', '%s', " +//2
+            "'%s', '', '%s', '%s', '%s', '%s', '%s');";//3
+
     @Test
     public void testReadExcel() {
-        List<Map<Integer, Object>> excel = readExcelToObj("D:\\areatosql.xls");
+        List<Map<Integer, Object>> excel = readExcelToObj("C:\\Users\\jinqwang\\Desktop\\UAT2.xlsx");
         System.out.println(excel);
-        List<Map<Integer, Object>> filter = excel.stream().filter(map ->
-                !map.get(0).equals("鄞州区") && !map.get(0).equals("南岸区") && !map.get(0).equals("巴南区") && !map.get(0).equals("建邺区")
-        ).collect(Collectors.toList());
 
 
-        System.out.println("filter after");
-        filter.forEach(map ->
-                System.out.println("UPDATE u_user_address SET fourth=area,area=" + map.get(1)
-                        + " where  area=" + map.get(2) + ";#" + map.get(3))
-        );
+        String[] s = excel.stream()
+                .filter(integerObjectMap -> Objects.equals(integerObjectMap.get(0), "MIC") || Objects.equals(integerObjectMap.get(0), "PIC"))
+                .map(integerObjectMap -> integerObjectMap.get(2))
+                .toArray(String[]::new);
 
+        //System.out.println(s.length);
+
+//        String path="C:\\Users\\jinqwang\\Desktop\\Sql for user and project.sql";
+//        File file = new File(path);
+//        String sql = FileTest.textToString(file);
+//        System.out.println(String.format(sql, s));
+
+        //登录名
+        //工号
+        //serviceLine
+        //中文名
+        //英文名
+        //region
+        //office
+        //email
+
+//        int i = 0;
+//        for (Map<Integer, Object> map : excel) {
+//            String finalSQL = String.format(sql, map.get(1), map.get(2), map.get(9), map.get(3)
+//                    , map.get(4), map.get(8), map.get(7), map.get(6));
+//
+//            System.out.println(finalSQL);
+//            System.out.println();
+//            i++;
+//        }
+
+
+//        String updateSQL = "UPDATE SYS_USER SET ENAME_='%s' WHERE STAFF_NO='%s';";
+//        int i = 0;
+//        for (Map<Integer, Object> map : excel) {
+//            String finalSQL = String.format(updateSQL, map.get(4), map.get(2));
+//
+//            System.out.println(finalSQL);
+//            System.out.println();
+//            i++;
+//        }
 
     }
 
     /**
      * 读取excel数据
      */
-    private List<Map<Integer, Object>> readExcelToObj(String path) {
+    public static List<Map<Integer, Object>> readExcelToObj(String path) {
 
         Workbook wb = null;
         try {
@@ -65,7 +103,7 @@ public class GenerateSql {
      * @param startReadLine 开始读取的行:从0开始
      * @param tailLine      去除最后读取的行
      */
-    private List<Map<Integer, Object>> readExcel(Workbook wb, int sheetIndex, int startReadLine, int tailLine) {
+    private static List<Map<Integer, Object>> readExcel(Workbook wb, int sheetIndex, int startReadLine, int tailLine) {
 
         Sheet sheet = wb.getSheetAt(sheetIndex);
 
@@ -83,16 +121,16 @@ public class GenerateSql {
                 String rs = null;
                 if (isMerge) {
                     rs = getMergedRegionValue(sheet, row.getRowNum(), c.getColumnIndex());
-                    System.out.print(rs + "  ");
+                    //System.out.print(rs + "  ");
                 } else {
                     rs = c.getRichStringCellValue().toString();
-                    System.out.print(rs + "  ");
+                    //System.out.print(rs + "  ");
                 }
                 map.put(integer, rs);
                 integer++;
             }
             excel.add(map);
-            System.out.println();
+            //System.out.println();
 
         }
         return excel;
@@ -102,7 +140,7 @@ public class GenerateSql {
     /**
      * 获取合并单元格的值
      */
-    public String getMergedRegionValue(Sheet sheet, int row, int column) {
+    public static String getMergedRegionValue(Sheet sheet, int row, int column) {
 
         int sheetMergeCount = sheet.getNumMergedRegions();
 
@@ -153,7 +191,7 @@ public class GenerateSql {
      * @param row    行下标
      * @param column 列下标
      */
-    private boolean isMergedRegion(Sheet sheet, int row, int column) {
+    private static boolean isMergedRegion(Sheet sheet, int row, int column) {
 
         int sheetMergeCount = sheet.getNumMergedRegions();
         for (int i = 0; i < sheetMergeCount; i++) {
@@ -194,7 +232,7 @@ public class GenerateSql {
     /**
      * 获取单元格的值
      */
-    public String getCellValue(Cell cell) {
+    public static String getCellValue(Cell cell) {
 
         if (cell == null) return "";
 

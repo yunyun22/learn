@@ -1,8 +1,5 @@
 package demo.wangjq.app.domain;
 
-import com.sun.org.glassfish.gmbal.ManagedData;
-import org.springframework.data.mongodb.core.mapping.Document;
-
 import java.util.List;
 
 /**

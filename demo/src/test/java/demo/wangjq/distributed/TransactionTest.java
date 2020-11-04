@@ -1,18 +1,18 @@
-package demo.wangjq.app.service;
+package demo.wangjq.distributed;
 
+import demo.wangjq.BaseTest;
+import org.junit.Test;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 
 /**
  * @author wang, jinqiao
- * @title: TransactionalTest
- * @date 06/12/2019
+ * @title: TransactionTest
+ * @date 10/01/2020
  */
-@Service
-public class TransactionalTest {
+public class TransactionTest extends BaseTest {
 
     @Resource(name = "jdbcTemplate1")
     private JdbcTemplate jdbcTemplate1;
@@ -24,20 +24,13 @@ public class TransactionalTest {
 
     public static final String INSERT_CLOTHING = "INSERT INTO clothing VALUE(20)";
 
-
-    @Transactional(rollbackFor = RuntimeException.class)
-    public void update() {
+    @Transactional
+    @Test
+    // @Rollback(false)
+    public void insert() {
         jdbcTemplate1.execute(INSERT_PERSON);
         int i = 1 / 0;
         jdbcTemplate2.execute(INSERT_CLOTHING);
-
     }
 
-    public static final String SQL = "DELETE FROM person WHERE name=? ";
-
-//    @Transactional(rollbackFor = RuntimeException.class)
-//    public void delete(String name) {
-//        jdbcTemplate.update(SQL, name);
-//        throw new RuntimeException();
-//    }
 }
