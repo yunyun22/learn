@@ -1,34 +1,42 @@
 package server.wangjq;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.boot.WebApplicationType;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.builder.SpringApplicationBuilder;
-import org.springframework.cloud.netflix.eureka.server.EnableEurekaServer;
+
+
+import java.io.Serializable;
+import java.lang.invoke.SerializedLambda;
+import java.lang.reflect.Method;
 
 /**
  * @author wangjq
  */
-@SpringBootApplication
-@EnableEurekaServer
 public class Application {
 
-    private static Logger logger = LoggerFactory.getLogger(Application.class);
 
     public static void main(String[] args) {
-        logger.info("test");
-        new SpringApplicationBuilder(Application.class).web(WebApplicationType.SERVLET).run(args);
-        logger.error("this is error");
-        logger.error("this is error");
-        logger.error("this is error");
-        logger.error("this is error");
-        logger.error("this is error");
-        logger.error("this is error");
-        logger.error("this is error");
-        logger.error("this is error");
-        logger.error("this is error");
-        logger.error("this is error");
+
+        Domain domain = new Domain();
+        domain.setName("name");
+        try {
+            doConsume(domain::getCode);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
+
+    private static void doConsume(SerializableSupplier<String> consumer) throws Exception {
+        Method writeReplace = consumer.getClass().getDeclaredMethod("writeReplace");
+        writeReplace.setAccessible(true);
+        Object sl = writeReplace.invoke(consumer);
+
+        SerializedLambda serializedLambda = (SerializedLambda) sl;
+        String implMethodName = serializedLambda.getImplMethodName();
+        Object capturedArg = serializedLambda.getCapturedArg(0);
+        System.out.println(implMethodName);
+        System.out.println(serializedLambda);
+    }
+
+}
+interface SerializableSupplier<T> extends Serializable {
+    T get();
 }
