@@ -12,8 +12,11 @@ import net.sf.cglib.proxy.MethodInterceptor;
  */
 public class SampleClass {
 
-    public Integer test() {
+    int i = 0;
+
+    public synchronized Integer test() {
         System.out.println("hello world");
+        i++;
         return 1;
     }
 
@@ -31,7 +34,9 @@ public class SampleClass {
             return result;
         });
         SampleClass sample = (SampleClass) enhancer.create();
-        sample.test();
+        new Thread(sample::test).start();
+        new Thread(sample::test).start();
+
 
     }
 

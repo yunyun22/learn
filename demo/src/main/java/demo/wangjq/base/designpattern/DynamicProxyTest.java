@@ -12,6 +12,7 @@ public class DynamicProxyTest {
     public static void main(String[] args) {
 
         System.getProperties().put("sun.misc.ProxyGenerator.saveGeneratedFiles", true);
+        System.getProperties().put("jdk.proxy.ProxyGenerator.saveGeneratedFiles", "true");
 
         TargetImpl target = new TargetImpl();
         MyInvokerHandlerProxy myInvokerHandlerProxy = new MyInvokerHandlerProxy(target);
@@ -49,6 +50,7 @@ class MyInvokerHandlerProxy implements InvocationHandler {
         // 在目标对象的方法执行之前简单的打印一下
         System.out.println("------------------before------------------");
         // 执行目标对象的方法
+        //method 获取的是接口上的方法
         Object result = method.invoke(target, args);
         // 在目标对象的方法执行之后简单的打印一下
         System.out.println("-------------------after------------------");
@@ -71,7 +73,7 @@ class MyInvokerHandlerProxy implements InvocationHandler {
  */
 class TargetImpl implements TargetService {
     @Override
-    public void sayHello() {
+    public synchronized void sayHello() {
         System.out.println("hello world");
     }
 }

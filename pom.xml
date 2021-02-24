@@ -10,6 +10,7 @@
 
     <modules>
         <module>demo</module>
+        <module>demo-springboot-starter</module>
     </modules>
 
     <dependencyManagement>
