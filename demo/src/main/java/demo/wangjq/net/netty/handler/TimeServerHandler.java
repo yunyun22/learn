@@ -32,6 +32,8 @@ public class TimeServerHandler extends ChannelInboundHandlerAdapter {
 
     @Override
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
+        //do noting
+        cause.printStackTrace();
         ctx.close();
     }
 
