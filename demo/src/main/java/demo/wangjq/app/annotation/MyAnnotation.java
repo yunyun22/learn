@@ -1,4 +1,4 @@
-package demo.wangjq.app.annotaation;
+package demo.wangjq.app.annotation;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
@@ -8,16 +8,11 @@ import java.lang.annotation.Target;
 
 /**
  * @author:wangjq
- * @Date: 2019/8/12 15:28
+ * @Date: 2019/4/16 15:44
  */
 @Target(ElementType.PARAMETER)
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
-public @interface GetJsonProperty {
+public @interface MyAnnotation {
     String value() default "";
-
-    /**
-     * 获取json的名字
-     */
-    String name() default "";
 }

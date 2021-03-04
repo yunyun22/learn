@@ -33,8 +33,17 @@ public class MyClient {
 
                         }
                     });
-            ChannelFuture channelFuture = bootstrap.connect("localhost", 8080).sync();
+            int i =1000;
+            ChannelFuture channelFuture = null;
+            while (i>0) {
+                i--;
+                 channelFuture = bootstrap.connect("localhost", 8080).sync();
+                 bootstrap.connect("localhost", 8080).sync();
+                System.out.println("fuck"+i);
+            }
+
             channelFuture.channel().closeFuture().sync();
+
 
         } finally {
             eventLoopGroup.shutdownGracefully();
