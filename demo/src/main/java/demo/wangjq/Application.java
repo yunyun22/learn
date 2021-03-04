@@ -1,8 +1,5 @@
 package demo.wangjq;
 
-import demo.wangjq.app.beandefinition.SpringContextHolder;
-import demo.wangjq.app.beandefinition.circulate.Husband;
-import demo.wangjq.app.beandefinition.circulate.Wife;
 import demo.wangjq.app.servlet.MyServlet;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -36,12 +33,6 @@ public class Application {
 
     public static void main(String[] args) throws Exception {
         SpringApplication.run(Application.class, args);
-        Husband husband = SpringContextHolder.getBean("husband");
-        Wife wife = husband.wife;
-        System.out.println(wife);
-        wife = husband.getWife();
-        System.out.println(wife);
-        //Application
     }
 
     @Bean
