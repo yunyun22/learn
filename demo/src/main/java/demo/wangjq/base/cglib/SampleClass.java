@@ -22,7 +22,7 @@ public class SampleClass {
 
     public static void main(String[] args) {
         // 代理类class文件存入本地磁盘方便我们反编译查看源码
-        System.setProperty(DebuggingClassWriter.DEBUG_LOCATION_PROPERTY, "C:\\Users\\jinqwang");
+        System.setProperty(DebuggingClassWriter.DEBUG_LOCATION_PROPERTY, "C:\\Users\\TEMP");
         Enhancer enhancer = new Enhancer();
         enhancer.setSuperclass(SampleClass.class);
         enhancer.setCallback((MethodInterceptor) (obj, method, args1, proxy) -> {
@@ -34,9 +34,8 @@ public class SampleClass {
             return result;
         });
         SampleClass sample = (SampleClass) enhancer.create();
-        new Thread(sample::test).start();
-        new Thread(sample::test).start();
 
+        sample.test();
 
     }
 
