@@ -1,19 +1,22 @@
 package demo.wangjq.base.gc;
 
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
- * Created by wangjq on 2018/10/23.
+ *
  */
 public class CPUController {
 
-    public static void main(String[] args) {
-        List<User> list = new ArrayList<>();
-        int i = 0;
+
+    static int BUSY_TIME = 10;
+    static int IDLE_TIME = BUSY_TIME;
+
+    public static void main(String[] args) throws InterruptedException {
+
+        long startTime;
         while (true) {
-            list.add(new User("w" + i++, i));
+            startTime = System.currentTimeMillis();
+            while (System.currentTimeMillis() - startTime < BUSY_TIME) ;
+            Thread.sleep(IDLE_TIME);
         }
     }
 

@@ -34,9 +34,7 @@ public class SampleClass {
             return result;
         });
         SampleClass sample = (SampleClass) enhancer.create();
-
         sample.test();
-
     }
 
 }
