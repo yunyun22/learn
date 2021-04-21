@@ -12,6 +12,8 @@ public class DataLab {
 
     public static void main(String[] args) {
 
+        String s= "test";
+
         System.out.println(biXor(1, 0));
         System.out.println(biXor(0, 1));
         System.out.println(biXor(1, 1));
