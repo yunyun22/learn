@@ -1,10 +1,12 @@
 package demo.wangjq.base.socket;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.net.SocketAddress;
+import java.nio.charset.StandardCharsets;
 
 import static jodd.util.ThreadUtil.sleep;
 
@@ -21,15 +23,37 @@ public class SocketClient {
         OutputStream outputStream = socket.getOutputStream();
         System.out.println(outputStream.getClass());
         int i = 0;
+        new Thread(new Receive(socket.getInputStream())).start();
         while (true) {
             SocketAddress localSocketAddress = socket.getLocalSocketAddress();
             InetSocketAddress inetSocketAddress = (InetSocketAddress) localSocketAddress;
             String message = inetSocketAddress.getPort() + "发送消息:第" + i + "次发送消息，你好";
-            outputStream.write(message.getBytes("UTF-8"));
+            outputStream.write(message.getBytes(StandardCharsets.UTF_8));
             outputStream.flush();
             System.out.println("第" + i + "发送消息完成");
             i++;
             sleep(10000);
+        }
+    }
+
+    static class Receive implements Runnable {
+
+        InputStream inputStream;
+
+        public Receive(InputStream inputStream) {
+            this.inputStream = inputStream;
+        }
+
+        @Override
+        public void run() {
+            try {
+                byte[] bytes = new byte[1000];
+                while (inputStream.read(bytes) > 0) {
+                    System.out.println("接受消息：" + new String(bytes, 0, 1000));
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 }
