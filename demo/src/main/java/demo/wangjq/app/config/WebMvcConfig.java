@@ -9,7 +9,6 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupp
 import java.nio.charset.Charset;
 import java.util.List;
 
-import demo.wangjq.app.component.JsonToPlainHandlerMethodArgumentResolver;
 import demo.wangjq.app.component.MyHandlerMethodArgumentResolver;
 
 /**
@@ -23,7 +22,7 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
     public void addArgumentResolvers(List<HandlerMethodArgumentResolver> argumentResolvers) {
         super.addArgumentResolvers(argumentResolvers);
         argumentResolvers.add(new MyHandlerMethodArgumentResolver());
-        argumentResolvers.add(0, new JsonToPlainHandlerMethodArgumentResolver());
+        //argumentResolvers.add(0, new JsonToPlainHandlerMethodArgumentResolver());
     }
 
     @Override
