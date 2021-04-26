@@ -1,28 +1,28 @@
 package demo.wangjq.base.bytecode;
 /*
-* Copyright (c) 1999, 2008, Oracle and/or its affiliates. All rights reserved.
-* DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
-*
-* This code is free software; you can redistribute it and/or modify it
-* under the terms of the GNU General Public License version 2 only, as
-* published by the Free Software Foundation.  Oracle designates this
-* particular file as subject to the "Classpath" exception as provided
-* by Oracle in the LICENSE file that accompanied this code.
-*
-* This code is distributed in the hope that it will be useful, but WITHOUT
-* ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
-* FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License
-* version 2 for more details (a copy is included in the LICENSE file that
-* accompanied this code).
-*
-* You should have received a copy of the GNU General Public License version
-* 2 along with this work; if not, write to the Free Software Foundation,
-* Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA.
-*
-* Please contact Oracle, 500 Oracle Parkway, Redwood Shores, CA 94065 USA
-* or visit www.oracle.com if you need additional information or have any
-* questions.
-*/
+ * Copyright (c) 1999, 2008, Oracle and/or its affiliates. All rights reserved.
+ * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
+ *
+ * This code is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License version 2 only, as
+ * published by the Free Software Foundation.  Oracle designates this
+ * particular file as subject to the "Classpath" exception as provided
+ * by Oracle in the LICENSE file that accompanied this code.
+ *
+ * This code is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+ * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License
+ * version 2 for more details (a copy is included in the LICENSE file that
+ * accompanied this code).
+ *
+ * You should have received a copy of the GNU General Public License version
+ * 2 along with this work; if not, write to the Free Software Foundation,
+ * Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ * Please contact Oracle, 500 Oracle Parkway, Redwood Shores, CA 94065 USA
+ * or visit www.oracle.com if you need additional information or have any
+ * questions.
+ */
 
 
 import sun.security.action.GetBooleanAction;
@@ -44,7 +44,7 @@ import java.util.Map;
 /**
  * ProxyGenerator contains the code to generate a dynamic proxy class
  * for the java.lang.reflect.Proxy API.
- *
+ * <p>
  * The external interfaces to ProxyGenerator is the static
  * "generateProxyClass" method.
  *
@@ -52,21 +52,21 @@ import java.util.Map;
  * @since 1.3
  */
 public class ProxyGenerator {
-       /*
-        * In the comments below, "JVMS" refers to The Java Virtual Machine
-        * Specification Second Edition and "JLS" refers to the original
-        * version of The Java Language Specification, unless otherwise
-        * specified.
-        */
+    /*
+     * In the comments below, "JVMS" refers to The Java Virtual Machine
+     * Specification Second Edition and "JLS" refers to the original
+     * version of The Java Language Specification, unless otherwise
+     * specified.
+     */
 
     /* generate 1.5-era class file version */
     private static final int CLASSFILE_MAJOR_VERSION = 49;
     private static final int CLASSFILE_MINOR_VERSION = 0;
-   
-       /*
-        * beginning of constants copied from
-        * sun.tools.java.RuntimeConstants (which no longer exists):
-        */
+
+    /*
+     * beginning of constants copied from
+     * sun.tools.java.RuntimeConstants (which no longer exists):
+     */
 
     /* constant pool tags */
     private static final int CONSTANT_UTF8 = 1;
@@ -328,6 +328,9 @@ public class ProxyGenerator {
         ProxyGenerator gen = new ProxyGenerator(name, interfaces);
         final byte[] classFile = gen.generateClassFile();
 
+        String path = ProxyGenerator.class.getResource("/").getPath() + dotToSlash(name) + ".class";
+        System.out.println("path======:" + path);
+
         FileOutputStream file =
                 new FileOutputStream(ProxyGenerator.class.getResource("/").getPath() + dotToSlash(name) + ".class");
         file.write(classFile);
@@ -391,7 +394,7 @@ public class ProxyGenerator {
     /**
      * Construct a ProxyGenerator to generate a proxy class with the
      * specified name and for the given interfaces.
-     *
+     * <p>
      * A ProxyGenerator object contains the state for the ongoing
      * generation of a particular proxy class.
      */
@@ -405,47 +408,47 @@ public class ProxyGenerator {
      * class file generation process.
      */
     private byte[] generateClassFile() {
-   
-           /* ============================================================
-            * Step 1: Assemble ProxyMethod objects for all methods to
-            * generate proxy dispatching code for.
-            */
-   
-           /*
-            * Record that proxy methods are needed for the hashCode, equals,
-            * and toString methods of java.lang.Object.  This is done before
-            * the methods from the proxy interfaces so that the methods from
-            * java.lang.Object take precedence over duplicate methods in the
-            * proxy interfaces.
-            */
+
+        /* ============================================================
+         * Step 1: Assemble ProxyMethod objects for all methods to
+         * generate proxy dispatching code for.
+         */
+
+        /*
+         * Record that proxy methods are needed for the hashCode, equals,
+         * and toString methods of java.lang.Object.  This is done before
+         * the methods from the proxy interfaces so that the methods from
+         * java.lang.Object take precedence over duplicate methods in the
+         * proxy interfaces.
+         */
         addProxyMethod(hashCodeMethod, Object.class);
         addProxyMethod(equalsMethod, Object.class);
         addProxyMethod(toStringMethod, Object.class);
-   
-           /*
-            * Now record all of the methods from the proxy interfaces, giving
-            * earlier interfaces precedence over later ones with duplicate
-            * methods.
-            */
+
+        /*
+         * Now record all of the methods from the proxy interfaces, giving
+         * earlier interfaces precedence over later ones with duplicate
+         * methods.
+         */
         for (int i = 0; i < interfaces.length; i++) {
             Method[] methods = interfaces[i].getMethods();
             for (int j = 0; j < methods.length; j++) {
                 addProxyMethod(methods[j], interfaces[i]);
             }
         }
-   
-           /*
-            * For each set of proxy methods with the same signature,
-            * verify that the methods' return types are compatible.
-            */
+
+        /*
+         * For each set of proxy methods with the same signature,
+         * verify that the methods' return types are compatible.
+         */
         for (List<ProxyMethod> sigmethods : proxyMethods.values()) {
             checkReturnTypes(sigmethods);
         }
-   
-           /* ============================================================
-            * Step 2: Assemble FieldInfo and MethodInfo structs for all of
-            * fields and methods in the class we are generating.
-            */
+
+        /* ============================================================
+         * Step 2: Assemble FieldInfo and MethodInfo structs for all of
+         * fields and methods in the class we are generating.
+         */
         try {
             methods.add(generateConstructor());
 
@@ -474,35 +477,35 @@ public class ProxyGenerator {
         if (fields.size() > 65535) {
             throw new IllegalArgumentException("field limit exceeded");
         }
-   
-           /* ============================================================
-            * Step 3: Write the final class file.
-            */
-   
-           /*
-            * Make sure that constant pool indexes are reserved for the
-            * following items before starting to write the final class file.
-            */
+
+        /* ============================================================
+         * Step 3: Write the final class file.
+         */
+
+        /*
+         * Make sure that constant pool indexes are reserved for the
+         * following items before starting to write the final class file.
+         */
         cp.getClass(dotToSlash(className));
         cp.getClass(superclassName);
         for (int i = 0; i < interfaces.length; i++) {
             cp.getClass(dotToSlash(interfaces[i].getName()));
         }
-   
-           /*
-            * Disallow new constant pool additions beyond this point, since
-            * we are about to write the final constant pool table.
-            */
+
+        /*
+         * Disallow new constant pool additions beyond this point, since
+         * we are about to write the final constant pool table.
+         */
         cp.setReadOnly();
 
         ByteArrayOutputStream bout = new ByteArrayOutputStream();
         DataOutputStream dout = new DataOutputStream(bout);
 
         try {
-               /*
-                * Write all the items of the "ClassFile" structure.
-                * See JVMS section 4.1.
-                */
+            /*
+             * Write all the items of the "ClassFile" structure.
+             * See JVMS section 4.1.
+             */
             // u4 magic;
             dout.writeInt(0xCAFEBABE);
             // u2 minor_version;
@@ -555,7 +558,7 @@ public class ProxyGenerator {
      * Add another method to be proxied, either by creating a new
      * ProxyMethod object or augmenting an old one for a duplicate
      * method.
-     *
+     * <p>
      * "fromClass" indicates the proxy interface that the method was
      * found through, which may be different from (a subinterface of)
      * the method's "declaring class".  Note that the first Method
@@ -575,12 +578,12 @@ public class ProxyGenerator {
         if (sigmethods != null) {
             for (ProxyMethod pm : sigmethods) {
                 if (returnType == pm.returnType) {
-                       /*
-                        * Found a match: reduce exception types to the
-                        * greatest set of exceptions that can thrown
-                        * compatibly with the throws clauses of both
-                        * overridden methods.
-                        */
+                    /*
+                     * Found a match: reduce exception types to the
+                     * greatest set of exceptions that can thrown
+                     * compatibly with the throws clauses of both
+                     * overridden methods.
+                     */
                     List<Class<?>> legalExceptions = new ArrayList<Class<?>>();
                     collectCompatibleTypes(
                             exceptionTypes, pm.exceptionTypes, legalExceptions);
@@ -604,25 +607,25 @@ public class ProxyGenerator {
      * For a given set of proxy methods with the same signature, check
      * that their return types are compatible according to the Proxy
      * specification.
-     *
+     * <p>
      * Specifically, if there is more than one such method, then all
      * of the return types must be reference types, and there must be
      * one return type that is assignable to each of the rest of them.
      */
     private static void checkReturnTypes(List<ProxyMethod> methods) {
-           /*
-            * If there is only one method with a given signature, there
-            * cannot be a conflict.  This is the only case in which a
-            * primitive (or void) return type is allowed.
-            */
+        /*
+         * If there is only one method with a given signature, there
+         * cannot be a conflict.  This is the only case in which a
+         * primitive (or void) return type is allowed.
+         */
         if (methods.size() < 2) {
             return;
         }
-   
-           /*
-            * List of return types that are not yet known to be
-            * assignable from ("covered" by) any of the others.
-            */
+
+        /*
+         * List of return types that are not yet known to be
+         * assignable from ("covered" by) any of the others.
+         */
         LinkedList<Class<?>> uncoveredReturnTypes = new LinkedList<Class<?>>();
 
         nextNewReturnType:
@@ -637,30 +640,30 @@ public class ProxyGenerator {
                                 newReturnType.getName() + " and others");
             }
             boolean added = false;
-   
-               /*
-                * Compare the new return type to the existing uncovered
-                * return types.
-                */
+
+            /*
+             * Compare the new return type to the existing uncovered
+             * return types.
+             */
             ListIterator<Class<?>> liter = uncoveredReturnTypes.listIterator();
             while (liter.hasNext()) {
                 Class<?> uncoveredReturnType = liter.next();
-   
-                   /*
-                    * If an existing uncovered return type is assignable
-                    * to this new one, then we can forget the new one.
-                    */
+
+                /*
+                 * If an existing uncovered return type is assignable
+                 * to this new one, then we can forget the new one.
+                 */
                 if (newReturnType.isAssignableFrom(uncoveredReturnType)) {
                     assert !added;
                     continue nextNewReturnType;
                 }
-   
-                   /*
-                    * If the new return type is assignable to an existing
-                    * uncovered one, then should replace the existing one
-                    * with the new one (or just forget the existing one,
-                    * if the new one has already be put in the list).
-                    */
+
+                /*
+                 * If the new return type is assignable to an existing
+                 * uncovered one, then should replace the existing one
+                 * with the new one (or just forget the existing one,
+                 * if the new one has already be put in the list).
+                 */
                 if (uncoveredReturnType.isAssignableFrom(newReturnType)) {
                     // (we can assume that each return type is unique)
                     if (!added) {
@@ -671,21 +674,21 @@ public class ProxyGenerator {
                     }
                 }
             }
-   
-               /*
-                * If we got through the list of existing uncovered return
-                * types without an assignability relationship, then add
-                * the new return type to the list of uncovered ones.
-                */
+
+            /*
+             * If we got through the list of existing uncovered return
+             * types without an assignability relationship, then add
+             * the new return type to the list of uncovered ones.
+             */
             if (!added) {
                 uncoveredReturnTypes.add(newReturnType);
             }
         }
-   
-           /*
-            * We shouldn't end up with more than one return type that is
-            * not assignable from any of the others.
-            */
+
+        /*
+         * We shouldn't end up with more than one return type that is
+         * not assignable from any of the others.
+         */
         if (uncoveredReturnTypes.size() > 1) {
             ProxyMethod pm = methods.get(0);
             throw new IllegalArgumentException(
@@ -709,20 +712,20 @@ public class ProxyGenerator {
             this.name = name;
             this.descriptor = descriptor;
             this.accessFlags = accessFlags;
-   
-               /*
-                * Make sure that constant pool indexes are reserved for the
-                * following items before starting to write the final class file.
-                */
+
+            /*
+             * Make sure that constant pool indexes are reserved for the
+             * following items before starting to write the final class file.
+             */
             cp.getUtf8(name);
             cp.getUtf8(descriptor);
         }
 
         public void write(DataOutputStream out) throws IOException {
-               /*
-                * Write all the items of the "field_info" structure.
-                * See JVMS section 4.5.
-                */
+            /*
+             * Write all the items of the "field_info" structure.
+             * See JVMS section 4.5.
+             */
             // u2 access_flags;
             out.writeShort(accessFlags);
             // u2 name_index;
@@ -776,11 +779,11 @@ public class ProxyGenerator {
             this.name = name;
             this.descriptor = descriptor;
             this.accessFlags = accessFlags;
-   
-               /*
-                * Make sure that constant pool indexes are reserved for the
-                * following items before starting to write the final class file.
-                */
+
+            /*
+             * Make sure that constant pool indexes are reserved for the
+             * following items before starting to write the final class file.
+             */
             cp.getUtf8(name);
             cp.getUtf8(descriptor);
             cp.getUtf8("Code");
@@ -788,10 +791,10 @@ public class ProxyGenerator {
         }
 
         public void write(DataOutputStream out) throws IOException {
-               /*
-                * Write all the items of the "method_info" structure.
-                * See JVMS section 4.6.
-                */
+            /*
+             * Write all the items of the "method_info" structure.
+             * See JVMS section 4.6.
+             */
             // u2 access_flags;
             out.writeShort(accessFlags);
             // u2 name_index;
@@ -1243,17 +1246,17 @@ public class ProxyGenerator {
 
         return minfo;
     }
-   
-   
-       /*
-        * =============== Code Generation Utility Methods ===============
-        */
-   
-       /*
-        * The following methods generate code for the load or store operation
-        * indicated by their name for the given local variable.  The code is
-        * written to the supplied stream.
-        */
+
+
+    /*
+     * =============== Code Generation Utility Methods ===============
+     */
+
+    /*
+     * The following methods generate code for the load or store operation
+     * indicated by their name for the given local variable.  The code is
+     * written to the supplied stream.
+     */
 
     private void code_iload(int lvar, DataOutputStream out)
             throws IOException {
@@ -1312,7 +1315,7 @@ public class ProxyGenerator {
     /**
      * Generate code for a load or store instruction for the given local
      * variable.  The code is written to the supplied stream.
-     *
+     * <p>
      * "opcode" indicates the opcode form of the desired load or store
      * instruction that takes an explicit local variable index, and
      * "opcode_0" indicates the corresponding form of the instruction
@@ -1328,10 +1331,10 @@ public class ProxyGenerator {
             out.writeByte(opcode);
             out.writeByte(lvar & 0xFF);
         } else {
-               /*
-                * Use the "wide" instruction modifier for local variable
-                * indexes that do not fit into an unsigned byte.
-                */
+            /*
+             * Use the "wide" instruction modifier for local variable
+             * indexes that do not fit into an unsigned byte.
+             */
             out.writeByte(opc_wide);
             out.writeByte(opcode);
             out.writeShort(lvar & 0xFFFF);
@@ -1391,11 +1394,11 @@ public class ProxyGenerator {
                 "java/lang/Class",
                 "forName", "(Ljava/lang/String;)Ljava/lang/Class;"));
     }
-   
-   
-       /*
-        * ==================== General Utility Methods ====================
-        */
+
+
+    /*
+     * ==================== General Utility Methods ====================
+     */
 
     /**
      * Convert a fully qualified class name that uses '.' as the package
@@ -1443,13 +1446,13 @@ public class ProxyGenerator {
         if (type.isPrimitive()) {
             return PrimitiveTypeInfo.get(type).baseTypeString;
         } else if (type.isArray()) {
-               /*
-                * According to JLS 20.3.2, the getName() method on Class does
-                * return the VM type descriptor format for array classes (only);
-                * using that should be quicker than the otherwise obvious code:
-                *
-                *     return "[" + getTypeDescriptor(type.getComponentType());
-                */
+            /*
+             * According to JLS 20.3.2, the getName() method on Class does
+             * return the VM type descriptor format for array classes (only);
+             * using that should be quicker than the otherwise obvious code:
+             *
+             *     return "[" + getTypeDescriptor(type.getComponentType());
+             */
             return type.getName().replace('.', '/');
         } else {
             return "L" + dotToSlash(type.getName()) + ";";
@@ -1487,7 +1490,7 @@ public class ProxyGenerator {
      * Return the number of abstract "words", or consecutive local variable
      * indexes, required to contain a value of the given type.  See JVMS
      * section 3.6.1.
-     *
+     * <p>
      * Note that the original version of the JVMS contained a definition of
      * this abstract notion of a "word" in section 3.4, but that definition
      * was removed for the second edition.
@@ -1504,7 +1507,7 @@ public class ProxyGenerator {
      * Add to the given list all of the types in the "from" array that
      * are not already contained in the list and are assignable to at
      * least one of the types in the "with" array.
-     *
+     * <p>
      * This method is useful for computing the greatest common set of
      * declared exceptions from duplicate methods inherited from
      * different interfaces.
@@ -1530,17 +1533,17 @@ public class ProxyGenerator {
      * handler's invoke method and rethrown intact in the method's
      * implementation before catching other Throwables and wrapping them
      * in UndeclaredThrowableExceptions.
-     *
+     * <p>
      * The exceptions to be caught are returned in a List object.  Each
      * exception in the returned list is guaranteed to not be a subclass of
      * any of the other exceptions in the list, so the catch blocks for
      * these exceptions may be generated in any order relative to each other.
-     *
+     * <p>
      * Error and RuntimeException are each always contained by the returned
      * list (if none of their superclasses are contained), since those
      * unchecked exceptions should always be rethrown intact, and thus their
      * subclasses will never appear in the returned list.
-     *
+     * <p>
      * The returned List will be empty if java.lang.Throwable is in the
      * given list of declared exceptions, indicating that no exceptions
      * need to be caught.
@@ -1556,36 +1559,36 @@ public class ProxyGenerator {
         for (int i = 0; i < exceptions.length; i++) {
             Class<?> ex = exceptions[i];
             if (ex.isAssignableFrom(Throwable.class)) {
-                   /*
-                    * If Throwable is declared to be thrown by the proxy method,
-                    * then no catch blocks are necessary, because the invoke
-                    * can, at most, throw Throwable anyway.
-                    */
+                /*
+                 * If Throwable is declared to be thrown by the proxy method,
+                 * then no catch blocks are necessary, because the invoke
+                 * can, at most, throw Throwable anyway.
+                 */
                 uniqueList.clear();
                 break;
             } else if (!Throwable.class.isAssignableFrom(ex)) {
-                   /*
-                    * Ignore types that cannot be thrown by the invoke method.
-                    */
+                /*
+                 * Ignore types that cannot be thrown by the invoke method.
+                 */
                 continue;
             }
-               /*
-                * Compare this exception against the current list of
-                * exceptions that need to be caught:
-                */
+            /*
+             * Compare this exception against the current list of
+             * exceptions that need to be caught:
+             */
             for (int j = 0; j < uniqueList.size(); ) {
                 Class<?> ex2 = uniqueList.get(j);
                 if (ex2.isAssignableFrom(ex)) {
-                       /*
-                        * if a superclass of this exception is already on
-                        * the list to catch, then ignore this one and continue;
-                        */
+                    /*
+                     * if a superclass of this exception is already on
+                     * the list to catch, then ignore this one and continue;
+                     */
                     continue nextException;
                 } else if (ex.isAssignableFrom(ex2)) {
-                       /*
-                        * if a subclass of this exception is on the list
-                        * to catch, then remove it;
-                        */
+                    /*
+                     * if a subclass of this exception is on the list
+                     * to catch, then remove it;
+                     */
                     uniqueList.remove(j);
                 } else {
                     j++;        // else continue comparing.
@@ -1674,12 +1677,12 @@ public class ProxyGenerator {
      * that constant pool entries will not need to be resorted (for example,
      * by their type, as the Java compiler does), so that the final index
      * value can be assigned and used when an entry is first created.
-     *
+     * <p>
      * Note that new entries cannot be created after the constant pool has
      * been written to a class file.  To prevent such logic errors, a
      * ConstantPool instance can be marked "read only", so that further
      * attempts to add new entries will fail with a runtime exception.
-     *
+     * <p>
      * See JVMS section 4.4 for more information about the constant pool
      * of a class file.
      */
@@ -1687,7 +1690,7 @@ public class ProxyGenerator {
 
         /**
          * list of constant pool entries, in constant pool index order.
-         *
+         * <p>
          * This list is used when writing the constant pool to a stream
          * and for assigning the next index value.  Note that element 0
          * of this list corresponds to constant pool index 1.
@@ -1696,7 +1699,7 @@ public class ProxyGenerator {
 
         /**
          * maps constant pool data of all types to constant pool indexes.
-         *
+         * <p>
          * This map is used to look up the index of an existing entry for
          * values of all types.
          */
@@ -1794,7 +1797,7 @@ public class ProxyGenerator {
 
         /**
          * Set this ConstantPool instance to be "read only".
-         *
+         * <p>
          * After this method has been called, further requests to get
          * an index for a non-existent entry will cause an InternalError
          * to be thrown instead of creating of the entry.
@@ -1806,7 +1809,7 @@ public class ProxyGenerator {
         /**
          * Write this constant pool to a stream as part of
          * the class file format.
-         *
+         * <p>
          * This consists of writing the "constant_pool_count" and
          * "constant_pool[]" items of the "ClassFile" structure, as
          * described in JVMS section 4.1.
@@ -1827,11 +1830,11 @@ public class ProxyGenerator {
          */
         private short addEntry(Entry entry) {
             pool.add(entry);
-               /*
-                * Note that this way of determining the index of the
-                * added entry is wrong if this pool supports
-                * CONSTANT_Long or CONSTANT_Double entries.
-                */
+            /*
+             * Note that this way of determining the index of the
+             * added entry is wrong if this pool supports
+             * CONSTANT_Long or CONSTANT_Double entries.
+             */
             if (pool.size() >= 65535) {
                 throw new IllegalArgumentException(
                         "constant pool size limit exceeded");
@@ -1843,7 +1846,7 @@ public class ProxyGenerator {
          * Get or assign the index for an entry of a type that contains
          * a direct value.  The type of the given object determines the
          * type of the desired entry as follows:
-         *
+         * <p>
          * java.lang.String        CONSTANT_Utf8
          * java.lang.Integer       CONSTANT_Integer
          * java.lang.Float         CONSTANT_Float
@@ -1897,7 +1900,7 @@ public class ProxyGenerator {
          * ValueEntry represents a constant pool entry of a type that
          * contains a direct value (see the comments for the "getValue"
          * method for a list of such types).
-         *
+         * <p>
          * ValueEntry objects are not used as keys for their entries in the
          * Map "map", so no useful hashCode or equals methods are defined.
          */
@@ -1934,14 +1937,14 @@ public class ProxyGenerator {
         /**
          * IndirectEntry represents a constant pool entry of a type that
          * references other constant pool entries, i.e., the following types:
-         *
+         * <p>
          * CONSTANT_Class, CONSTANT_String, CONSTANT_Fieldref,
          * CONSTANT_Methodref, CONSTANT_InterfaceMethodref, and
          * CONSTANT_NameAndType.
-         *
+         * <p>
          * Each of these entry types contains either one or two indexes of
          * other constant pool entries.
-         *
+         * <p>
          * IndirectEntry objects are used as the keys for their entries in
          * the Map "map", so the hashCode and equals methods are overridden
          * to allow matching.
@@ -1975,10 +1978,10 @@ public class ProxyGenerator {
             public void write(DataOutputStream out) throws IOException {
                 out.writeByte(tag);
                 out.writeShort(index0);
-                   /*
-                    * If this entry type contains two indexes, write
-                    * out the second, too.
-                    */
+                /*
+                 * If this entry type contains two indexes, write
+                 * out the second, too.
+                 */
                 if (tag == CONSTANT_FIELD ||
                         tag == CONSTANT_METHOD ||
                         tag == CONSTANT_INTERFACEMETHOD ||

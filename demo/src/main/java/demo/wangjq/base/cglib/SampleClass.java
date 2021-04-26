@@ -12,30 +12,29 @@ import net.sf.cglib.proxy.MethodInterceptor;
  */
 public class SampleClass {
 
+    int i = 0;
 
     public synchronized Integer test() {
         System.out.println("hello world");
+        i++;
         return 1;
     }
 
     public static void main(String[] args) {
         // 代理类class文件存入本地磁盘方便我们反编译查看源码
-        System.setProperty(DebuggingClassWriter.DEBUG_LOCATION_PROPERTY, "E:\\project\\temp");
+        System.setProperty(DebuggingClassWriter.DEBUG_LOCATION_PROPERTY, "C:\\Users\\TEMP");
         Enhancer enhancer = new Enhancer();
         enhancer.setSuperclass(SampleClass.class);
         enhancer.setCallback((MethodInterceptor) (obj, method, args1, proxy) -> {
-            System.out.println("before method run1...");
+            System.out.println("before method run...");
             System.out.println(obj.getClass());
             System.out.println(proxy.getClass());
-            //Object invoke = method.invoke(obj, args1);
             Object result = proxy.invokeSuper(obj, args1);
-            System.out.println("after method run2...");
-            return null;
+            System.out.println("after method run...");
+            return result;
         });
         SampleClass sample = (SampleClass) enhancer.create();
         sample.test();
-
-
     }
 
 }

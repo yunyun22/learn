@@ -16,11 +16,11 @@ public class DynamicProxyTest {
 
         TargetImpl target = new TargetImpl();
         MyInvokerHandlerProxy myInvokerHandlerProxy = new MyInvokerHandlerProxy(target);
-        /**
+        /*
          * 获取代理后的对象。
          */
         TargetService service = (TargetService) myInvokerHandlerProxy.getProxy();
-        /**
+        /*
          * 调用代理后的方法。
          */
         service.sayHello();
@@ -33,7 +33,7 @@ public class DynamicProxyTest {
  */
 class MyInvokerHandlerProxy implements InvocationHandler {
 
-    private TargetService target;
+    private final TargetService target;
 
     /**
      * 构造方法
@@ -51,7 +51,9 @@ class MyInvokerHandlerProxy implements InvocationHandler {
         System.out.println("------------------before------------------");
         // 执行目标对象的方法
         //method 获取的是接口上的方法
+        //System.out.println(proxy);
         Object result = method.invoke(target, args);
+        System.out.println(proxy);
         // 在目标对象的方法执行之后简单的打印一下
         System.out.println("-------------------after------------------");
         return result;
