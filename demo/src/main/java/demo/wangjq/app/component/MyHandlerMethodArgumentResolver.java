@@ -6,7 +6,6 @@ import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.method.support.ModelAndViewContainer;
 
-import demo.wangjq.app.annotaation.MyAnnotation;
 
 /**
  * @author:wangjq
@@ -15,7 +14,7 @@ import demo.wangjq.app.annotaation.MyAnnotation;
 public class MyHandlerMethodArgumentResolver implements HandlerMethodArgumentResolver {
     @Override
     public boolean supportsParameter(MethodParameter parameter) {
-        return parameter.hasParameterAnnotation(MyAnnotation.class);
+        return false;
     }
 
     @Override

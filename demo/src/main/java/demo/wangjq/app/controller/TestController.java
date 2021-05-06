@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 import java.util.Map;
 
-import demo.wangjq.app.annotaation.GetJsonProperty;
 import demo.wangjq.app.service.CacheService;
 import demo.wangjq.base.annotation.User;
 
@@ -50,7 +49,7 @@ public class TestController {
 
     @RequestMapping(value = "/getJson", method = RequestMethod.POST)
     @ResponseBody
-    public String getJson(@GetJsonProperty("fuck") Map<String, Object> map, @GetJsonProperty int age) {
-        return "fuck:" + map;
+    public String getJson() {
+        return "fuck:" ;
     }
 }
