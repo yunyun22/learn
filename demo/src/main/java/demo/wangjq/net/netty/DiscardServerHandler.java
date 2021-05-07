@@ -14,7 +14,9 @@ public class DiscardServerHandler extends ChannelInboundHandlerAdapter {
         System.out.println("2222");
         System.out.println(msg);
         System.out.println("2222");
-        ctx.flush();
+        throw new RuntimeException();
+        //ctx.fireChannelRead(msg);
+        //ctx.flush();
     }
 
     @Override

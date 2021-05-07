@@ -14,6 +14,7 @@ public class MyClientHandler extends SimpleChannelInboundHandler<String> {
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
         ctx.writeAndFlush("0");
+        ctx.fireChannelActive();
     }
 
     @Override

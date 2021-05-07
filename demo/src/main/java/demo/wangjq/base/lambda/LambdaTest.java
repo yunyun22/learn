@@ -1,9 +1,9 @@
 package demo.wangjq.base.lambda;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 import java.util.function.Predicate;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 public class LambdaTest {
     //List<String> list = new ArrayList<>();
@@ -45,7 +45,7 @@ public class LambdaTest {
 
     public static void main(String[] args) {
 
-        List<Apple> inventory = Arrays.asList(new Apple("green", 150), new Apple("red", 140), new Apple("green", 170));
+
 //        List<Apple> apples = filterAppls(inventory, (apple) -> apple.getWeight() > 150);
 //        System.out.println(apples);
 //        List<Apple> apples = filterAppls(inventory,apple -> "red".equals(apple.getColor()));
@@ -71,6 +71,24 @@ public class LambdaTest {
 //        Predicate<Apple> redAppleAndHeavyApplw = redApple.and(apple -> apple.getWeight() > 150);
 //        Predicate<Apple> redAndHeavyAppleOrGreen = redApple.and(apple -> apple.getWeight() > 150).or(apple -> "green".equals(apple.getColor()));
 
+
+        //数据
+        List<Apple> inventory = Arrays.asList(
+                new Apple("green", 150),
+                new Apple("red", 140),
+                new Apple("green", 170));
+
+        Map<String, Apple> collect = inventory.stream().collect(Collectors.groupingBy(
+                apple -> apple.getColor() + apple.getWeight(),
+                Collector.of(() -> new Apple(null, 0), (o, p) -> {
+                    if (o.getColor() == null) {
+                        o.setColor(p.getColor());
+                    }
+                    o.setWeight(o.getWeight() + p.getWeight());
+                }, (o, p) -> o)
+        ));
+        //{red=Apple{color='red', weight=140}, green=Apple{color='green', weight=320}}
+        System.out.println(collect);
 
     }
 
