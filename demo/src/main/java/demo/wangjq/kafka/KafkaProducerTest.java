@@ -20,7 +20,7 @@ import java.util.concurrent.TimeUnit;
 public class KafkaProducerTest {
 
 
-    public static final int SEND_NUMBER = 100;
+    public static final int SEND_NUMBER = 1000;
 
     public static void main(String[] args) throws ExecutionException, InterruptedException {
 
@@ -41,19 +41,19 @@ public class KafkaProducerTest {
 
         //Topic Key Value
         for (int i = 0; i < SEND_NUMBER; i++) {
-            ProducerRecord<String, String> record = new ProducerRecord<>("test", "Precision Products", "France");
+            ProducerRecord<String, String> record = new ProducerRecord<>("topicTest2", "Precision Products", "France");
+           //System.out.println(record);
             producer.send(record, (metadata, exception) -> {
                 if (exception != null) {
                     System.out.println("处理record");
-                }else {
-                   // System.out.println("发生成功");
                 }
+                int partition = metadata.partition();
+
+                System.out.println("partition:" + partition);
             }).get();
         }
         producer.close();
 
         TimeUnit.SECONDS.sleep(Integer.MAX_VALUE);
-
-
     }
 }
