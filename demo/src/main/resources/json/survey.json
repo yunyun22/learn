@@ -1,0 +1,63 @@
+{
+  "name":"Catalog 1/3",
+  "questions":[
+    {
+      "type":"input",
+      "required":true,
+      "questionEn":"Basic Summary of Engagement <em>(What solutions, approaches or values are delivered to clients?)</em>",
+      "questionCn":"Basic Summary of Engagement <em>(What solutions, approaches or values are delivered to clients?)</em>",
+      "answers":[
+
+      ],
+      "otherInputValue":"",
+      "note":"",
+      "answerValue":"q1"
+    },
+    {
+      "type":"radio",
+      "required":true,
+      "questionEn":"Can this project be disclosed in eDMS?",
+      "questionCn":"Can this project be disclosed in eDMS?",
+      "answers":[
+        {
+          "answerEn":"Yes",
+          "answerCn":"Yes",
+          "needInput":false,
+          "placeholder":"",
+          "otherInputValue":"",
+          "note":""
+        },
+        {
+          "answerEn":"No",
+          "answerCn":"No",
+          "needInput":false,
+          "placeholder":"",
+          "otherInputValue":"",
+          "note":""
+        },
+        {
+          "answerEn":"In some cases",
+          "answerCn":"In some cases",
+          "needInput":true,
+          "placeholder":"Please specify the restriction if select \"In some cases\". ",
+          "otherInputValue":null,
+          "note":""
+        }
+      ],
+      "answerValue":"No",
+      "note":""
+    },
+    {
+      "type":"input",
+      "required":false,
+      "questionEn":"Which Topic/IMO/E&A is this project related to?",
+      "questionCn":"Which Topic/IMO/E&A is this project related to?",
+      "answers":[
+
+      ],
+      "otherInputValue":"",
+      "note":"Note: based on your advice, KS team may follow up with you to contribute relevant contents to <a href='https://kx.deloitte/Collections' target='_blank' style='color: #86bc25;text-decoration: underline'>KX Collections</a> /E&A resources hub as after content sanitization against risk-approved guidelines.",
+      "answerValue":"q3"
+    }
+  ]
+}

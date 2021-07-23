@@ -12,7 +12,7 @@ public class TestObject {
     final byte[] b1 = new byte[1024 * 1024];
 
     /**
-     * -Xms10m -Xmx10m -XX:+PrintGC
+     * -Xms10m -Xmx10m -XX:+UseConcMarkSweepGC -XX:+PrintGC  -XX:+PrintGCDetails
      * @param args
      */
     public static void main(String[] args) {
