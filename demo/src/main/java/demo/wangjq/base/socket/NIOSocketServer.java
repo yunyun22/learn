@@ -3,10 +3,7 @@ package demo.wangjq.base.socket;
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.nio.ByteBuffer;
-import java.nio.channels.SelectionKey;
-import java.nio.channels.Selector;
-import java.nio.channels.ServerSocketChannel;
-import java.nio.channels.SocketChannel;
+import java.nio.channels.*;
 import java.nio.charset.Charset;
 import java.util.Iterator;
 import java.util.Set;
@@ -64,6 +61,11 @@ public class NIOSocketServer {
         serverChannel.bind(new InetSocketAddress(9999));
         Selector selector = Selector.open();
         serverChannel.register(selector, SelectionKey.OP_ACCEPT);
+        Set<SelectionKey> keys = selector.keys();
+        for (SelectionKey key : keys) {
+            SelectableChannel channel = key.channel();
+
+        }
         System.out.println("server 启动");
         return selector;
     }
