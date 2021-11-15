@@ -2,7 +2,6 @@ package demo.wangjq.base.rx;
 
 import rx.Observable;
 import rx.Observer;
-import rx.Subscriber;
 
 /**
  * @author:wangjq
@@ -45,16 +44,13 @@ public class App {
             }
         };
 
-        Observable<String> observable = Observable.create(new Observable.OnSubscribe<String>() {
-            @Override
-            public void call(Subscriber<? super String> subscriber) {
-                //向观察者发布事件
-                subscriber.onNext("Hello");
-                //再次向观察者发布事件
-                subscriber.onNext("world");
-                //通知观察者，订阅结束
-                subscriber.onCompleted();
-            }
+        Observable<String> observable = Observable.create(subscriber -> {
+            //向观察者发布事件
+            subscriber.onNext("Hello");
+            //再次向观察者发布事件
+            subscriber.onNext("world");
+            //通知观察者，订阅结束
+            subscriber.onCompleted();
         });
         System.out.println("try subscribe");
         //执行订阅

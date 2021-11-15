@@ -19,6 +19,8 @@ public class FunctionalTest {
                 Arrays.asList("b")
         );
 
+
+
         System.out.println(list.stream().flatMap(Collection::stream).collect(Collectors.toList()));
 
 

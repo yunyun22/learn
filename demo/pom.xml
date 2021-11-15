@@ -226,6 +226,12 @@
             <version>2.8.0</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>4.5.5</version>
+        </dependency>
+
 
     </dependencies>
 
@@ -249,6 +255,27 @@
                     <execution>
                         <goals>
                             <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.jsonschema2pojo</groupId>
+                <artifactId>jsonschema2pojo-maven-plugin</artifactId>
+                <version>0.4.34</version>
+                <configuration>
+                    <sourceDirectory>${basedir}/src/main/resources/json</sourceDirectory>
+                    <targetPackage>demo.wangjq.json</targetPackage>
+                    <outputDirectory>${basedir}/src/main/java</outputDirectory>
+                    <addCompileSourceRoot>false</addCompileSourceRoot>
+                    <sourceType>json</sourceType>
+                    <annotationStyle>none</annotationStyle>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>generate</goal>
                         </goals>
                     </execution>
                 </executions>

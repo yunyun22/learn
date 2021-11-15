@@ -10,10 +10,14 @@ import java.util.Map;
  * @date 13/05/2021
  */
 public class NewCustomPartitioner implements Partitioner {
+
+    int i = 1;
+
     @Override
     public int partition(String topic, Object key, byte[] keyBytes, Object value, byte[] valueBytes, Cluster cluster) {
-        System.out.println("修改topic");
-        return 0;
+        i++;
+        System.out.println("the message partition:" + i % 2);
+        return 1;
     }
 
     @Override
@@ -23,6 +27,11 @@ public class NewCustomPartitioner implements Partitioner {
 
     @Override
     public void configure(Map<String, ?> configs) {
+
+    }
+
+    @Override
+    public void onNewBatch(String topic, Cluster cluster, int prevPartition) {
 
     }
 }

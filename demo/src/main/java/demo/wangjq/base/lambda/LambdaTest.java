@@ -1,6 +1,8 @@
 package demo.wangjq.base.lambda;
 
 import java.util.*;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
@@ -72,11 +74,20 @@ public class LambdaTest {
 //        Predicate<Apple> redAndHeavyAppleOrGreen = redApple.and(apple -> apple.getWeight() > 150).or(apple -> "green".equals(apple.getColor()));
 
 
+        AtomicInteger i = new AtomicInteger();
+
+        List<Long> longs = Arrays.asList(1L, 2L, 3L, 4L);
+        Map<Long, Integer> collect1 = longs.stream().collect(Collectors.toMap(Function.identity(), l -> i.getAndIncrement()));
+
+        System.out.println(collect1);
+
+
         //数据
         List<Apple> inventory = Arrays.asList(
                 new Apple("green", 150),
                 new Apple("red", 140),
                 new Apple("green", 170));
+
 
         Map<String, Apple> collect = inventory.stream().collect(Collectors.groupingBy(
                 apple -> apple.getColor() + apple.getWeight(),
