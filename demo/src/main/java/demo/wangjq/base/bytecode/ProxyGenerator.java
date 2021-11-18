@@ -988,7 +988,7 @@ public class ProxyGenerator {
             }
 
             if (minfo.code.size() > 65535) {
-                throw new IllegalArgumentException("code size limit exceeded");
+                throw new IllegalArgumentException("code bytes limit exceeded");
             }
 
             minfo.maxStack = 10;
@@ -1237,7 +1237,7 @@ public class ProxyGenerator {
         out.writeByte(opc_athrow);
 
         if (minfo.code.size() > 65535) {
-            throw new IllegalArgumentException("code size limit exceeded");
+            throw new IllegalArgumentException("code bytes limit exceeded");
         }
 
         minfo.maxStack = 10;
@@ -1361,7 +1361,7 @@ public class ProxyGenerator {
     /**
      * Generate code to push a constant integer value on to the operand
      * stack, using the "iconst_<i>", "bipush", or "sipush" instructions
-     * depending on the size of the value.  The code is written to the
+     * depending on the bytes of the value.  The code is written to the
      * supplied stream.
      */
     private void code_ipush(int value, DataOutputStream out)
@@ -1837,7 +1837,7 @@ public class ProxyGenerator {
              */
             if (pool.size() >= 65535) {
                 throw new IllegalArgumentException(
-                        "constant pool size limit exceeded");
+                        "constant pool bytes limit exceeded");
             }
             return (short) pool.size();
         }

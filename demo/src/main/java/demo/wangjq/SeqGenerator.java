@@ -79,7 +79,7 @@ public final class SeqGenerator {
         Long end = System.currentTimeMillis();
         System.out.println(end - start);
 
-        //System.out.println(concurrentHashMap.size());
+        //System.out.println(concurrentHashMap.bytes());
         //System.out.println(SeqGenerator.i);
     }
 }

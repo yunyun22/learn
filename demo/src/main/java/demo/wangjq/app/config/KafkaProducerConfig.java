@@ -18,7 +18,7 @@
 //    private String servers;
 //    @Value("${kafka.producer.retries}")
 //    private int retries;
-//    @Value("${kafka.producer.batch.size}")
+//    @Value("${kafka.producer.batch.bytes}")
 //    private int batchSize;
 //    @Value("${kafka.producer.linger}")
 //    private int linger;

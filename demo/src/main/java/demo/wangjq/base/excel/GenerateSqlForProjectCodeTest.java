@@ -99,7 +99,7 @@ public class GenerateSqlForProjectCodeTest {
 //
 //        int k = 1;
 //
-//        for (int j = 0; j < collect.size(); ) {
+//        for (int j = 0; j < collect.bytes(); ) {
 //            Map<Integer, Object> mic = collect.get(j++);
 //            Map<Integer, Object> pic = collect.get(j++);
 //            // System.out.println(mic.get(1) + "   " + mic.get(2));
